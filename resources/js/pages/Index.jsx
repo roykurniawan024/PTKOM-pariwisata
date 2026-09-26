@@ -4,7 +4,7 @@ import DestinationCard from '@/components/DestinationCard';
 import TestimonialCard from '@/components/TestimonialCard';
 
 const navigationLinks = [
-    { label: 'Destinasi', href: '#destinasi' },
+    { label: 'Destinasi', href: '/destinasi' },
     { label: 'Budaya', href: '#budaya' },
     { label: 'Galeri', href: '#galeri' },
     { label: 'Testimoni', href: '#testimoni' },
@@ -301,11 +301,10 @@ export default function Index({ auth }) {
                                 Lampung menyimpan keajaiban alam dan tradisi yang<br className="hidden sm:inline" />
                                 menunggu untuk dijelajahi.
                             </p>
-
-                            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                                <Link
-                                    href={route('registrasi.select')}
-                                    className="rounded-full bg-[#4C83AD] px-8 py-3.5 text-center text-sm font-medium text-white shadow-md transition hover:bg-[#3d6d93]"
+                            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                                <a
+                                    href="#destinasi"
+                                    className="rounded-full bg-[#5B8DBE] px-8 py-4 text-center font-medium text-white transition hover:bg-[#4A7BAA]"
                                 >
                                     Mulai Pendaftaran
                                 </Link>
