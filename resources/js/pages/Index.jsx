@@ -2,7 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 
 const navigationLinks = [
-    { label: 'Destinasi', href: '#destinasi' },
+    { label: 'Destinasi', href: '/destinasi' },
     { label: 'Budaya', href: '#budaya' },
     { label: 'Galeri', href: '#galeri' },
 ];
@@ -134,7 +134,7 @@ export default function Index({ auth }) {
                             </p>
                             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                                 <a
-                                    href="#destinasi"
+                                    href="/destinasi"
                                     className="rounded-full bg-[#5B8DBE] px-8 py-4 text-center font-medium text-white transition hover:bg-[#4A7BAA]"
                                 >
                                     Jelajahi Destinasi
