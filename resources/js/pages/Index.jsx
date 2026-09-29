@@ -1,14 +1,9 @@
 import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 import DestinationCard from '@/components/DestinationCard';
+import PublicFooter from '@/components/PublicFooter';
+import PublicNavbar from '@/components/PublicNavbar';
 import TestimonialCard from '@/components/TestimonialCard';
-
-const navigationLinks = [
-    { label: 'Destinasi', href: '/destinasi' },
-    { label: 'Budaya', href: '#budaya' },
-    { label: 'Galeri', href: '#galeri' },
-    { label: 'Testimoni', href: '#testimoni' },
-];
 
 const statistics = [
     { value: '47+', label: 'DESTINASI WISATA' },
@@ -150,8 +145,7 @@ const testimonialsData = [
     },
 ];
 
-export default function Index({ auth }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function Index() {
     const [activeCategory, setActiveCategory] = useState('Semua');
 
     const filteredDestinations =
@@ -163,112 +157,7 @@ export default function Index({ auth }) {
         <>
             <Head title="Jelajah Lampung - Pariwisata & Budaya" />
             <div className="flex min-h-screen flex-col font-sans text-slate-800 antialiased">
-                {/* Navbar */}
-                <nav className="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-xs">
-                    <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
-                        {/* Brand Logo */}
-                        <div className="flex items-center">
-                            <Link
-                                href="/"
-                                className="font-serif text-2xl tracking-tight"
-                            >
-                                <span className="font-semibold text-[#2D4D43]">
-                                    Jelajah
-                                </span>{' '}
-                                <span className="italic font-normal text-[#4C83AD]">
-                                    Lampung
-                                </span>
-                            </Link>
-                        </div>
-
-                        {/* Navigation Links */}
-                        <div className="hidden items-center gap-10 md:flex">
-                            {navigationLinks.map((link) => (
-                                <a
-                                    key={link.label}
-                                    href={link.href}
-                                    className="text-sm font-medium text-slate-700 transition hover:text-[#4C83AD]"
-                                >
-                                    {link.label}
-                                </a>
-                            ))}
-                        </div>
-
-                        {/* CTA Button */}
-                        <div className="hidden md:flex items-center gap-3">
-                            {auth?.user ? (
-                                <Link
-                                    href={route('dashboard')}
-                                    className="rounded-full bg-[#4C83AD] px-6 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-[#3d6d93]"
-                                >
-                                    Dashboard
-                                </Link>
-                            ) : (
-                                <>
-                                    <Link
-                                        href={route('login')}
-                                        className="text-sm font-medium text-slate-700 transition hover:text-[#4C83AD]"
-                                    >
-                                        Masuk
-                                    </Link>
-                                    <Link
-                                        href={route('registrasi.select')}
-                                        className="rounded-full bg-[#4C83AD] px-6 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-[#3d6d93]"
-                                    >
-                                        Daftar Akun
-                                    </Link>
-                                </>
-                            )}
-                        </div>
-
-                        {/* Mobile Menu Button */}
-                        <button
-                            type="button"
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="rounded-md p-2 text-slate-700 md:hidden"
-                            aria-label="Buka menu"
-                        >
-                            <svg
-                                className="h-6 w-6"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                viewBox="0 0 24 24"
-                            >
-                                {isMenuOpen ? (
-                                    <path d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path d="M4 6h16M4 12h16M4 18h16" />
-                                )}
-                            </svg>
-                        </button>
-                    </div>
-
-                    {/* Mobile Dropdown */}
-                    {isMenuOpen && (
-                        <div className="flex flex-col gap-2 border-t border-slate-200 bg-white px-6 py-6 shadow-xl md:hidden">
-                            {navigationLinks.map((link) => (
-                                <a
-                                    key={link.label}
-                                    href={link.href}
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className="rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-50"
-                                >
-                                    {link.label}
-                                </a>
-                            ))}
-                            <div className="mt-4 flex flex-col gap-3 pt-4 border-t border-slate-100">
-                                <a
-                                    href="#destinasi"
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className="rounded-full bg-[#4C83AD] px-6 py-3 text-center text-sm font-medium text-white"
-                                >
-                                    Rencanakan Wisata
-                                </a>
-                            </div>
-                        </div>
-                    )}
-                </nav>
+                <PublicNavbar />
 
                 <main className="flex-1">
                     {/* Hero Section */}
@@ -303,7 +192,7 @@ export default function Index({ auth }) {
                             </p>
                             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                                 <a
-                                    href="#destinasi"
+                                    href="#destinations"
                                     className="rounded-full bg-[#5B8DBE] px-8 py-4 text-center font-medium text-white transition hover:bg-[#4A7BAA]"
                                 >
                                     Mulai Pendaftaran
@@ -319,7 +208,7 @@ export default function Index({ auth }) {
 
                         {/* Scroll Down Arrow */}
                         <a
-                            href="#destinasi"
+                            href="#destinations"
                             className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/60 transition hover:text-white"
                             aria-label="Scroll down"
                         >
@@ -355,7 +244,7 @@ export default function Index({ auth }) {
                     </section>
 
                     {/* Destinations Section ("Tempat yang Wajib Dikunjungi") */}
-                    <section id="destinasi" className="bg-[#FBF0F0] py-20 sm:py-28">
+                    <section id="destinations" className="bg-[#FBF0F0] py-20 sm:py-28">
                         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
                             {/* Header */}
                             <div className="text-center">
@@ -553,7 +442,7 @@ export default function Index({ auth }) {
                                     Daftar Akun Sekarang
                                 </Link>
                                 <a
-                                    href="#destinasi"
+                                    href="#destinations"
                                     className="rounded-full border border-white/30 px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
                                 >
                                     Jelajahi Destinasi
@@ -563,87 +452,7 @@ export default function Index({ auth }) {
                     </section>
                 </main>
 
-                {/* Footer */}
-                <footer className="bg-[#152A25] text-slate-400">
-                    <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12">
-                        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
-                            {/* Col 1 */}
-                            <div className="space-y-4 md:col-span-1">
-                                <Link
-                                    href="/"
-                                    className="font-serif text-2xl tracking-tight text-white"
-                                >
-                                    <span>Jelajah</span>{' '}
-                                    <span className="italic font-normal text-[#E8C5C8]">
-                                        Lampung
-                                    </span>
-                                </Link>
-                                <p className="text-sm leading-relaxed text-slate-400">
-                                    Portal informasi pariwisata dan kebudayaan resmi Provinsi Lampung. Temukan keindahan Sang Bumi Ruwa Jurai.
-                                </p>
-                            </div>
-
-                            {/* Col 2 */}
-                            <div>
-                                <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
-                                    Destinasi Populer
-                                </h3>
-                                <ul className="mt-4 space-y-2.5 text-sm">
-                                    <li>
-                                        <a href="#destinasi" className="transition hover:text-white">Pulau Pahawang</a>
-                                    </li>
-                                    <li>
-                                        <a href="#destinasi" className="transition hover:text-white">Way Kambas</a>
-                                    </li>
-                                    <li>
-                                        <a href="#destinasi" className="transition hover:text-white">Pantai Gigi Hiu</a>
-                                    </li>
-                                    <li>
-                                        <a href="#destinasi" className="transition hover:text-white">Teluk Kiluan</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {/* Col 3 */}
-                            <div>
-                                <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
-                                    Navigasi Cepat
-                                </h3>
-                                <ul className="mt-4 space-y-2.5 text-sm">
-                                    <li>
-                                        <a href="#destinasi" className="transition hover:text-white">Destinasi Wisata</a>
-                                    </li>
-                                    <li>
-                                        <a href="#budaya" className="transition hover:text-white">Budaya & Tradisi</a>
-                                    </li>
-                                    <li>
-                                        <a href="#galeri" className="transition hover:text-white">Galeri Foto</a>
-                                    </li>
-                                    <li>
-                                        <a href="#testimoni" className="transition hover:text-white">Testimoni</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {/* Col 4 */}
-                            <div>
-                                <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
-                                    Kontak & Informasi
-                                </h3>
-                                <ul className="mt-4 space-y-2.5 text-sm">
-                                    <li>Dinas Pariwisata Provinsi Lampung</li>
-                                    <li>Bandar Lampung, Indonesia</li>
-                                    <li>info@jelajahlampung.id</li>
-                                    <li>+62 721 123456</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div className="mt-12 border-t border-white/10 pt-8 text-center text-xs text-slate-500">
-                            &copy; {new Date().getFullYear()} Jelajah Lampung. All rights reserved.
-                        </div>
-                    </div>
-                </footer>
+                <PublicFooter />
             </div>
         </>
     );
