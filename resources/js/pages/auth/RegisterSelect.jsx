@@ -1,83 +1,81 @@
-import InputError from '@/components/InputError';
-import InputLabel from '@/components/InputLabel';
-import PrimaryButton from '@/components/PrimaryButton';
-import GuestLayout from '@/layouts/GuestLayout';
+import AuthSplitLayout from '@/layouts/AuthSplitLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { Store, UserCheck, ArrowRight } from 'lucide-react';
+import { ArrowRight, Store, UserCheck } from 'lucide-react';
+
+const accountTypes = [
+    {
+        type: 'user',
+        title: 'Akun Wisatawan / Pengguna',
+        description:
+            'Jelajahi destinasi, beri ulasan, dan simpan favorit perjalanan Anda.',
+        icon: UserCheck,
+    },
+    {
+        type: 'business_owner',
+        title: 'Akun Pemilik Usaha / Mitra',
+        description:
+            'Daftarkan kuliner, penginapan, atau wisata Anda & ikuti verifikasi admin.',
+        icon: Store,
+    },
+];
 
 export default function RegisterSelect() {
-    const { data, setData, post, processing } = useForm({
-        type: 'user',
-    });
+    const { transform, post, processing } = useForm({ type: 'user' });
 
-    const submit = (e, selectedType) => {
-        e.preventDefault();
-        setData('type', selectedType);
-        post(route('registrasi.generate'), {
-            data: { type: selectedType }
-        });
+    const selectType = (selectedType) => {
+        transform(() => ({ type: selectedType }));
+        post(route('registrasi.generate'));
     };
 
     return (
-        <GuestLayout>
-            <Head title="Pilih Jenis Pendaftaran - Jelajah Lampung" />
+        <AuthSplitLayout
+            heading="Buat akun, lalu mulai perjalananmu."
+            description="Pilih jenis akun sesuai kebutuhan Anda untuk mulai menjelajahi Lampung."
+            cardClassName="bg-[#FBEFF2]"
+        >
+            <Head title="Pilih Jenis Akun - Jelajah Lampung" />
 
-            <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 font-serif">Pilih Jenis Akun</h2>
-                <p className="text-sm text-gray-600 mt-1">
-                    Silakan pilih kategori pendaftaran sesuai kebutuhan Anda di platform Jelajah Lampung.
-                </p>
+            <h2 className="font-serif text-3xl font-semibold text-[#1E3A34]">
+                Pilih jenis akun
+            </h2>
+            <p className="mt-2 text-xs text-slate-600">
+                Silakan pilih kategori pendaftaran sesuai kebutuhan Anda.
+            </p>
+
+            <div className="mt-6 space-y-3">
+                {accountTypes.map(({ type, title, description, icon: Icon }) => (
+                    <button
+                        key={type}
+                        type="button"
+                        disabled={processing}
+                        onClick={() => selectType(type)}
+                        className="group flex w-full items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 text-left transition hover:border-[#4C83AD] hover:shadow-sm disabled:opacity-60"
+                    >
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#E4EEF7] text-[#4C83AD] transition group-hover:bg-[#4C83AD] group-hover:text-white">
+                            <Icon className="h-5 w-5" />
+                        </span>
+                        <span className="flex-1">
+                            <span className="block font-serif text-base font-semibold text-[#1E3A34]">
+                                {title}
+                            </span>
+                            <span className="mt-0.5 block text-xs text-slate-500">
+                                {description}
+                            </span>
+                        </span>
+                        <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 transition group-hover:text-[#4C83AD]" />
+                    </button>
+                ))}
             </div>
 
-            <div className="space-y-4">
-                <form onSubmit={(e) => submit(e, 'user')}>
-                    <button
-                        type="submit"
-                        disabled={processing}
-                        className="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-emerald-600 hover:bg-emerald-50/50 transition-all flex items-center justify-between group"
-                    >
-                        <div className="flex items-center space-x-4">
-                            <div className="p-3 bg-emerald-100 text-emerald-700 rounded-lg group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                                <UserCheck className="w-6 h-6" />
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-gray-900 text-base">Akun Wisatawan / Pengguna</h3>
-                                <p className="text-xs text-gray-500 mt-0.5">Jelajahi destinasi, beri ulasan, dan simpan favorit perjalanan Anda.</p>
-                            </div>
-                        </div>
-                        <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors" />
-                    </button>
-                </form>
-
-                <form onSubmit={(e) => submit(e, 'business_owner')}>
-                    <button
-                        type="submit"
-                        disabled={processing}
-                        className="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-amber-600 hover:bg-amber-50/50 transition-all flex items-center justify-between group"
-                    >
-                        <div className="flex items-center space-x-4">
-                            <div className="p-3 bg-amber-100 text-amber-700 rounded-lg group-hover:bg-amber-600 group-hover:text-white transition-colors">
-                                <Store className="w-6 h-6" />
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-gray-900 text-base">Akun Pemilik Usaha / Mitra</h3>
-                                <p className="text-xs text-gray-500 mt-0.5">Daftarkan kuliner, penginapan, atau wisata Anda & ikuti verifikasi admin.</p>
-                            </div>
-                        </div>
-                        <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-amber-600 transition-colors" />
-                    </button>
-                </form>
-            </div>
-
-            <div className="mt-8 text-center border-t border-gray-200 pt-4">
-                <span className="text-xs text-gray-600">Sudah punya akun? </span>
+            <p className="mt-8 text-center text-xs text-slate-700">
+                Sudah punya akun?{' '}
                 <Link
                     href={route('login')}
-                    className="text-xs font-semibold text-emerald-600 hover:text-emerald-500 underline"
+                    className="text-[#4C83AD] transition hover:text-[#1E3A34]"
                 >
-                    Masuk di sini
+                    Masuk
                 </Link>
-            </div>
-        </GuestLayout>
+            </p>
+        </AuthSplitLayout>
     );
 }
