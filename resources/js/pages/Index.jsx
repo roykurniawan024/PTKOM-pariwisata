@@ -307,7 +307,7 @@ export default function Index({ auth }) {
                                     className="rounded-full bg-[#5B8DBE] px-8 py-4 text-center font-medium text-white transition hover:bg-[#4A7BAA]"
                                 >
                                     Mulai Pendaftaran
-                                </Link>
+                                </a>
                                 <a
                                     href="#budaya"
                                     className="rounded-full border border-white/30 px-8 py-3.5 text-center text-sm font-medium text-white/90 backdrop-blur-sm transition hover:bg-white/10 hover:text-white"
