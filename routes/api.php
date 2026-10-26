@@ -12,6 +12,7 @@ Route::prefix('v1')->middleware('throttle:60,1')->group(function () {
     Route::get('/destinations/{slug}', [DestinationController::class, 'show']);
     Route::get('/destinations/{slug}/reviews', [ReviewController::class, 'index']);
     Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/{slug}', [CategoryController::class, 'show']);
     Route::get('/gallery', [GalleryController::class, 'index']);
     Route::get('/hero-stats', [SiteMetricController::class, 'heroStats']);
 
