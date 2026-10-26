@@ -42,4 +42,14 @@ class ReviewController extends Controller
 
         return back()->with('success', 'Status ulasan berhasil diperbarui.');
     }
+
+    /**
+     * Delete a review permanently (admin only).
+     */
+    public function destroy(Review $review): RedirectResponse
+    {
+        $review->delete();
+
+        return back()->with('success', 'Ulasan berhasil dihapus.');
+    }
 }

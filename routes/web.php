@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryManagementController;
 use App\Http\Controllers\BusinessValidationController;
 use App\Http\Controllers\DestinationManagementController;
 use App\Http\Controllers\GalleryController;
@@ -46,11 +47,16 @@ Route::middleware('auth')->group(function () {
         Route::patch('/admin/validasi-mitra/{user}', [BusinessValidationController::class, 'updateStatus'])->name('admin.business-validation.update');
 
         Route::patch('/admin/ulasan/{review}', [ReviewController::class, 'moderate'])->name('admin.reviews.moderate');
+        Route::delete('/admin/ulasan/{review}', [ReviewController::class, 'destroy'])->name('admin.reviews.destroy');
 
         Route::get('/admin/destinasi', [App\Http\Controllers\Admin\DestinationManagementController::class, 'index'])->name('admin.destinations.index');
         Route::post('/admin/destinasi', [App\Http\Controllers\Admin\DestinationManagementController::class, 'store'])->name('admin.destinations.store');
         Route::put('/admin/destinasi/{destination}', [App\Http\Controllers\Admin\DestinationManagementController::class, 'update'])->name('admin.destinations.update');
         Route::delete('/admin/destinasi/{destination}', [App\Http\Controllers\Admin\DestinationManagementController::class, 'destroy'])->name('admin.destinations.destroy');
+
+        Route::post('/admin/kategori', [CategoryManagementController::class, 'store'])->name('admin.categories.store');
+        Route::put('/admin/kategori/{category}', [CategoryManagementController::class, 'update'])->name('admin.categories.update');
+        Route::delete('/admin/kategori/{category}', [CategoryManagementController::class, 'destroy'])->name('admin.categories.destroy');
     });
 });
 
