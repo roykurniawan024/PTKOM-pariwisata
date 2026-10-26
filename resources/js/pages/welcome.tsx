@@ -2,7 +2,6 @@ import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
 const fontFamily = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
-const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4C83AD]';
 
 function ArrowIcon() {
     return (
