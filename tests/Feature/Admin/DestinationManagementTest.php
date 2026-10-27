@@ -95,3 +95,36 @@ test('admin can delete a destination', function () {
         'id' => $destination->id,
     ]);
 });
+
+test('admin update keeps fields that are not sent', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $destination = Destination::first();
+    $destination->update(['tagline' => 'Tagline lama', 'is_published' => true]);
+
+    $this->actingAs($admin)->put("/admin/destinasi/{$destination->id}", [
+        'name' => 'Nama Baru',
+        'category_id' => $destination->category_id,
+        'price' => 1000,
+    ])->assertSessionHasNoErrors();
+
+    $fresh = $destination->fresh();
+    expect($fresh->tagline)->toBe('Tagline lama')
+        ->and($fresh->is_published)->toBeTrue();
+});
+
+test('admin store ignores a manual rating and validates through the form request', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+
+    $this->actingAs($admin)->post('/admin/destinasi', [
+        'name' => 'Destinasi Admin Baru',
+        'category_id' => Category::first()->id,
+        'price' => 1000,
+        'rating' => 5,
+    ])->assertSessionHasNoErrors();
+
+    expect((float) Destination::where('slug', 'destinasi-admin-baru')->first()->rating)->toBe(0.0);
+
+    $this->actingAs($admin)
+        ->post('/admin/destinasi', ['name' => '', 'price' => 100, 'discount_price' => 500])
+        ->assertSessionHasErrors(['name', 'category_id', 'discount_price']);
+});

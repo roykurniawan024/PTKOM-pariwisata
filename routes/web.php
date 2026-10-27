@@ -18,7 +18,7 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index
 Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials.index');
 
 Route::post('/destinations/{slug}/reviews', [ReviewController::class, 'store'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'throttle:10,1'])
     ->name('destinations.reviews.store');
 
 Route::get('/dashboard', function () {
@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/validasi-mitra', [BusinessValidationController::class, 'index'])->name('admin.business-validation.index');
         Route::patch('/admin/validasi-mitra/{user}', [BusinessValidationController::class, 'updateStatus'])->name('admin.business-validation.update');
 
+        Route::get('/admin/ulasan', [ReviewController::class, 'index'])->name('admin.reviews.index');
         Route::patch('/admin/ulasan/{review}', [ReviewController::class, 'moderate'])->name('admin.reviews.moderate');
         Route::delete('/admin/ulasan/{review}', [ReviewController::class, 'destroy'])->name('admin.reviews.destroy');
 

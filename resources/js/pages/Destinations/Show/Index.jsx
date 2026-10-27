@@ -1,9 +1,9 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import PublicNavbar from '@/components/PublicNavbar';
 import PublicFooter from '@/components/PublicFooter';
 import { useState } from 'react';
 
-export default function Show({ destination }) {
+export default function Show({ destination, reviews = [], userReview = null }) {
     const [activeTab, setActiveTab] = useState('overview');
 
     if (!destination) {
@@ -70,7 +70,7 @@ export default function Show({ destination }) {
                                 </span>
                                 <span className="flex items-center gap-1 text-white/90 text-sm font-medium">
                                     <i className="bx bxs-star text-amber-400"></i>
-                                    {displayData.rating} ({displayData.reviewCount || 0} Ulasan)
+                                    {displayData.rating} ({displayData.approved_reviews_count || 0} Ulasan)
                                 </span>
                             </div>
                             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-4">
@@ -124,7 +124,7 @@ export default function Show({ destination }) {
                             {/* Tabs Navigation */}
                             <div className="border-b border-slate-100">
                                 <div className="flex gap-8">
-                                    {['overview', 'facilities', 'tips'].map((tab) => (
+                                    {['overview', 'facilities', 'tips', 'reviews'].map((tab) => (
                                         <button
                                             key={tab}
                                             onClick={() => setActiveTab(tab)}
@@ -192,6 +192,10 @@ export default function Show({ destination }) {
                                         </div>
                                     </div>
                                 )}
+
+                                {activeTab === 'reviews' && (
+                                    <ReviewsTab destination={destination} reviews={reviews} userReview={userReview} />
+                                )}
                             </div>
                         </div>
 
@@ -244,6 +248,114 @@ export default function Show({ destination }) {
             </main>
 
             <PublicFooter />
+        </div>
+    );
+}
+function ReviewsTab({ destination, reviews, userReview }) {
+    const { auth } = usePage().props;
+    const { data, setData, post, processing, errors, wasSuccessful } = useForm({
+        rating: userReview?.rating ?? 0,
+        comment: userReview?.comment ?? '',
+    });
+
+    const submit = (e) => {
+        e.preventDefault();
+        post(route('destinations.reviews.store', destination.slug), { preserveScroll: true });
+    };
+
+    return (
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-10">
+            <div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Ulasan Pengunjung</h3>
+                {reviews.length === 0 ? (
+                    <p className="text-slate-500">Belum ada ulasan. Jadilah yang pertama menulis ulasan.</p>
+                ) : (
+                    <div className="space-y-4">
+                        {reviews.map((review) => (
+                            <div key={review.id} className="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                                <div className="flex items-center justify-between mb-2">
+                                    <span className="font-bold text-slate-900">{review.user_name || 'Pengunjung'}</span>
+                                    <span className="flex items-center gap-1 text-sm font-semibold text-slate-700">
+                                        <i className="bx bxs-star text-amber-400"></i>
+                                        {review.rating}
+                                    </span>
+                                </div>
+                                <p className="text-slate-600 leading-relaxed">{review.comment}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            <div className="p-6 rounded-2xl border border-slate-100">
+                <h4 className="text-lg font-bold text-slate-900 mb-4">
+                    {userReview ? 'Ulasan Anda' : 'Tulis Ulasan'}
+                </h4>
+
+                {!auth?.user ? (
+                    <p className="text-slate-600">
+                        Silakan{' '}
+                        <Link href={route('login')} className="font-semibold text-blue-600 hover:underline">
+                            masuk
+                        </Link>{' '}
+                        untuk menulis ulasan.
+                    </p>
+                ) : (
+                    <form onSubmit={submit} className="space-y-4">
+                        {userReview && (
+                            <p className={`text-sm font-medium ${userReview.is_approved ? 'text-emerald-600' : 'text-amber-600'}`}>
+                                {userReview.is_approved
+                                    ? 'Ulasan Anda sudah tampil. Mengubahnya akan membutuhkan persetujuan ulang.'
+                                    : 'Ulasan Anda menunggu persetujuan admin.'}
+                            </p>
+                        )}
+
+                        <div>
+                            <div className="flex gap-1" role="radiogroup" aria-label="Rating">
+                                {[1, 2, 3, 4, 5].map((value) => (
+                                    <button
+                                        key={value}
+                                        type="button"
+                                        onClick={() => setData('rating', value)}
+                                        aria-label={`${value} bintang`}
+                                        className="text-3xl leading-none"
+                                    >
+                                        <i className={`bx ${value <= data.rating ? 'bxs-star text-amber-400' : 'bx-star text-slate-300'}`}></i>
+                                    </button>
+                                ))}
+                            </div>
+                            {errors.rating && <p className="mt-1 text-xs text-rose-600 font-medium">{errors.rating}</p>}
+                        </div>
+
+                        <div>
+                            <textarea
+                                value={data.comment}
+                                onChange={(e) => setData('comment', e.target.value)}
+                                rows={4}
+                                maxLength={1000}
+                                placeholder="Ceritakan pengalaman Anda..."
+                                className="w-full rounded-xl border border-slate-200 p-3 text-sm focus:border-blue-500 focus:ring-blue-500"
+                            />
+                            {errors.comment && <p className="mt-1 text-xs text-rose-600 font-medium">{errors.comment}</p>}
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                            <button
+                                type="submit"
+                                disabled={processing || data.rating === 0}
+                                className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all disabled:opacity-50"
+                            >
+                                {userReview ? 'Perbarui Ulasan' : 'Kirim Ulasan'}
+                            </button>
+                            {wasSuccessful && (
+                                <span className="text-sm text-emerald-600 font-medium">
+                                    Ulasan terkirim dan menunggu persetujuan admin.
+                                </span>
+                            )}
+                        </div>
+                    </form>
+                )}
+            </div>
         </div>
     );
 }

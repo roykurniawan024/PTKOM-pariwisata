@@ -50,10 +50,10 @@ class BusinessValidationController extends Controller
             'rejection_reason' => 'nullable|string|max:500',
         ]);
 
-        $user->update([
+        $user->forceFill([
             'validation_status' => $request->status,
             'rejection_reason' => $request->status === 'rejected' ? $request->rejection_reason : null,
-        ]);
+        ])->save();
 
         if (in_array($request->status, ['approved', 'rejected'])) {
             $user->notify(new PartnerValidationNotification($request->status, $request->rejection_reason));

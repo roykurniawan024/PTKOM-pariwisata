@@ -393,10 +393,10 @@ Hasil audit read-only setelah verifikasi email aktif (item 32). Item yang bertan
 
 ## 🟠 P2 — Konsistensi & Fitur
 
-- [ ] **36.** Satukan CRUD destinasi admin ke `StoreDestinationRequest`/`UpdateDestinationRequest` + `DestinationPolicy` (hapus input `rating` manual, tambah `tagline`/`facilities`/`tips`, samakan aturan upload gambar).
-- [ ] **37.** Lengkapi alur ulasan: form ulasan di halaman detail (frontend), UI moderasi admin (setujui/tolak/hapus), `throttle` pada `POST /destinations/{slug}/reviews`, dan perilaku rating saat ulasan terakhir yang disetujui dihapus.
-- [ ] **38.** Validasi nama kategori unik (`store` & `update`) dan tentukan perilaku slug saat nama berubah.
-- [ ] **39.** Kurangi risiko mass assignment: `role` dan `validation_status` pada `User::$fillable`.
+- [x] **36.** CRUD destinasi admin memakai `StoreDestinationRequest`/`UpdateDestinationRequest` + `DestinationPolicy` (`Gate::authorize` pada destroy). Input `rating` manual diabaikan (rating awal 0, dihitung dari ulasan), field `tagline`/`facilities`/`tips`/`content`/dll. didukung, update hanya mengubah field yang dikirim (tidak menimpa data lain/`is_published`), dan aturan upload gambar disamakan (`jpg,jpeg,png,webp`, maks 3 MB). *Sisa frontend: field Rating di `admin/Destinations.jsx` kini tidak berpengaruh dan bisa dihapus.*
+- [x] **37.** Alur ulasan lengkap. Backend: `throttle:10,1` pada `POST /destinations/{slug}/reviews`; rating dihitung ulang hanya saat status persetujuan berubah dan kembali ke 0 bila ulasan disetujui terakhir di-unapprove/dihapus; `GET /admin/ulasan` (`admin.reviews.index`) untuk moderasi; halaman detail destinasi menyuplai `reviews` (disetujui), `approved_reviews_count`, dan `userReview`. Frontend: tab "reviews" dengan form bintang + komentar di `Destinations/Show/Index.jsx`, halaman `admin/Reviews.jsx` (setujui/sembunyikan/hapus) dan menu "Moderasi Ulasan" di navigasi admin.
+- [x] **38.** Nama kategori wajib unik pada `store` & `update` (`Rule::unique`, mengabaikan kategori sendiri). Keputusan slug: tetap stabil saat nama diganti agar URL lama tidak rusak.
+- [x] **39.** `role`, `validation_status`, dan `rejection_reason` dikeluarkan dari `User::$fillable`; `RegistrationFlowController`, `BusinessValidationController`, dan `DatabaseSeeder` menetapkannya secara eksplisit (`forceFill` / `unguard`), dengan test bahwa mass assignment diabaikan.
 
 ## 🔵 P3 — Kebersihan, Konfigurasi & Dokumentasi
 

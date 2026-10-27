@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\RegistrationToken;
+use App\Models\User;
 
 test('registration screen can be rendered', function () {
     $response = $this->get('/register');
@@ -36,4 +37,17 @@ test('used and long expired registration tokens are pruned', function () {
     $this->artisan('model:prune', ['--model' => RegistrationToken::class])->assertSuccessful();
 
     expect(RegistrationToken::pluck('id')->all())->toBe([$fresh->id]);
+});
+
+test('role and validation status cannot be mass assigned', function () {
+    $user = User::create([
+        'name' => 'Coba Admin',
+        'email' => 'coba@example.com',
+        'password' => 'password',
+        'role' => 'admin',
+        'validation_status' => 'approved',
+    ]);
+
+    expect($user->fresh()->role)->toBe('user')
+        ->and($user->fresh()->validation_status)->toBe('pending');
 });

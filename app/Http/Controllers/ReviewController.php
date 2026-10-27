@@ -6,6 +6,8 @@ use App\Models\Destination;
 use App\Models\Review;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ReviewController extends Controller
 {
@@ -27,6 +29,33 @@ class ReviewController extends Controller
         );
 
         return back()->with('success', 'Ulasan Anda berhasil dikirim dan menunggu persetujuan admin.');
+    }
+
+    /**
+     * List reviews for moderation (admin only); pending reviews are shown by default.
+     */
+    public function index(Request $request): Response
+    {
+        $status = in_array($request->query('status'), ['pending', 'approved', 'all'], true)
+            ? $request->query('status')
+            : 'pending';
+
+        $reviews = Review::with(['user:id,name', 'destination:id,name,slug'])
+            ->when($status === 'pending', fn ($query) => $query->where('is_approved', false))
+            ->when($status === 'approved', fn ($query) => $query->approved())
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
+
+        return Inertia::render('admin/Reviews', [
+            'reviews' => $reviews,
+            'currentStatus' => $status,
+            'stats' => [
+                'total' => Review::count(),
+                'pending' => Review::where('is_approved', false)->count(),
+                'approved' => Review::approved()->count(),
+            ],
+        ]);
     }
 
     /**

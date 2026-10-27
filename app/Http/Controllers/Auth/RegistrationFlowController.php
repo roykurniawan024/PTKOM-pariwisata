@@ -112,17 +112,17 @@ class RegistrationFlowController extends Controller
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
 
-            $user = User::create([
+            $user = new User([
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
-                'role' => 'business_owner',
                 'business_name' => $request->business_name,
                 'business_type' => $request->business_type,
                 'business_address' => $request->business_address,
-                'validation_status' => 'pending', // Menunggu validasi admin
                 'password' => Hash::make($request->password),
             ]);
+            // Menunggu validasi admin
+            $user->forceFill(['role' => 'business_owner', 'validation_status' => 'pending'])->save();
         } else {
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -131,14 +131,14 @@ class RegistrationFlowController extends Controller
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
 
-            $user = User::create([
+            $user = new User([
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone_number' => $request->phone_number,
-                'role' => 'user',
-                'validation_status' => 'approved', // Pengguna biasa langsung disetujui
                 'password' => Hash::make($request->password),
             ]);
+            // Pengguna biasa langsung disetujui
+            $user->forceFill(['role' => 'user', 'validation_status' => 'approved'])->save();
         }
 
         // Mark token as used

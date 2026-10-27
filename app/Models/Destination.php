@@ -75,15 +75,13 @@ class Destination extends Model
     }
 
     /**
-     * Recalculate the rating from approved reviews, keeping the current value when there are none.
+     * Recalculate the rating from approved reviews; it falls back to 0 when none are approved.
      */
     public function recalculateRating(): void
     {
         $average = $this->reviews()->approved()->avg('rating');
 
-        if ($average !== null) {
-            $this->forceFill(['rating' => round($average, 1)])->saveQuietly();
-        }
+        $this->forceFill(['rating' => $average === null ? 0 : round($average, 1)])->saveQuietly();
     }
 
     public function images()

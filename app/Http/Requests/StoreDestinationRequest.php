@@ -34,7 +34,7 @@ class StoreDestinationRequest extends FormRequest
             'tips.*' => 'string|max:255',
             'is_published' => 'boolean',
             'image_url' => 'nullable|string|url',
-            'image' => 'nullable|image|max:3072',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
         ];
     }
 }

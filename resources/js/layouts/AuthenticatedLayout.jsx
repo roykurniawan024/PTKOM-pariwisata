@@ -44,6 +44,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                         >
                                             Validasi Mitra
                                         </NavLink>
+                                        <NavLink
+                                            href={route('admin.reviews.index')}
+                                            active={route().current('admin.reviews.*')}
+                                        >
+                                            Moderasi Ulasan
+                                        </NavLink>
                                     </>
                                 )}
                             </div>
@@ -163,6 +169,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                     active={route().current('admin.business-validation.*')}
                                 >
                                     Validasi Mitra
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('admin.reviews.index')}
+                                    active={route().current('admin.reviews.*')}
+                                >
+                                    Moderasi Ulasan
                                 </ResponsiveNavLink>
                             </>
                         )}

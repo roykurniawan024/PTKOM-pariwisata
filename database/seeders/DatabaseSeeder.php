@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // Role dan status validasi tidak mass assignable, jadi seeder membukanya secara eksplisit.
+        User::unguard();
+
         // Akun Pengguna Biasa (Wisatawan)
         User::firstOrCreate(
             ['email' => 'test@example.com'],
@@ -54,6 +57,8 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        User::reguard();
 
         $this->call([
             DestinationSeeder::class,

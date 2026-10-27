@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDestinationRequest;
+use App\Http\Requests\UpdateDestinationRequest;
 use App\Models\Category;
 use App\Models\Destination;
 use App\Models\DestinationImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -47,17 +51,9 @@ class DestinationManagementController extends Controller
     /**
      * Store a newly created destination.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreDestinationRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'location' => 'required|string|max:255',
-            'rating' => 'nullable|numeric|between:0,5',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        ]);
+        $validated = $request->validated();
 
         $baseSlug = Str::slug($validated['name']);
         $slug = $baseSlug;
@@ -66,70 +62,25 @@ class DestinationManagementController extends Controller
             $slug = "{$baseSlug}-".(++$count);
         }
 
-        $destination = Destination::create([
-            'category_id' => $validated['category_id'],
-            'name' => $validated['name'],
+        $destination = Destination::create(array_merge(Arr::except($validated, ['image', 'image_url']), [
             'slug' => $slug,
-            'description' => $validated['description'] ?? null,
-            'price' => $validated['price'],
-            'location' => $validated['location'],
-            'rating' => $validated['rating'] ?? 5.0,
-        ]);
+            'rating' => 0,
+            'is_published' => $request->boolean('is_published', true),
+        ]));
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('destinations', 'public');
-            $imageUrl = Storage::url($path);
-
-            DestinationImage::create([
-                'destination_id' => $destination->id,
-                'image_url' => $imageUrl,
-                'is_primary' => true,
-            ]);
-        }
+        $this->replacePrimaryImage($request, $destination);
 
         return back()->with('success', 'Destinasi wisata baru berhasil ditambahkan.');
     }
 
     /**
-     * Update the specified destination.
+     * Update the specified destination; only fields present in the request are changed.
      */
-    public function update(Request $request, Destination $destination): RedirectResponse
+    public function update(UpdateDestinationRequest $request, Destination $destination): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'location' => 'required|string|max:255',
-            'rating' => 'nullable|numeric|between:0,5',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        ]);
+        $destination->update(Arr::except($request->validated(), ['image', 'image_url']));
 
-        $destination->update([
-            'category_id' => $validated['category_id'],
-            'name' => $validated['name'],
-            'description' => $validated['description'] ?? null,
-            'price' => $validated['price'],
-            'location' => $validated['location'],
-            'rating' => $validated['rating'] ?? $destination->rating,
-        ]);
-
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('destinations', 'public');
-            $imageUrl = Storage::url($path);
-
-            // Replace previous primary images, removing their stored files
-            $destination->images()->where('is_primary', true)->get()->each(function (DestinationImage $image) {
-                $image->deleteStoredFile();
-                $image->delete();
-            });
-
-            DestinationImage::create([
-                'destination_id' => $destination->id,
-                'image_url' => $imageUrl,
-                'is_primary' => true,
-            ]);
-        }
+        $this->replacePrimaryImage($request, $destination);
 
         return back()->with('success', 'Data destinasi berhasil diperbarui.');
     }
@@ -139,8 +90,35 @@ class DestinationManagementController extends Controller
      */
     public function destroy(Destination $destination): RedirectResponse
     {
+        Gate::authorize('delete', $destination);
+
         $destination->delete();
 
         return back()->with('success', 'Destinasi wisata berhasil dihapus.');
+    }
+
+    /**
+     * Store an uploaded file or given URL as the primary image, removing the previous primary image files.
+     */
+    private function replacePrimaryImage(Request $request, Destination $destination): void
+    {
+        if ($request->hasFile('image')) {
+            $imageUrl = Storage::url($request->file('image')->store('destinations', 'public'));
+        } elseif ($request->filled('image_url')) {
+            $imageUrl = $request->input('image_url');
+        } else {
+            return;
+        }
+
+        $destination->images()->where('is_primary', true)->get()->each(function (DestinationImage $image) {
+            $image->deleteStoredFile();
+            $image->delete();
+        });
+
+        DestinationImage::create([
+            'destination_id' => $destination->id,
+            'image_url' => $imageUrl,
+            'is_primary' => true,
+        ]);
     }
 }

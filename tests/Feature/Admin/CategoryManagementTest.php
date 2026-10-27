@@ -132,3 +132,20 @@ test('non-admin cannot delete a review', function () {
         ->delete(route('admin.reviews.destroy', $review))
         ->assertForbidden();
 });
+
+test('category name must be unique on create and update', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    [$first, $second] = Category::take(2)->get();
+
+    $this->actingAs($admin)
+        ->post(route('admin.categories.store'), ['name' => $first->name])
+        ->assertSessionHasErrors('name');
+
+    $this->actingAs($admin)
+        ->put(route('admin.categories.update', $second), ['name' => $first->name])
+        ->assertSessionHasErrors('name');
+
+    $this->actingAs($admin)
+        ->put(route('admin.categories.update', $first), ['name' => $first->name, 'description' => 'Sama'])
+        ->assertSessionHasNoErrors();
+});

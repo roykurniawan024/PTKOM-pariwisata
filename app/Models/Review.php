@@ -24,8 +24,16 @@ class Review extends Model
 
     protected static function booted(): void
     {
-        static::saved(fn (Review $review) => $review->destination?->recalculateRating());
-        static::deleted(fn (Review $review) => $review->destination?->recalculateRating());
+        static::saved(function (Review $review) {
+            if ($review->is_approved || $review->wasChanged('is_approved')) {
+                $review->destination?->recalculateRating();
+            }
+        });
+        static::deleted(function (Review $review) {
+            if ($review->is_approved) {
+                $review->destination?->recalculateRating();
+            }
+        });
     }
 
     /**
