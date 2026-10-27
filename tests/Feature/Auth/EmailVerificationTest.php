@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\RegistrationToken;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -50,11 +51,14 @@ test('email is not verified with invalid hash', function () {
 test('registration sends a verification email', function () {
     Notification::fake();
 
-    $this->post('/register', [
+    $this->post(route('registrasi.generate'), ['type' => 'user']);
+
+    $this->post(route('registrasi.store'), [
+        'token' => RegistrationToken::first()->token,
         'name' => 'Test User',
         'email' => 'baru@example.com',
-        'password' => 'password',
-        'password_confirmation' => 'password',
+        'password' => 'password123',
+        'password_confirmation' => 'password123',
     ]);
 
     Notification::assertSentTo(User::where('email', 'baru@example.com')->first(), VerifyEmail::class);

@@ -368,6 +368,7 @@ Setelah menarik 3 commit terbaru dari GitHub (UI Update), ditemukan bug baru yan
 - [x] **29.** Refactor closure rute ke Controller (`HomeController`).
 - [x] **30.** FormRequest & Policy untuk manajemen destinasi.
 - [x] **31.** Automated test tambahan: `ReviewApiTest`, `PartnerDestinationManagementTest`, dan `GalleryApiTest`.
+- [x] **32.** Verifikasi email aktif (`User implements MustVerifyEmail`): registrasi mengirim email verifikasi, `/dashboard` mewajibkan email terverifikasi, dan 3 test tambahan di `EmailVerificationTest`. Uji lokal memakai `MAIL_MAILER=log` (tautan di `storage/logs/laravel.log`); produksi perlu SMTP sungguhan.
 
 ---
 
@@ -375,4 +376,34 @@ Setelah menarik 3 commit terbaru dari GitHub (UI Update), ditemukan bug baru yan
 Daftar tugas di atas siap diproses kembali secara terstruktur dan bertahap.
 
 
+
+---
+
+# 🚧 FASE 3 — Temuan Audit Proyek (Belum Diproses)
+
+Hasil audit read-only setelah verifikasi email aktif (item 32). Item yang bertanda `[x]` sudah dikerjakan; item bertanda ⚠️ memerlukan persetujuan sebelum dieksekusi.
+
+---
+
+## 🔴 P1 — Keamanan
+
+- [x] **33.** Registrasi diamankan: `POST /register` (`RegisteredUserController`) dihapus sehingga hanya alur token `/registrasi` yang tersisa; `throttle:10,1` pada `registrasi.generate` & `registrasi.store`; `RegistrationToken` memakai `MassPrunable` (token terpakai/kedaluwarsa >1 hari) dengan `model:prune` terjadwal harian.
+- [ ] **34.** ⚠️ Perbarui dependensi rentan: `npm audit` (11 celah, 1 kritis `shell-quote`, 8 tinggi termasuk `vite`, `rollup`, `postcss`) dan `composer audit` (`symfony/yaml`), lalu jalankan ulang seluruh test dan build. *Dry-run: `composer update symfony/yaml` melompat ke 8.1.9 (versi mayor) dan `npm audit fix` menyentuh banyak paket; perlu persetujuan dan pengecekan kompatibilitas sebelum dieksekusi.*
+- [x] **35.** Middleware `verified` dipasang pada `POST /destinations/{slug}/reviews` dan grup `kelola/destinasi`, dengan test untuk user dan mitra yang belum terverifikasi. Catatan: `MAIL_MAILER` produksi tetap perlu diarahkan ke SMTP sungguhan (konfigurasi `.env` di luar repo).
+
+## 🟠 P2 — Konsistensi & Fitur
+
+- [ ] **36.** Satukan CRUD destinasi admin ke `StoreDestinationRequest`/`UpdateDestinationRequest` + `DestinationPolicy` (hapus input `rating` manual, tambah `tagline`/`facilities`/`tips`, samakan aturan upload gambar).
+- [ ] **37.** Lengkapi alur ulasan: form ulasan di halaman detail (frontend), UI moderasi admin (setujui/tolak/hapus), `throttle` pada `POST /destinations/{slug}/reviews`, dan perilaku rating saat ulasan terakhir yang disetujui dihapus.
+- [ ] **38.** Validasi nama kategori unik (`store` & `update`) dan tentukan perilaku slug saat nama berubah.
+- [ ] **39.** Kurangi risiko mass assignment: `role` dan `validation_status` pada `User::$fillable`.
+
+## 🔵 P3 — Kebersihan, Konfigurasi & Dokumentasi
+
+- [ ] **40.** Bersihkan kode starter-kit yang tidak terpakai: `routes/settings.php` (tidak dimuat), `Settings/ProfileController`, halaman `settings/*.tsx`, dan pasangan `.tsx`/`.jsx` ganda.
+- [ ] **41.** Seragamkan huruf besar-kecil folder `pages/auth` vs `Auth/...` di controller agar aman di Linux.
+- [ ] **42.** Konfirmasi tujuan `vercel.json` (`@vercel/static-build` tidak menjalankan PHP/Laravel) dengan pembuatnya.
+- [ ] **43.** Rapikan dokumentasi & konfigurasi: tambah fitur ulasan, galeri, CRUD mitra/kategori ke README (SKPL); `.env.example` (`APP_NAME`, database); ganti data Instagram/Facebook di `config/pariwisata.php` dengan data asli; verifikasi item 15/16 di PostgreSQL asli.
+
+---
 

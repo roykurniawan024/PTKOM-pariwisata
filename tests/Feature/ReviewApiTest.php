@@ -62,3 +62,13 @@ test('non admin cannot moderate reviews', function () {
         ->patch(route('admin.reviews.moderate', $review), ['is_approved' => true])
         ->assertForbidden();
 });
+
+test('unverified user cannot submit a review', function () {
+    $user = User::factory()->unverified()->create();
+
+    $this->actingAs($user)
+        ->post(route('destinations.reviews.store', $this->destination->slug), ['rating' => 5, 'comment' => 'Bagus'])
+        ->assertRedirect(route('verification.notice'));
+
+    expect(Review::count())->toBe(0);
+});

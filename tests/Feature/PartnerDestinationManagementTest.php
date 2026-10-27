@@ -144,3 +144,11 @@ test('partner cannot update or delete or toggle someone elses destination', func
     $this->actingAs($partner)->delete(route('manage.destinations.destroy', $destination))->assertForbidden();
     $this->actingAs($partner)->patch(route('manage.destinations.toggle-publish', $destination))->assertForbidden();
 });
+
+test('unverified partner is redirected to verification from the manage page', function () {
+    $partner = User::factory()->unverified()->create(['role' => 'business_owner', 'validation_status' => 'approved']);
+
+    $this->actingAs($partner)
+        ->get(route('manage.destinations.index'))
+        ->assertRedirect(route('verification.notice'));
+});

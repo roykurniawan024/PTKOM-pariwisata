@@ -18,7 +18,7 @@ Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index
 Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials.index');
 
 Route::post('/destinations/{slug}/reviews', [ReviewController::class, 'store'])
-    ->middleware('auth')
+    ->middleware(['auth', 'verified'])
     ->name('destinations.reviews.store');
 
 Route::get('/dashboard', function () {
@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Admin & Mitra Destination Management
-    Route::middleware('business.approved')->prefix('kelola/destinasi')->name('manage.destinations.')->group(function () {
+    Route::middleware(['verified', 'business.approved'])->prefix('kelola/destinasi')->name('manage.destinations.')->group(function () {
         Route::get('/', [DestinationManagementController::class, 'index'])->name('index');
         Route::get('/create', [DestinationManagementController::class, 'create'])->name('create');
         Route::post('/', [DestinationManagementController::class, 'store'])->name('store');
