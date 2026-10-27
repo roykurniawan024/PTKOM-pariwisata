@@ -19,16 +19,21 @@ Portal informasi pariwisata Provinsi Lampung. Wisatawan bisa menjelajahi destina
 - **F-02** Menampilkan daftar destinasi wisata dan detail destinasi berdasarkan slug, termasuk kategori dan galeri foto.
 - **F-03** Menampilkan informasi kontak dinas pariwisata.
 - **F-04** Registrasi akun sebagai wisatawan atau sebagai mitra usaha (nama usaha, jenis usaha, alamat, nomor telepon).
-- **F-05** Login, logout, reset password, dan verifikasi email.
+- **F-05** Login, logout, reset password, dan verifikasi email (akun baru wajib memverifikasi email sebelum membuka dashboard, menulis ulasan, atau mengelola destinasi).
 - **F-06** Mengelola profil pengguna (ubah data, hapus akun).
 - **F-07** Admin memvalidasi mitra: menyetujui atau menolak (`pending` / `approved` / `rejected`) beserta alasan penolakan.
-- **F-08** Menyediakan REST API publik (`/api/v1`) untuk data destinasi, statistik, dan kontak.
+- **F-08** Menyediakan REST API publik (`/api/v1`) untuk data destinasi, kategori, ulasan, galeri, statistik, dan kontak.
+- **F-09** Wisatawan terverifikasi menulis ulasan dan rating pada destinasi; admin memoderasi ulasan (setujui, sembunyikan, hapus). Rating destinasi dihitung dari ulasan yang disetujui.
+- **F-10** Menampilkan galeri foto destinasi (halaman `/gallery` dan `GET /api/v1/gallery`).
+- **F-11** Mitra yang sudah disetujui mengelola destinasinya sendiri (tambah, ubah, hapus, terbitkan/draft, unggah gambar) di `/kelola/destinasi`.
+- **F-12** Admin mengelola semua destinasi dan kategori wisata.
 
 ### Kebutuhan Non-Fungsional
 
 - Responsif di desktop dan mobile.
 - Password di-hash (bcrypt), dan rute admin/profil dilindungi autentikasi.
 - Respons API berformat JSON yang konsisten (`status`, `message`, `data`).
+- Pembatasan laju (rate limit) pada API, login, registrasi, dan pengiriman ulasan.
 
 ### Tech Stack
 
@@ -103,6 +108,16 @@ Portal informasi pariwisata Provinsi Lampung. Wisatawan bisa menjelajahi destina
 
    Perintah ini menjalankan server Laravel, queue, log viewer, dan Vite secara bersamaan. Buka http://localhost:8000.
 
+   Akun contoh dari seeder:
+
+   | Peran | Email | Password |
+   | --- | --- | --- |
+   | Wisatawan | `test@example.com` | `password` |
+   | Admin | `admin@pariwisatalampung.go.id` | `admin123` |
+   | Mitra (status `pending`, perlu disetujui admin) | `mitra@pariwisatalampung.go.id` | `mitra123` |
+
+   Email (verifikasi dan reset password) secara default tidak dikirim, melainkan ditulis ke `storage/logs/laravel.log` (`MAIL_MAILER=log`). Salin tautan dari log itu untuk menguji. Untuk produksi, ganti ke SMTP sungguhan.
+
    Alternatifnya, jalankan di dua terminal terpisah: `php artisan serve` dan `npm run dev`.
 
 ### Perintah Lain
@@ -127,6 +142,8 @@ Portal informasi pariwisata Provinsi Lampung. Wisatawan bisa menjelajahi destina
 app/Http/Controllers/      # Controller web & API (Api/)
 database/migrations/       # Skema database
 database/seeders/          # Data awal (destinasi, user)
+app/Policies/               # Otorisasi (DestinationPolicy)
+app/Http/Requests/          # Validasi form (FormRequest)
 resources/js/pages/        # Halaman React (Inertia)
 routes/web.php             # Rute web
 routes/api.php             # Rute REST API (/api/v1)

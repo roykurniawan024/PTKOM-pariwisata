@@ -400,8 +400,8 @@ Hasil audit read-only setelah verifikasi email aktif (item 32). Item yang bertan
 
 ## 🔵 P3 — Kebersihan, Konfigurasi & Dokumentasi
 
-- [ ] **40.** Bersihkan kode starter-kit yang tidak terpakai: `routes/settings.php` (tidak dimuat), `Settings/ProfileController`, halaman `settings/*.tsx`, dan pasangan `.tsx`/`.jsx` ganda.
-- [ ] **41.** Seragamkan huruf besar-kecil folder `pages/auth` vs `Auth/...` di controller agar aman di Linux.
+- [x] **40.** Bersihkan kode starter-kit yang tidak terpakai: `routes/settings.php` (tidak dimuat), `Settings/ProfileController`, halaman `settings/*.tsx`, dan pasangan `.tsx`/`.jsx` ganda. Dikerjakan: `routes/settings.php`, `Settings/PasswordController`, `Settings/ProfileController`, dan `Settings/ProfileUpdateRequest` dihapus; halaman `.tsx` tidak disentuh (tidak dimuat Vite).
+- [x] **41.** Seragamkan huruf besar-kecil folder `pages/auth` vs `Auth/...` di controller agar aman di Linux. Dikerjakan: controller `Auth/*` kini merender `auth/...` sesuai nama folder.
 - [ ] **42.** Konfirmasi tujuan `vercel.json` (`@vercel/static-build` tidak menjalankan PHP/Laravel) dengan pembuatnya.
 - [ ] **43.** Rapikan dokumentasi & konfigurasi: tambah fitur ulasan, galeri, CRUD mitra/kategori ke README (SKPL); `.env.example` (`APP_NAME`, database); ganti data Instagram/Facebook di `config/pariwisata.php` dengan data asli; verifikasi item 15/16 di PostgreSQL asli.
 
