@@ -2,7 +2,9 @@
 
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
 
 test('email verification screen can be rendered', function () {
@@ -43,4 +45,29 @@ test('email is not verified with invalid hash', function () {
     $this->actingAs($user)->get($verificationUrl);
 
     expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
+});
+
+test('registration sends a verification email', function () {
+    Notification::fake();
+
+    $this->post('/register', [
+        'name' => 'Test User',
+        'email' => 'baru@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+
+    Notification::assertSentTo(User::where('email', 'baru@example.com')->first(), VerifyEmail::class);
+});
+
+test('unverified users are sent to the verification notice from the dashboard', function () {
+    $user = User::factory()->unverified()->create();
+
+    $this->actingAs($user)->get('/dashboard')->assertRedirect(route('verification.notice'));
+});
+
+test('verified users can open the dashboard', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)->get('/dashboard')->assertOk();
 });

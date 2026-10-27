@@ -58,13 +58,24 @@ export default function Dashboard({ auth }) {
                                 <h4 className="text-lg font-bold text-gray-900">Status Akun Mitra Usaha</h4>
                             </div>
 
-                            <div className="p-4 rounded-xl border flex items-start space-x-4">
+                            <div className={`p-4 rounded-xl border flex items-start space-x-4 ${
+                                user.validation_status === 'approved'
+                                    ? 'bg-emerald-50/70 border-emerald-200'
+                                    : user.validation_status === 'pending'
+                                    ? 'bg-amber-50/80 border-amber-200'
+                                    : 'bg-rose-50/70 border-rose-200'
+                            }`}>
                                 {user.validation_status === 'approved' && (
                                     <>
                                         <ShieldCheck className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" />
                                         <div>
-                                            <h5 className="font-semibold text-emerald-900">Usaha Telah Disetujui & Terverifikasi</h5>
-                                            <p className="text-xs text-emerald-700 mt-1">
+                                            <div className="flex items-center gap-2">
+                                                <h5 className="font-semibold text-emerald-900">Usaha Telah Disetujui & Terverifikasi</h5>
+                                                <span className="px-2.5 py-0.5 text-xs font-semibold bg-emerald-100 text-emerald-800 rounded-full">
+                                                    Disetujui
+                                                </span>
+                                            </div>
+                                            <p className="text-xs text-emerald-700 mt-1.5 leading-relaxed">
                                                 Usaha Anda <span className="font-bold">"{user.business_name}"</span> ({user.business_type}) telah divalidasi oleh admin. Anda dapat mengelola penawaran dan profil wisata Anda.
                                             </p>
                                         </div>
@@ -73,11 +84,16 @@ export default function Dashboard({ auth }) {
 
                                 {user.validation_status === 'pending' && (
                                     <>
-                                        <Clock className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
+                                        <Clock className="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5 animate-pulse" />
                                         <div>
-                                            <h5 className="font-semibold text-amber-900">Menunggu Validasi Admin</h5>
-                                            <p className="text-xs text-amber-700 mt-1">
-                                                Pendaftaran usaha <span className="font-bold">"{user.business_name}"</span> sedang dalam antrean verifikasi oleh tim administrator Jelajah Lampung. Mohon menunggu 1x24 jam.
+                                            <div className="flex flex-wrap items-center gap-2">
+                                                <h5 className="font-semibold text-amber-900">Masih Dalam Persetujuan</h5>
+                                                <span className="px-2.5 py-0.5 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full">
+                                                    Menunggu Validasi Admin
+                                                </span>
+                                            </div>
+                                            <p className="text-xs text-amber-800 mt-1.5 leading-relaxed">
+                                                Pendaftaran usaha <span className="font-bold">"{user.business_name}"</span> ({user.business_type}) saat ini masih dalam proses peninjauan dan antrean verifikasi oleh tim administrator Jelajah Lampung. Mohon menunggu 1x24 jam kerja.
                                             </p>
                                         </div>
                                     </>
@@ -87,8 +103,13 @@ export default function Dashboard({ auth }) {
                                     <>
                                         <AlertCircle className="w-6 h-6 text-rose-600 flex-shrink-0 mt-0.5" />
                                         <div>
-                                            <h5 className="font-semibold text-rose-900">Validasi Ditolak</h5>
-                                            <p className="text-xs text-rose-700 mt-1">
+                                            <div className="flex items-center gap-2">
+                                                <h5 className="font-semibold text-rose-900">Validasi Ditolak</h5>
+                                                <span className="px-2.5 py-0.5 text-xs font-semibold bg-rose-100 text-rose-800 rounded-full">
+                                                    Ditolak
+                                                </span>
+                                            </div>
+                                            <p className="text-xs text-rose-700 mt-1.5 leading-relaxed">
                                                 Maaf, pengajuan validasi untuk usaha <span className="font-bold">"{user.business_name}"</span> belum dapat disetujui.
                                             </p>
                                             {user.rejection_reason && (
