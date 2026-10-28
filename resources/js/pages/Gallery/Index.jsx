@@ -124,19 +124,19 @@ export default function GalleryIndex({ galleryItems = [] }) {
 
     return (
         <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased">
-            <Head title="Galeri Foto Keindahan Lampung - Wonderly Lampung" />
+            <Head title="Galeri Foto Keindahan Lampung - Wanderly" />
 
             <PublicNavbar />
 
             {/* Header Hero Section */}
             <section className="relative pt-64 pb-20 overflow-hidden bg-slate-900 text-white">
-                <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(#ca8a04_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div className="absolute -top-24 -right-24 w-96 h-96 bg-yellow-600/20 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl"></div>
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight">
-                        Potret Keajaiban <span className="font-serif italic font-normal text-blue-400">Sang Bumi Ruwa Jurai</span>
+                        Potret Keajaiban <span className="font-serif italic font-normal text-yellow-500">Sang Bumi Ruwa Jurai</span>
                     </h1>
 
 
@@ -152,7 +152,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
                                 onClick={() => setSelectedCategory(cat.id)}
                                 className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                                     selectedCategory === cat.id
-                                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-105'
+                                        ? 'bg-yellow-600 text-white shadow-lg shadow-yellow-600/30 scale-105'
                                         : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700'
                                 }`}
                             >
@@ -190,7 +190,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
                                     {/* Top badges */}
                                     <div className="absolute top-4 left-4 flex gap-2">
                                         <span className="inline-flex items-center gap-1 rounded-full bg-slate-900/80 backdrop-blur-md px-3 py-1 text-xs font-medium text-white border border-white/10">
-                                            <i className="bx bx-tag-alt text-blue-400"></i>
+                                            <i className="bx bx-tag-alt text-yellow-500"></i>
                                             {item.categoryLabel}
                                         </span>
                                     </div>
@@ -203,11 +203,11 @@ export default function GalleryIndex({ galleryItems = [] }) {
 
                                     {/* Bottom Info */}
                                     <div className="absolute bottom-0 inset-x-0 p-5 text-white">
-                                        <div className="flex items-center gap-1 text-xs text-blue-300 font-medium mb-1">
+                                        <div className="flex items-center gap-1 text-xs text-yellow-400 font-medium mb-1">
                                             <i className="bx bx-map-pin"></i>
                                             <span>{item.location}</span>
                                         </div>
-                                        <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors">
+                                        <h3 className="text-lg font-bold text-white group-hover:text-yellow-400 transition-colors">
                                             {item.title}
                                         </h3>
                                         <div className="mt-3 flex items-center justify-between text-xs text-slate-300 pt-3 border-t border-white/15">
@@ -255,12 +255,12 @@ export default function GalleryIndex({ galleryItems = [] }) {
 
                         <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900 text-white border-t border-slate-800">
                             <div>
-                                <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-semibold mb-2">
+                                <span className="inline-block px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs font-semibold mb-2">
                                     {activeLightbox.categoryLabel}
                                 </span>
                                 <h3 className="text-xl font-bold">{activeLightbox.title}</h3>
                                 <p className="text-sm text-slate-400 flex items-center gap-2 mt-1">
-                                    <i className="bx bx-map-pin text-blue-400"></i>
+                                    <i className="bx bx-map-pin text-yellow-500"></i>
                                     {activeLightbox.location} • Oleh {activeLightbox.photographer}
                                 </p>
                             </div>
@@ -272,7 +272,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
                                 </button>
                                 <Link
                                     href="/destinations"
-                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-yellow-600 text-white text-xs font-semibold hover:bg-yellow-700 transition"
                                 >
                                     <span>Jelajahi Lokasi</span>
                                     <i className="bx bx-right-arrow-alt text-base"></i>

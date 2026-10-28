@@ -33,7 +33,7 @@ class GalleryController extends Controller
                 'category' => $image->destination->category?->slug,
                 'categoryLabel' => $image->destination->category?->name,
                 'location' => $image->destination->location,
-                'photographer' => 'Tim WonderLy',
+                'photographer' => 'Tim Wanderly',
                 'image' => $image->image_url,
                 'aspect' => 'aspect-[4/3]',
             ])

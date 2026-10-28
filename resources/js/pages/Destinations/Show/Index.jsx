@@ -11,7 +11,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
             <div className="min-h-screen flex items-center justify-center bg-white">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-slate-900 mb-4">Destinasi Tidak Ditemukan</h1>
-                    <Link href={route('home')} className="text-blue-600 font-semibold hover:underline">
+                    <Link href={route('home')} className="text-yellow-600 font-semibold hover:underline">
                         Kembali ke Beranda
                     </Link>
                 </div>
@@ -48,7 +48,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
 
     return (
         <div className="min-h-screen bg-white text-slate-900 font-sans antialiased">
-            <Head title={`${displayData.name} - Wonderly Lampung`} />
+            <Head title={`${displayData.name} - Wanderly`} />
             
             <PublicNavbar />
 
@@ -65,7 +65,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                     <div className="absolute bottom-0 left-0 w-full p-6 sm:p-12 lg:p-20">
                         <div className="max-w-7xl mx-auto">
                             <div className="flex flex-wrap items-center gap-3 mb-4">
-                                <span className="px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold uppercase tracking-wider">
+                                <span className="px-3 py-1 rounded-full bg-yellow-600 text-white text-xs font-bold uppercase tracking-wider">
                                     {displayData.category}
                                 </span>
                                 <span className="flex items-center gap-1 text-white/90 text-sm font-medium">
@@ -91,31 +91,31 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                         <div className="lg:col-span-2 space-y-12">
                             
                             {/* Quick Info Bar */}
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 p-8 rounded-3xl bg-slate-50 border border-slate-100">
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 p-8 rounded-md bg-slate-50 border border-slate-100">
                                 <div className="space-y-1">
                                     <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Lokasi</span>
                                     <p className="text-sm font-bold text-slate-900 flex items-center gap-1">
-                                        <i className="bx bx-map-pin text-blue-600"></i>
+                                        <i className="bx bx-map-pin text-yellow-600"></i>
                                         {displayData.regency || displayData.location}
                                     </p>
                                 </div>
                                 <div className="space-y-1">
                                     <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Durasi</span>
                                     <p className="text-sm font-bold text-slate-900 flex items-center gap-1">
-                                        <i className="bx bx-time-five text-blue-600"></i>
+                                        <i className="bx bx-time-five text-yellow-600"></i>
                                         {displayData.duration || '1-2 Hari'}
                                     </p>
                                 </div>
                                 <div className="space-y-1">
                                     <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Jam Buka</span>
                                     <p className="text-sm font-bold text-slate-900 flex items-center gap-1">
-                                        <i className="bx bx-calendar-check text-blue-600"></i>
+                                        <i className="bx bx-calendar-check text-yellow-600"></i>
                                         {displayData.openingHours}
                                     </p>
                                 </div>
                                 <div className="space-y-1">
                                     <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Tiket Mulai</span>
-                                    <p className="text-sm font-bold text-blue-600">
+                                    <p className="text-sm font-bold text-yellow-600">
                                         {formatRupiah(displayData.priceMin || displayData.price)}
                                     </p>
                                 </div>
@@ -129,12 +129,12 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                             key={tab}
                                             onClick={() => setActiveTab(tab)}
                                             className={`pb-4 text-sm font-bold uppercase tracking-widest transition-all relative ${
-                                                activeTab === tab ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+                                                activeTab === tab ? 'text-yellow-600' : 'text-slate-400 hover:text-slate-600'
                                             }`}
                                         >
                                             {tab}
                                             {activeTab === tab && (
-                                                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 rounded-full"></span>
+                                                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-600 rounded-full"></span>
                                             )}
                                         </button>
                                     ))}
@@ -146,14 +146,16 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                 {activeTab === 'overview' && (
                                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                                         <h3 className="text-2xl font-bold text-slate-900 mb-6">Tentang Destinasi</h3>
-                                        <p className="text-lg leading-relaxed text-slate-600">
-                                            {displayData.description}
-                                        </p>
+                                        <div className="text-lg leading-relaxed text-slate-600 space-y-6">
+                                            {displayData.description.split('\n\n').map((paragraph, idx) => (
+                                                <p key={idx}>{paragraph}</p>
+                                            ))}
+                                        </div>
                                         
                                         {/* Small Gallery Grid */}
                                         <div className="mt-12 grid grid-cols-2 gap-4">
                                             {displayData.images.slice(1, 3).map((img, idx) => (
-                                                <div key={idx} className="aspect-video rounded-2xl overflow-hidden">
+                                                <div key={idx} className="aspect-video rounded-md overflow-hidden">
                                                     <img src={img.image_url} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                                                 </div>
                                             ))}
@@ -166,8 +168,8 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                         <h3 className="text-2xl font-bold text-slate-900 mb-6">Fasilitas Tersedia</h3>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             {displayData.facilities.map((item, idx) => (
-                                                <div key={idx} className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                                                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                                                <div key={idx} className="flex items-center gap-3 p-4 rounded-md bg-slate-50 border border-slate-100">
+                                                    <div className="w-8 h-8 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center">
                                                         <i className="bx bx-check text-xl"></i>
                                                     </div>
                                                     <span className="font-medium text-slate-700">{item}</span>
@@ -182,8 +184,8 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                         <h3 className="text-2xl font-bold text-slate-900 mb-6">Tips Berkunjung</h3>
                                         <div className="space-y-4">
                                             {displayData.tips.map((tip, idx) => (
-                                                <div key={idx} className="flex gap-4 p-6 rounded-2xl bg-amber-50 border border-amber-100">
-                                                    <div className="shrink-0 w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+                                                <div key={idx} className="flex gap-4 p-6 rounded-md bg-amber-50 border border-amber-100">
+                                                    <div className="shrink-0 w-10 h-10 rounded-sm bg-amber-100 text-amber-600 flex items-center justify-center">
                                                         <i className="bx bx-bulb text-2xl"></i>
                                                     </div>
                                                     <p className="text-slate-700 font-medium leading-relaxed">{tip}</p>
@@ -200,47 +202,37 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                         </div>
 
                         {/* Right Column: Sidebar / Booking CTA */}
-                        <div className="space-y-8">
-                            <div className="sticky top-32 p-8 rounded-3xl bg-slate-900 text-white shadow-2xl shadow-slate-200">
+                        <div className="relative">
+                            <div className="lg:sticky p-8 rounded-md bg-slate-900 text-white lg:-mt-60 z-10">
                                 <h4 className="text-xl font-bold mb-2">Rencanakan Kunjungan</h4>
                                 <p className="text-slate-400 text-sm mb-8">Dapatkan pengalaman terbaik menjelajahi {displayData.name} bersama kami.</p>
                                 
                                 <div className="space-y-4 mb-8">
                                     <div className="flex justify-between items-center py-3 border-b border-white/10">
                                         <span className="text-sm text-white/60">Harga Tiket</span>
-                                        <span className="font-bold text-blue-400">{formatRupiah(displayData.priceMin || displayData.price)}</span>
+                                        <span className="font-bold text-yellow-600">{formatRupiah(displayData.priceMin || displayData.price)}</span>
                                     </div>
                                     <div className="flex justify-between items-center py-3 border-b border-white/10">
                                         <span className="text-sm text-white/60">Status</span>
-                                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">Buka Sekarang</span>
+                                        <span className="px-2 py-0.5 rounded-sm bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">Buka Sekarang</span>
                                     </div>
                                 </div>
 
-                                <button className="w-full py-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all shadow-lg shadow-blue-600/20 mb-4">
+                                <button className="w-full py-4 rounded-sm bg-yellow-600 hover:bg-yellow-700 text-white font-bold transition-all shadow-lg shadow-yellow-600/20 mb-4">
                                     Pesan Tiket Sekarang
                                 </button>
                                 
                                 <a 
                                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${displayData.name}, Lampung`)}`}
                                     target="_blank"
-                                    className="w-full py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold transition-all flex items-center justify-center gap-2"
+                                    className="w-full py-4 rounded-sm bg-white/10 hover:bg-white/20 text-white font-bold transition-all flex items-center justify-center gap-2"
                                 >
                                     <i className="bx bx-map-alt"></i>
                                     Petunjuk Arah
                                 </a>
                             </div>
 
-                            {/* Share Section */}
-                            <div className="p-8 rounded-3xl border border-slate-100 bg-white">
-                                <h4 className="font-bold text-slate-900 mb-4">Bagikan Destinasi</h4>
-                                <div className="flex gap-3">
-                                    {['facebook', 'instagram', 'twitter', 'whatsapp'].map((social) => (
-                                        <button key={social} className="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center">
-                                            <i className={`bx bxl-${social} text-xl`}></i>
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
+                        
                         </div>
 
                     </div>
@@ -272,7 +264,7 @@ function ReviewsTab({ destination, reviews, userReview }) {
                 ) : (
                     <div className="space-y-4">
                         {reviews.map((review) => (
-                            <div key={review.id} className="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div key={review.id} className="p-6 rounded-md bg-slate-50 border border-slate-100">
                                 <div className="flex items-center justify-between mb-2">
                                     <span className="font-bold text-slate-900">{review.user_name || 'Pengunjung'}</span>
                                     <span className="flex items-center gap-1 text-sm font-semibold text-slate-700">
@@ -287,7 +279,7 @@ function ReviewsTab({ destination, reviews, userReview }) {
                 )}
             </div>
 
-            <div className="p-6 rounded-2xl border border-slate-100">
+            <div className="p-6 rounded-md border border-slate-100">
                 <h4 className="text-lg font-bold text-slate-900 mb-4">
                     {userReview ? 'Ulasan Anda' : 'Tulis Ulasan'}
                 </h4>
@@ -295,7 +287,7 @@ function ReviewsTab({ destination, reviews, userReview }) {
                 {!auth?.user ? (
                     <p className="text-slate-600">
                         Silakan{' '}
-                        <Link href={route('login')} className="font-semibold text-blue-600 hover:underline">
+                        <Link href={route('login')} className="font-semibold text-yellow-600 hover:underline">
                             masuk
                         </Link>{' '}
                         untuk menulis ulasan.
@@ -334,7 +326,7 @@ function ReviewsTab({ destination, reviews, userReview }) {
                                 rows={4}
                                 maxLength={1000}
                                 placeholder="Ceritakan pengalaman Anda..."
-                                className="w-full rounded-xl border border-slate-200 p-3 text-sm focus:border-blue-500 focus:ring-blue-500"
+                                className="w-full rounded-xl border border-slate-200 p-3 text-sm focus:border-yellow-500 focus:ring-yellow-500"
                             />
                             {errors.comment && <p className="mt-1 text-xs text-rose-600 font-medium">{errors.comment}</p>}
                         </div>
@@ -343,7 +335,7 @@ function ReviewsTab({ destination, reviews, userReview }) {
                             <button
                                 type="submit"
                                 disabled={processing || data.rating === 0}
-                                className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all disabled:opacity-50"
+                                className="px-6 py-3 rounded-xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold transition-all disabled:opacity-50"
                             >
                                 {userReview ? 'Perbarui Ulasan' : 'Kirim Ulasan'}
                             </button>

@@ -97,7 +97,7 @@ export default function Register() {
                         <button
                             type="submit"
                             disabled={processing}
-                            className={`mt-3 w-full rounded-md bg-[#4C83AD] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#3f7099] disabled:opacity-60 ${focusRing}`}
+                            className={`mt-3 w-full rounded-md bg-yellow-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-yellow-700 disabled:opacity-60 ${focusRing}`}
                         >
                             {processing ? 'Memproses...' : 'Daftar akun'}
                         </button>

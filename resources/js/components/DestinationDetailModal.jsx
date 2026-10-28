@@ -48,7 +48,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-8 sm:scale-95"
                         >
-                            <DialogPanel className="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl border border-slate-100">
+                            <DialogPanel className="relative w-full max-w-4xl overflow-hidden rounded-md bg-white shadow-2xl border border-slate-100">
                                 {displayed && (
                                     <>
                                         {/* Header Image with Gradient */}
@@ -67,7 +67,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
 
                                             <div className="absolute bottom-6 left-6 right-6 text-white">
                                                 <div className="flex items-center gap-2 mb-2">
-                                                    <span className="px-3 py-1 rounded-full bg-blue-600 text-xs font-bold uppercase tracking-wider">
+                                                    <span className="px-3 py-1 rounded-full bg-yellow-600 text-xs font-bold uppercase tracking-wider">
                                                         {displayed.category}
                                                     </span>
                                                     <span className="flex items-center gap-1 text-xs font-medium text-amber-400">
@@ -79,7 +79,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                                                     {displayed.name}
                                                 </DialogTitle>
                                                 <p className="text-xs sm:text-sm text-slate-300 flex items-center gap-1 mt-1">
-                                                    <i className="bx bx-map-pin text-blue-400"></i>
+                                                    <i className="bx bx-map-pin text-yellow-600"></i>
                                                     {displayed.regency}
                                                 </p>
                                             </div>
@@ -92,7 +92,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                                                 {infoItems.map((item) => (
                                                     <div
                                                         key={item.label}
-                                                        className="flex flex-col items-center justify-center rounded-2xl bg-slate-50 border border-slate-100 p-4 text-center"
+                                                        className="flex flex-col items-center justify-center rounded-md bg-slate-50 border border-slate-100 p-4 text-center"
                                                     >
                                                         <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">
                                                             {item.label}
@@ -116,7 +116,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                                                         {displayed.facilities.map((facility) => (
                                                             <span
                                                                 key={facility}
-                                                                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 px-3.5 py-2 text-xs font-semibold text-blue-700 border border-blue-100"
+                                                                className="inline-flex items-center gap-1.5 rounded-md bg-yellow-50 px-3.5 py-2 text-xs font-semibold text-yellow-700 border border-yellow-100"
                                                             >
                                                                 <i className="bx bx-check-circle text-base"></i>
                                                                 {facility}
@@ -132,7 +132,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                                                     href={mapsUrl}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-100 px-6 py-3.5 text-xs font-bold text-slate-700 hover:bg-slate-200 transition"
+                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-slate-100 px-6 py-3.5 text-xs font-bold text-slate-700 hover:bg-slate-200 transition"
                                                 >
                                                     <i className="bx bx-map-alt text-lg"></i>
                                                     Petunjuk Arah (Maps)
@@ -140,7 +140,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
 
                                                 <Link
                                                     href={route('destinations.show', displayed.slug)}
-                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-8 py-3.5 text-xs font-bold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition"
+                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-yellow-600 px-8 py-3.5 text-xs font-bold text-white shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition"
                                                 >
                                                     <span>Lihat Halaman Full Detail</span>
                                                     <i className="bx bx-right-arrow-alt text-lg"></i>

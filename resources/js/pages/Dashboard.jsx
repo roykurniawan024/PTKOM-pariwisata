@@ -43,7 +43,7 @@ export default function Dashboard({ auth }) {
                             <div className="flex flex-wrap gap-2">
                                 <Link
                                     href={route('admin.destinations.index')}
-                                    className="px-4 py-2 bg-[#4C83AD] hover:bg-[#3d6b8e] text-white rounded-xl text-sm font-medium transition-colors shadow-sm flex items-center space-x-2"
+                                    className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-xl text-sm font-medium transition-colors shadow-sm flex items-center space-x-2"
                                 >
                                     <span>Kelola Destinasi Wisata</span>
                                     <ArrowRight className="w-4 h-4 ml-1" />

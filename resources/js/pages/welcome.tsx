@@ -38,8 +38,8 @@ export default function Welcome() {
             <div className="flex min-h-screen flex-col bg-white px-6 py-6 text-slate-800 antialiased sm:px-10" style={{ fontFamily }}>
                 <header className="mx-auto w-full max-w-xl text-sm">
                     <span className="flex w-fit items-center gap-2 font-medium text-slate-900">
-                        <span className="h-2 w-2 rounded-full bg-[#4C83AD]" aria-hidden="true" />
-                        WonderLy
+                        <span className="h-2 w-2 rounded-full bg-yellow-600" aria-hidden="true" />
+                        Wanderly
                     </span>
                 </header>
 
@@ -59,15 +59,15 @@ export default function Welcome() {
                             <li key={item.href}>
                                 <Link
                                     href={item.href}
-                                    className="group flex items-center justify-between gap-6 py-4 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#4C83AD]"
+                                    className="group flex items-center justify-between gap-6 py-4 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-yellow-600"
                                 >
                                     <span className="flex flex-col">
-                                        <span className="text-sm font-medium text-slate-900 transition-colors group-hover:text-[#4C83AD]">
+                                        <span className="text-sm font-medium text-slate-900 transition-colors group-hover:text-yellow-600">
                                             {item.title}
                                         </span>
                                         <span className="text-sm text-slate-500">{item.description}</span>
                                     </span>
-                                    <span className="text-slate-400 transition-colors group-hover:text-[#4C83AD]">
+                                    <span className="text-slate-400 transition-colors group-hover:text-yellow-600">
                                         <ArrowIcon />
                                     </span>
                                 </Link>

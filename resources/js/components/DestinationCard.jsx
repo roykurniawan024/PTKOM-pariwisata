@@ -22,7 +22,7 @@ export default function DestinationCard({
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-slate-900/80 backdrop-blur-md px-3 py-1 text-xs font-semibold text-white border border-white/10">
-                    <i className="bx bx-category-alt text-blue-400"></i>
+                    <i className="bx bx-category-alt text-yellow-600"></i>
                     {category}
                 </span>
             </div>
@@ -31,7 +31,7 @@ export default function DestinationCard({
                 <div>
                     <div className="mt-3 flex items-center justify-between text-xs">
                         <span className="flex items-center gap-1 text-slate-500">
-                            <i className="bx bx-map-pin text-blue-600 text-sm"></i>
+                            <i className="bx bx-map-pin text-yellow-600 text-sm"></i>
                             {location}
                         </span>
                         <span className="flex items-center gap-1 font-semibold text-amber-500">
@@ -41,7 +41,7 @@ export default function DestinationCard({
                         </span>
                     </div>
 
-                    <h3 className="mt-2 text-lg font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
+                    <h3 className="mt-2 text-lg font-bold tracking-tight text-slate-900 group-hover:text-yellow-600 transition-colors">
                         <a href={destinationUrl} className="outline-none">
                             {title}
                         </a>
@@ -55,11 +55,11 @@ export default function DestinationCard({
                 <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
                     <div>
                         <span className="text-[10px] text-slate-400 block uppercase font-bold tracking-wider">Harga Tiket</span>
-                        <span className="text-sm font-bold text-blue-600">{price}</span>
+                        <span className="text-sm font-bold text-yellow-600">{price}</span>
                     </div>
                     <a
                         href={destinationUrl}
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-yellow-600 transition-colors"
                     >
                         <span>Detail</span>
                         <i className="bx bx-right-arrow-alt text-base group-hover:translate-x-1 transition-transform"></i>

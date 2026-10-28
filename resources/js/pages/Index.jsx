@@ -14,75 +14,6 @@ const statistics = [
 
 const categories = ['Semua', 'Bahari', 'Alam', 'Pantai', 'Budaya'];
 
-const destinationsData = [
-    {
-        id: 1,
-        title: 'Pulau Pahawang',
-        category: 'Bahari',
-        location: 'Pesawaran',
-        rating: 4.9,
-        reviewCount: 342,
-        description: 'Surga bawah laut terkenal dengan terumbu karang yang asri dan penangkaran anak penyu (tukik).',
-        price: 'Rp 250.000 / orang',
-        image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-        id: 2,
-        title: 'Taman Nasional Way Kambas',
-        category: 'Alam',
-        location: 'Lampung Timur',
-        rating: 4.8,
-        reviewCount: 215,
-        description: 'Pusat konservasi Gajah Sumatera dan Badak Sumatera di tengah hutan dataran rendah yang rimbun.',
-        price: 'Rp 100.000 / orang',
-        image: 'https://images.unsplash.com/photo-1564760055775-d63b19a55371?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-        id: 3,
-        title: 'Pantai Gigi Hiu',
-        category: 'Pantai',
-        location: 'Tanggamus',
-        rating: 4.7,
-        reviewCount: 180,
-        description: 'Formasi batuan karang tajam eksotis yang menjulang tinggi dihempas ombak Samudra Hindia.',
-        price: 'Rp 50.000 / orang',
-        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-        id: 4,
-        title: 'Teluk Kiluan',
-        category: 'Bahari',
-        location: 'Tanggamus',
-        rating: 4.9,
-        reviewCount: 290,
-        description: 'Saksikan atraksi ratusan lumba-lumba hidung botol berenang bebas di habitat aslinya.',
-        price: 'Rp 300.000 / orang',
-        image: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-        id: 5,
-        title: 'Gunung Krakatau & Anak Krakatau',
-        category: 'Alam',
-        location: 'Lampung Selatan',
-        rating: 4.9,
-        reviewCount: 410,
-        description: 'Petualangan vulkanik legendaris dunia dengan panorama matahari terbit yang luar biasa.',
-        price: 'Rp 500.000 / orang',
-        image: 'https://images.unsplash.com/photo-1608953154378-b19b808a974b?auto=format&fit=crop&w=800&q=80',
-    },
-    {
-        id: 6,
-        title: 'Menara Siger',
-        category: 'Budaya',
-        location: 'Lampung Selatan',
-        rating: 4.6,
-        reviewCount: 155,
-        description: 'Ikon budaya Lampung berupa mahkota pengantin wanita bersepuh emas menyambut di gerbang Sumatera.',
-        price: 'Rp 25.000 / orang',
-        image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80',
-    },
-];
-
 const cultureFeatures = [
     {
         title: 'Tari Siger',
@@ -143,12 +74,12 @@ const testimonialsData = [
 
 const fontFamily = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
 const container = 'mx-auto w-full max-w-7xl px-6 lg:px-8';
-const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600';
+const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-600';
 
 function SectionHeader({ title, description, centered = false }) {
     return (
         <div className={`${centered ? 'text-center mx-auto' : ''} max-w-2xl`}>
-            <h2 className="text-3xl leading-tight font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            <h2 className="text-3xl text-center leading-tight font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
                 {title}
             </h2>
             {description && <p className="mt-4 text-lg leading-relaxed text-center text-slate-600">{description}</p>}
@@ -161,7 +92,7 @@ export default function Index({
     categories: initialCategories = [],
     statistics: initialStatistics = [],
 }) {
-    const destinationsList = initialDestinations && initialDestinations.length > 0 ? initialDestinations : destinationsData;
+    const destinationsList = initialDestinations;
     const categoriesList = initialCategories && initialCategories.length > 0 ? ['Semua', ...initialCategories] : categories;
     const statsList = initialStatistics && initialStatistics.length > 0 ? initialStatistics : statistics;
 
@@ -172,7 +103,7 @@ export default function Index({
 
     return (
         <>
-            <Head title="Wonderly Lampung - Jelajahi Keindahan Sang Bumi Ruwa Jurai">
+            <Head title="Wanderly - Jelajahi Keindahan Sang Bumi Ruwa Jurai">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800" rel="stylesheet" />
             </Head>
@@ -183,18 +114,21 @@ export default function Index({
                     {/* Hero */}
                     <section className="relative flex h-[90vh] items-center overflow-hidden">
                         <img
-                            src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=2000&q=85"
-                            alt="Pantai di Lampung"
+                            src="https://asdp.id/storage//uploads/siaranpers/d905b966b12f4610fce258007a737f4d.jpeg"
+                            alt="Menara Siger Lampung"
                             className="absolute inset-0 h-full w-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent" />
 
                         <div className={`${container} relative z-10`}>
-                            <div className="max-w-3xl">
+                            <div className="max-w-6xl">
+                                <div className="bg-white leading-[2.1] font-semibold text-sm py-1 px-4 w-fit rounded-sm rounded-r-full">
+                                    <span>Yuk Kenali</span>
+                                </div>
                                 <h1 className="text-2xl leading-[1.1] font-extrabold tracking-tight text-white sm:text-4xl lg:text-6xl">
-                                    Alam Liar, Budaya Kaya, Lampung.
+                                    Wisata Alam & Budaya Lampung.
                                 </h1>
-                                <p className="mt-8 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+                                <p className="mt-4 max-w-4xl text-lg leading-relaxed text-slate-100 sm:text-xl">
                                     Dari sabana Way Kambas hingga ombak Samudra Hindia, Lampung menyimpan alam dan tradisi yang menunggu dijelajahi.
                                 </p>
                                 <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -209,8 +143,8 @@ export default function Index({
                                         href="#budaya"
                                         className="group inline-flex items-center gap-2 rounded-lg bg-transparent px-8 py-3 text-sm font-bold text-white outline outline-[1px] transition-all hover:bg-white/10 backdrop-blur-sm shadow-lg"
                                     >
-                                        <i className="bx bx-play-circle text-xl"></i>
                                         <span>Kenali Budaya</span>
+                                        <i className="bx bx-right-arrow-alt text-xl group-hover:translate-x-1 transition-transform"></i>
                                     </a>
                                 </div>
                             </div>
@@ -229,7 +163,7 @@ export default function Index({
                             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 p-8 rounded-xl bg-white shadow-2xl shadow-slate-200 border border-slate-100">
                                 {statsList.map((statistic, idx) => (
                                     <div key={statistic.label} className={`flex flex-col items-center text-center ${idx !== statsList.length - 1 ? 'md:border-r border-slate-100' : ''}`}>
-                                        <dd className="text-3xl font-extrabold tracking-tight text-blue-600 sm:text-4xl">{statistic.value}</dd>
+                                        <dd className="text-3xl font-extrabold tracking-tight text-yellow-600 sm:text-4xl">{statistic.value}</dd>
                                         <dt className="mt-1 text-xs font-bold uppercase tracking-widest text-slate-400">{statistic.label}</dt>
                                     </div>
                                 ))}
@@ -254,7 +188,7 @@ export default function Index({
                                             onClick={() => setActiveCategory(category)}
                                             className={`px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl transition-all ${
                                                 activeCategory === category
-                                                    ? 'bg-white text-blue-600 shadow-sm border border-slate-100'
+                                                    ? 'bg-white text-yellow-600 shadow-sm border border-slate-100'
                                                     : 'text-slate-500 hover:text-slate-900'
                                             }`}
                                         >
@@ -273,7 +207,7 @@ export default function Index({
                             <div className="mt-16 text-center">
                                 <Link
                                     href={route('destinations.index')}
-                                    className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-blue-600 shadow-lg shadow-slate-900/10"
+                                    className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-yellow-600 shadow-lg shadow-slate-900/10"
                                 >
                                     <span>Lihat Semua Destinasi</span>
                                     <i className="bx bx-grid-alt text-lg"></i>
@@ -294,8 +228,8 @@ export default function Index({
                                     
                                     <div className="grid gap-4 sm:grid-cols-2">
                                         {cultureFeatures.map((feature) => (
-                                            <div key={feature.title} className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                                                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                                            <div key={feature.title} className="p-6 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                                                <div className="w-12 h-12 rounded-2xl bg-yellow-50 text-yellow-600 flex items-center justify-center mb-4">
                                                     <i className="bx bx-star text-2xl"></i>
                                                 </div>
                                                 <h3 className="font-bold text-slate-900 mb-2">{feature.title}</h3>
@@ -335,7 +269,7 @@ export default function Index({
                                 />
                                 <Link
                                     href={route('gallery.index')}
-                                    className="group inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition"
+                                    className="group inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition"
                                 >
                                     <span>Lihat Semua Galeri</span>
                                     <i className="bx bx-right-arrow-alt text-xl group-hover:translate-x-1 transition-transform"></i>
@@ -366,7 +300,7 @@ export default function Index({
                     </section>
 
                     {/* Testimoni Preview */}
-                    <section id="testimoni" className="py-24 sm:py-32 bg-blue-50/50">
+                    <section id="testimoni" className="py-24 sm:py-32 bg-gray-100">
                         <div className={container}>
                             <div className="text-center max-w-3xl mx-auto mb-16">
                                 <SectionHeader
@@ -385,7 +319,7 @@ export default function Index({
                             <div className="mt-16 text-center">
                                 <Link
                                     href={route('testimonials.index')}
-                                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-blue-600 transition"
+                                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-yellow-600 transition"
                                 >
                                     <span>Baca Lebih Banyak Cerita</span>
                                     <i className="bx bx-plus-circle text-lg"></i>
@@ -405,7 +339,7 @@ export default function Index({
                                         alt="Background"
                                     />
                                 </div>
-                                <div className="absolute inset-0 bg-gradient-to-b from-blue-600/20 to-slate-950/90" />
+                                <div className="absolute inset-0 bg-gradient-to-b from-yellow-600/20 to-slate-950/90" />
                                 
                                 <div className="relative z-10 max-w-3xl mx-auto">
                                     <h2 className="text-4xl leading-tight font-extrabold tracking-tight text-white sm:text-6xl">
@@ -417,7 +351,7 @@ export default function Index({
                                     <div className="mt-12 flex flex-wrap justify-center items-center gap-4">
                                         <Link
                                             href={route('registrasi.select')}
-                                            className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-10 py-5 text-sm font-bold text-white transition-all hover:bg-blue-700 shadow-xl shadow-blue-600/20"
+                                            className="inline-flex items-center gap-2 rounded-2xl bg-yellow-600 px-10 py-5 text-sm font-bold text-white transition-all hover:bg-yellow-700 shadow-xl shadow-yellow-600/20"
                                         >
                                             <span>Daftar Akun Sekarang</span>
                                             <i className="bx bx-user-plus text-xl"></i>

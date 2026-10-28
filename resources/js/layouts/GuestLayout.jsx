@@ -6,7 +6,7 @@ export default function GuestLayout({ children }) {
             <div>
                 <Link href="/" className="font-serif text-2xl tracking-tight">
                     <span className="font-semibold text-[#2D4D43]">Jelajah</span>{' '}
-                    <span className="italic font-normal text-[#4C83AD]">Lampung</span>
+                    <span className="italic font-normal text-yellow-600">Lampung</span>
                 </Link>
             </div>
 

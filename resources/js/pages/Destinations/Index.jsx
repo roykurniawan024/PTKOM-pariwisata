@@ -253,13 +253,13 @@ const formatPriceRange = ({ priceMin, priceMax }) => {
 };
 
 const fontFamily = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
-const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4C83AD]';
+const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-600';
 const controlClass =
-    'rounded-md border border-slate-200 bg-white text-sm text-slate-700 transition focus:border-[#4C83AD] focus:outline-none focus:ring-1 focus:ring-[#4C83AD]';
+    'rounded-md border border-slate-200 bg-white text-sm text-slate-700 transition focus:border-yellow-600 focus:outline-none focus:ring-1 focus:ring-yellow-600';
 
 function DestinationListCard({ destination, onOpenDetail }) {
     return (
-        <article className="group relative flex flex-col rounded-md has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-[#4C83AD]">
+        <article className="group relative flex flex-col rounded-md has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-yellow-600">
             <div className="aspect-[4/3] overflow-hidden rounded-md bg-slate-100">
                 <img
                     src={destination.thumbnail}
@@ -270,7 +270,7 @@ function DestinationListCard({ destination, onOpenDetail }) {
             </div>
 
             <div className="mt-4 flex items-center justify-between gap-4 text-sm">
-                <span className="font-medium text-[#4C83AD]">{destination.regency}</span>
+                <span className="font-medium text-yellow-600">{destination.regency}</span>
                 <span className="flex shrink-0 items-center gap-1 text-slate-700">
                     <svg className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -467,7 +467,7 @@ export default function Index({
                                         aria-pressed={activeCategory === category}
                                         className={`-mb-px shrink-0 border-b-2 pb-3 text-sm font-medium transition-colors ${focusRing} ${
                                             activeCategory === category
-                                                ? 'border-[#4C83AD] text-slate-900'
+                                                ? 'border-yellow-600 text-slate-900'
                                                 : 'border-transparent text-slate-500 hover:text-slate-900'
                                         }`}
                                     >
@@ -482,7 +482,7 @@ export default function Index({
                                         value={activeRegency}
                                         onChange={(e) => setActiveRegency(e.target.value)}
                                         aria-label="Filter kabupaten atau kota"
-                                        className={`${controlClass} py-2 pl-3 pr-8 ${activeRegency ? 'border-[#4C83AD] text-slate-900' : ''}`}
+                                        className={`${controlClass} py-2 pl-3 pr-8 ${activeRegency ? 'border-yellow-600 text-slate-900' : ''}`}
                                     >
                                         <option value="">Semua daerah</option>
                                         {regencies.map((regency) => (

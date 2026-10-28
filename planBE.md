@@ -364,7 +364,7 @@ Setelah menarik 3 commit terbaru dari GitHub (UI Update), ditemukan bug baru yan
 - [x] **25.** Modul Galeri (`GalleryController`, endpoint `GET /api/v1/gallery`, dan suplai data dinamis ke `/gallery`).
 - [x] **26.** Data fasilitas, tips, dan tagline masuk database lewat migrasi dan model.
 - [x] **27.** Statistik hero dihitung secara akurat dari data riil destinasi dan rating database.
-- [x] **28.** Info kontak dan branding diselaraskan dengan platform WonderLy.
+- [x] **28.** Info kontak dan branding diselaraskan dengan platform Wanderly.
 - [x] **29.** Refactor closure rute ke Controller (`HomeController`).
 - [x] **30.** FormRequest & Policy untuk manajemen destinasi.
 - [x] **31.** Automated test tambahan: `ReviewApiTest`, `PartnerDestinationManagementTest`, dan `GalleryApiTest`.

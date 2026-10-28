@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Plus, Pencil, Trash2, MapPin, Star, Search, Image as ImageIcon, X } from 'lucide-react';
 
 const inputClass =
-    'w-full text-sm px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#4C83AD] outline-none';
+    'w-full text-sm px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-yellow-600 outline-none';
 
 const pageLabel = (label) => {
     if (label.includes('Previous')) return 'Sebelumnya';
@@ -117,7 +117,7 @@ export default function Destinations({ destinations, categories, filters }) {
                     <button
                         type="button"
                         onClick={openCreateModal}
-                        className="inline-flex items-center px-4 py-2 bg-[#4C83AD] hover:bg-[#3d6b8e] text-white text-sm font-medium rounded-xl shadow-sm transition-colors space-x-2"
+                        className="inline-flex items-center px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-medium rounded-xl shadow-sm transition-colors space-x-2"
                     >
                         <Plus className="w-4 h-4" />
                         <span>Tambah Destinasi Baru</span>
@@ -139,7 +139,7 @@ export default function Destinations({ destinations, categories, filters }) {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 placeholder="Cari nama atau lokasi destinasi..."
                                 aria-label="Cari destinasi"
-                                className="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#4C83AD] focus:border-transparent outline-none transition"
+                                className="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-yellow-600 focus:border-transparent outline-none transition"
                             />
                         </form>
                         <span className="text-xs text-gray-500 font-medium">
@@ -222,7 +222,7 @@ export default function Destinations({ destinations, categories, filters }) {
                                                         <button
                                                             type="button"
                                                             onClick={() => openEditModal(dest)}
-                                                            className="p-1.5 hover:bg-gray-100 text-gray-600 hover:text-[#4C83AD] rounded-lg transition"
+                                                            className="p-1.5 hover:bg-gray-100 text-gray-600 hover:text-yellow-600 rounded-lg transition"
                                                             title="Edit destinasi"
                                                             aria-label={`Edit ${dest.name}`}
                                                         >
@@ -258,7 +258,7 @@ export default function Destinations({ destinations, categories, filters }) {
                                         onClick={() => link.url && router.get(link.url, {}, { preserveScroll: true })}
                                         className={`px-3 py-1.5 text-xs rounded-lg transition ${
                                             link.active
-                                                ? 'bg-[#4C83AD] text-white font-bold'
+                                                ? 'bg-yellow-600 text-white font-bold'
                                                 : link.url
                                                   ? 'hover:bg-gray-100 text-gray-700'
                                                   : 'text-gray-300 cursor-not-allowed'
@@ -398,7 +398,7 @@ export default function Destinations({ destinations, categories, filters }) {
                                     type="file"
                                     accept="image/*"
                                     onChange={(e) => setData('image', e.target.files[0] ?? null)}
-                                    className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#4C83AD]/10 file:text-[#4C83AD] hover:file:bg-[#4C83AD]/20"
+                                    className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-yellow-600/10 file:text-yellow-600 hover:file:bg-yellow-600/20"
                                 />
                             </Field>
 
@@ -413,7 +413,7 @@ export default function Destinations({ destinations, categories, filters }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="px-5 py-2 bg-[#4C83AD] hover:bg-[#3d6b8e] text-white text-sm font-semibold rounded-xl shadow-sm transition disabled:opacity-50"
+                                    className="px-5 py-2 bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-semibold rounded-xl shadow-sm transition disabled:opacity-50"
                                 >
                                     {processing ? 'Menyimpan...' : 'Simpan Destinasi'}
                                 </button>

@@ -1,12 +1,12 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 
 const fontFamily = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
-const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600';
+const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-600';
 const inputClass =
     'w-full rounded-2xl border bg-slate-50/50 px-4 py-3.5 text-sm text-slate-900 transition placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:bg-white';
 
 const fieldClass = (hasError) =>
-    `${inputClass} ${hasError ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/20' : 'border-slate-200 focus:border-blue-600 focus:ring-blue-600/20'}`;
+    `${inputClass} ${hasError ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/20' : 'border-slate-200 focus:border-yellow-600 focus:ring-yellow-600/20'}`;
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,14 +14,6 @@ export default function Login({ status, canResetPassword }) {
         password: '',
         remember: false,
     });
-
-    const fillTestAccount = (email, password) => {
-        setData({
-            email: email,
-            password: password,
-            remember: true
-        });
-    };
 
     const submit = (e) => {
         e.preventDefault();
@@ -33,7 +25,7 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <>
-            <Head title="Masuk - Wonderly Lampung">
+            <Head title="Masuk - Wanderly">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700" rel="stylesheet" />
             </Head>
@@ -43,11 +35,8 @@ export default function Login({ status, canResetPassword }) {
                 <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-16">
                     <div>
                         <Link href="/" className="inline-flex items-center gap-2.5 group">
-                            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-                                <i className="bx bxs-compass text-xl"></i>
-                            </div>
                             <span className="font-serif text-2xl font-bold tracking-tight text-slate-900">
-                                Wonderly <span className="text-blue-600 font-sans text-xs uppercase font-extrabold tracking-widest ml-1 px-2 py-0.5 bg-blue-50 rounded-full border border-blue-100">Lampung</span>
+                                Wanderly
                             </span>
                         </Link>
                     </div>
@@ -56,32 +45,6 @@ export default function Login({ status, canResetPassword }) {
                         <div className="mb-8">
                             <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Selamat Datang</h1>
                             <p className="mt-2 text-sm text-slate-500">Masuk untuk menjelajahi dan mengelola pariwisata Lampung.</p>
-                        </div>
-
-                        {/* Quick Test Accounts Fill */}
-                        <div className="mb-8 p-4 rounded-2xl bg-blue-50/50 border border-blue-100">
-                            <p className="text-xs font-bold text-blue-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                                <i className="bx bx-info-circle text-blue-600 text-base"></i>
-                                Akun Uji Coba Cepat (Test Accounts):
-                            </p>
-                            <div className="grid grid-cols-2 gap-2">
-                                <button
-                                    type="button"
-                                    onClick={() => fillTestAccount('admin@pariwisatalampung.go.id', 'admin123')}
-                                    className="px-3 py-2 rounded-xl bg-white border border-blue-200 text-xs font-semibold text-blue-700 hover:bg-blue-600 hover:text-white transition shadow-sm text-left flex items-center justify-between"
-                                >
-                                    <span>👑 Admin</span>
-                                    <i className="bx bx-right-arrow-alt"></i>
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => fillTestAccount('mitra@pariwisatalampung.go.id', 'mitra123')}
-                                    className="px-3 py-2 rounded-xl bg-white border border-blue-200 text-xs font-semibold text-blue-700 hover:bg-blue-600 hover:text-white transition shadow-sm text-left flex items-center justify-between"
-                                >
-                                    <span>🏢 Pemilik Usaha</span>
-                                    <i className="bx bx-right-arrow-alt"></i>
-                                </button>
-                            </div>
                         </div>
 
                         {status && (
@@ -116,7 +79,7 @@ export default function Login({ status, canResetPassword }) {
                                         Kata Sandi
                                     </label>
                                     {canResetPassword && (
-                                        <Link href={route('password.request')} className="text-xs font-semibold text-blue-600 hover:underline">
+                                        <Link href={route('password.request')} className="text-xs font-semibold text-yellow-600 hover:underline">
                                             Lupa kata sandi?
                                         </Link>
                                     )}
@@ -141,7 +104,7 @@ export default function Login({ status, canResetPassword }) {
                                         type="checkbox"
                                         checked={data.remember}
                                         onChange={(e) => setData('remember', e.target.checked)}
-                                        className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                                        className="w-4 h-4 rounded border-slate-300 text-yellow-600 focus:ring-yellow-500"
                                     />
                                     <span className="text-xs font-medium text-slate-600">Ingat saya di perangkat ini</span>
                                 </label>
@@ -150,7 +113,7 @@ export default function Login({ status, canResetPassword }) {
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="w-full py-4 rounded-2xl bg-blue-600 text-white font-bold text-sm tracking-wide shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition disabled:opacity-50"
+                                className="w-full py-4 rounded-2xl bg-yellow-600 text-white font-bold text-sm tracking-wide shadow-xl shadow-yellow-600/20 hover:bg-yellow-700 transition disabled:opacity-50"
                             >
                                 {processing ? 'Memproses...' : 'Masuk ke Akun'}
                             </button>
@@ -158,27 +121,27 @@ export default function Login({ status, canResetPassword }) {
 
                         <p className="mt-8 text-center text-xs text-slate-500">
                             Belum punya akun?{' '}
-                            <Link href={route('registrasi.select')} className="font-bold text-blue-600 hover:underline">
+                            <Link href={route('registrasi.select')} className="font-bold text-yellow-600 hover:underline">
                                 Buat Akun Baru
                             </Link>
                         </p>
                     </div>
 
                     <div className="text-xs text-slate-400 text-center">
-                        &copy; {new Date().getFullYear()} Wonderly Lampung. All rights reserved.
+                        &copy; {new Date().getFullYear()} Wanderly. All rights reserved.
                     </div>
                 </div>
 
                 {/* Right: Image / Visual Banner */}
                 <div className="hidden lg:block relative overflow-hidden bg-slate-900">
                     <img
-                        src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1600&q=85"
+                        src="https://asdp.id/storage//uploads/siaranpers/d905b966b12f4610fce258007a737f4d.jpeg"
                         alt="Lampung Tourism"
                         className="absolute inset-0 w-full h-full object-cover opacity-60"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
                     <div className="absolute bottom-16 left-16 right-16 text-white">
-                        <span className="px-3 py-1 rounded-full bg-blue-600/30 border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+                        <span className="px-3 py-1 rounded-xs bg-yellow-600/5 border border-yellow-400/30 text-yellow-300 text-xs font-bold uppercase tracking-widest backdrop-blur-md">
                             Wonderful Indonesia
                         </span>
                         <h2 className="mt-4 text-3xl font-extrabold tracking-tight">Jelajahi Pesona Sang Bumi Ruwa Jurai</h2>
