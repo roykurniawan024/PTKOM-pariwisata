@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -29,13 +32,19 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $user->fill($request->safe()->except('avatar'));
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        if ($request->hasFile('avatar')) {
+            $this->deleteStoredAvatar($user);
+            $user->avatar_url = Storage::url($request->file('avatar')->store('avatars', 'public'));
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit');
     }
@@ -53,11 +62,22 @@ class ProfileController extends Controller
 
         Auth::logout();
 
+        $this->deleteStoredAvatar($user);
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Remove the user's uploaded avatar file from the public disk, if any.
+     */
+    private function deleteStoredAvatar(User $user): void
+    {
+        if ($user->avatar_url && Str::startsWith($user->avatar_url, '/storage/')) {
+            Storage::disk('public')->delete(Str::after($user->avatar_url, '/storage/'));
+        }
     }
 }

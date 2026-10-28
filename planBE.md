@@ -405,5 +405,10 @@ Hasil audit read-only setelah verifikasi email aktif (item 32). Item yang bertan
 - [ ] **42.** Konfirmasi tujuan `vercel.json` (`@vercel/static-build` tidak menjalankan PHP/Laravel) dengan pembuatnya.
 - [ ] **43.** Rapikan dokumentasi & konfigurasi: tambah fitur ulasan, galeri, CRUD mitra/kategori ke README (SKPL); `.env.example` (`APP_NAME`, database); ganti data Instagram/Facebook di `config/pariwisata.php` dengan data asli; verifikasi item 15/16 di PostgreSQL asli.
 
+## 🟢 Tambahan — Data Contoh & Profil Wisatawan
+
+- [x] **44.** Seeder ulasan contoh: `ReviewSeeder` (dipanggil `DatabaseSeeder` setelah `DestinationSeeder`) membuat 6 akun wisatawan (`*@example.com`, password `password`, email terverifikasi) beserta ulasan yang sudah disetujui menggantikan testimoni dummy; idempotent dan dites di `ReviewSeederTest`. Data uji ulasan `Wisatawan Test` (Pantai Tanjung Setia) di database lokal dihapus dan rating destinasi dikembalikan ke 4.9.
+- [x] **45.** Profil wisatawan: kolom `profession`, `city`, `avatar_url` pada `users` (migrasi `add_profile_fields_to_users_table`, jalankan `php artisan migrate`); `ProfileUpdateRequest` + `ProfileController` menerima upload foto (JPG/PNG/WebP, maks 2 MB; file lama dihapus saat diganti atau akun dihapus); halaman Testimoni memakai profesi, kota, dan foto reviewer (fallback "Pengunjung", "Lampung", dan avatar inisial); dites di `ProfileDetailsTest`.
+
 ---
 

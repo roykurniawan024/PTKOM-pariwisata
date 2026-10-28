@@ -29,6 +29,16 @@ export default function Dashboard({ auth }) {
                             </p>
                         </div>
 
+                        {user.role === 'user' && (
+                            <Link
+                                href={route('profile.edit')}
+                                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors shadow-sm flex items-center space-x-2"
+                            >
+                                <span>Lengkapi Profil (foto, profesi, kota)</span>
+                                <ArrowRight className="w-4 h-4 ml-1" />
+                            </Link>
+                        )}
+
                         {user.role === 'admin' && (
                             <div className="flex flex-wrap gap-2">
                                 <Link

@@ -4,6 +4,7 @@ import PrimaryButton from '@/components/PrimaryButton';
 import TextInput from '@/components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -12,16 +13,32 @@ export default function UpdateProfileInformation({
 }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
+    const [avatarPreview, setAvatarPreview] = useState(user.avatar_url);
+
+    const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm({
+            _method: 'patch',
             name: user.name,
             email: user.email,
+            profession: user.profession ?? '',
+            city: user.city ?? '',
+            avatar: null,
         });
+
+    const handleAvatarChange = (e) => {
+        const file = e.target.files[0] ?? null;
+
+        setData('avatar', file);
+
+        if (file) {
+            setAvatarPreview(URL.createObjectURL(file));
+        }
+    };
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        post(route('profile.update'), { forceFormData: true, preserveScroll: true });
     };
 
     return (
@@ -67,6 +84,60 @@ export default function UpdateProfileInformation({
                     />
 
                     <InputError className="mt-2" message={errors.email} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="profession" value="Profesi" />
+
+                    <TextInput
+                        id="profession"
+                        className="mt-1 block w-full"
+                        value={data.profession}
+                        onChange={(e) => setData('profession', e.target.value)}
+                        placeholder="Contoh: Fotografer, Mahasiswa"
+                    />
+
+                    <InputError className="mt-2" message={errors.profession} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="city" value="Kota" />
+
+                    <TextInput
+                        id="city"
+                        className="mt-1 block w-full"
+                        value={data.city}
+                        onChange={(e) => setData('city', e.target.value)}
+                        placeholder="Contoh: Bandar Lampung"
+                    />
+
+                    <InputError className="mt-2" message={errors.city} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="avatar" value="Foto Profil" />
+
+                    <div className="mt-1 flex items-center gap-4">
+                        {avatarPreview && (
+                            <img
+                                src={avatarPreview}
+                                alt="Foto profil"
+                                className="h-16 w-16 rounded-full object-cover"
+                            />
+                        )}
+
+                        <input
+                            id="avatar"
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp"
+                            onChange={handleAvatarChange}
+                            className="block w-full text-sm text-gray-600 file:mr-4 file:rounded-md file:border-0 file:bg-gray-100 file:px-4 file:py-2 file:text-sm file:font-medium hover:file:bg-gray-200"
+                        />
+                    </div>
+
+                    <p className="mt-1 text-xs text-gray-500">JPG, PNG, atau WebP, maksimal 2 MB.</p>
+
+                    <InputError className="mt-2" message={errors.avatar} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (

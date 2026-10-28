@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             DestinationSeeder::class,
+            ReviewSeeder::class,
         ]);
     }
 }

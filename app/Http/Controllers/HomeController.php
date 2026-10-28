@@ -51,7 +51,7 @@ class HomeController extends Controller
     public function testimonials(): Response
     {
         $testimonials = Review::approved()
-            ->with(['user:id,name', 'destination:id,name'])
+            ->with(['user:id,name,profession,city,avatar_url', 'destination:id,name'])
             ->latest()
             ->limit(50)
             ->get()
@@ -59,9 +59,9 @@ class HomeController extends Controller
                 'id' => $review->id,
                 'quote' => $review->comment,
                 'name' => $review->user?->name,
-                'role' => 'Pengunjung',
-                'location' => 'Lampung',
-                'avatar' => 'https://ui-avatars.com/api/?background=0ea5e9&color=fff&name='.urlencode((string) $review->user?->name),
+                'role' => $review->user?->profession ?: 'Pengunjung',
+                'location' => $review->user?->city ?: 'Lampung',
+                'avatar' => $review->user?->avatar_url ?: 'https://ui-avatars.com/api/?background=0ea5e9&color=fff&name='.urlencode((string) $review->user?->name),
                 'rating' => $review->rating,
                 'date' => $review->created_at?->translatedFormat('d F Y'),
                 'visited' => $review->destination?->name,
