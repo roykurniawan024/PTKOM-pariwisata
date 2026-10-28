@@ -131,7 +131,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
             {/* Header Hero Section */}
             <section className="relative pt-64 pb-20 overflow-hidden bg-slate-900 text-white">
                 <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
+                <div className="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl"></div>
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
@@ -152,7 +152,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
                                 onClick={() => setSelectedCategory(cat.id)}
                                 className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                                     selectedCategory === cat.id
-                                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-105'
+                                        ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30 scale-105'
                                         : 'bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700'
                                 }`}
                             >
@@ -255,7 +255,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
 
                         <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900 text-white border-t border-slate-800">
                             <div>
-                                <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-semibold mb-2">
+                                <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-blue-400 text-xs font-semibold mb-2">
                                     {activeLightbox.categoryLabel}
                                 </span>
                                 <h3 className="text-xl font-bold">{activeLightbox.title}</h3>
@@ -272,7 +272,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
                                 </button>
                                 <Link
                                     href="/destinations"
-                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 text-white text-xs font-semibold hover:bg-amber-600 transition"
                                 >
                                     <span>Jelajahi Lokasi</span>
                                     <i className="bx bx-right-arrow-alt text-base"></i>

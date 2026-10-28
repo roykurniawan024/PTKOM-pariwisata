@@ -2,13 +2,13 @@ import AuthSplitLayout from '@/layouts/AuthSplitLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 const fontFamily = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
-const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600';
+const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-500';
 
 const inputClass = (hasError) =>
     `block w-full rounded-2xl border bg-slate-50/50 px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 transition focus:outline-none focus:ring-2 focus:bg-white ${
         hasError
             ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
-            : 'border-slate-200 focus:border-blue-600 focus:ring-blue-600/20'
+            : 'border-slate-200 focus:border-amber-500 focus:ring-amber-500/20'
     }`;
 
 const fields = [
@@ -116,7 +116,7 @@ export default function RegisterUser({ token }) {
                     <button
                         type="submit"
                         disabled={processing}
-                        className="w-full mt-4 py-4 rounded-2xl bg-blue-600 text-white font-bold text-sm tracking-wide shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition disabled:opacity-50"
+                        className="w-full mt-4 py-4 rounded-2xl bg-amber-500 text-white font-bold text-sm tracking-wide shadow-xl shadow-amber-500/20 hover:bg-amber-600 transition disabled:opacity-50"
                     >
                         {processing ? 'Memproses...' : 'Daftar Akun Sekarang'}
                     </button>
@@ -124,7 +124,7 @@ export default function RegisterUser({ token }) {
 
                 <p className="mt-8 text-center text-xs text-slate-500">
                     Sudah punya akun?{' '}
-                    <Link href={route('login')} className="font-bold text-blue-600 hover:underline">
+                    <Link href={route('login')} className="font-bold text-amber-500 hover:underline">
                         Masuk di sini
                     </Link>
                 </p>

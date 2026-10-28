@@ -24,7 +24,7 @@ export default function PublicFooter() {
                             href="/"
                             className="flex items-center gap-2.5 font-serif text-2xl tracking-tight text-white group"
                         >
-                            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                            <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20">
                                 <i className="bx bxs-compass text-2xl"></i>
                             </div>
                             <span className="font-bold">
@@ -35,16 +35,16 @@ export default function PublicFooter() {
                             Portal pariwisata terpadu Provinsi Lampung. Temukan destinasi eksotis, kekayaan budaya, dan pengalaman petualangan terbaik Sang Bumi Ruwa Jurai.
                         </p>
                         <div className="flex items-center gap-3 pt-2">
-                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-amber-500 hover:border-amber-500 transition-all">
                                 <i className="bx bxl-facebook text-xl"></i>
                             </a>
-                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-amber-500 hover:border-amber-500 transition-all">
                                 <i className="bx bxl-instagram text-xl"></i>
                             </a>
-                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-amber-500 hover:border-amber-500 transition-all">
                                 <i className="bx bxl-youtube text-xl"></i>
                             </a>
-                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-amber-500 hover:border-amber-500 transition-all">
                                 <i className="bx bxl-tiktok text-xl"></i>
                             </a>
                         </div>
@@ -62,7 +62,7 @@ export default function PublicFooter() {
                                         href={item.href}
                                         className="inline-flex items-center gap-2 text-slate-400 transition hover:text-white hover:translate-x-1 duration-200"
                                     >
-                                        <i className="bx bx-chevron-right text-blue-500"></i>
+                                        <i className="bx bx-chevron-right text-amber-500"></i>
                                         {item.name}
                                     </Link>
                                 </li>
@@ -82,7 +82,7 @@ export default function PublicFooter() {
                                         href={link.href}
                                         className="inline-flex items-center gap-2 text-slate-400 transition hover:text-white hover:translate-x-1 duration-200"
                                     >
-                                        <i className="bx bx-chevron-right text-blue-500"></i>
+                                        <i className="bx bx-chevron-right text-amber-500"></i>
                                         {link.label}
                                     </Link>
                                 </li>

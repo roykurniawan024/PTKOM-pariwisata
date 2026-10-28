@@ -67,7 +67,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
 
                                             <div className="absolute bottom-6 left-6 right-6 text-white">
                                                 <div className="flex items-center gap-2 mb-2">
-                                                    <span className="px-3 py-1 rounded-full bg-blue-600 text-xs font-bold uppercase tracking-wider">
+                                                    <span className="px-3 py-1 rounded-full bg-amber-500 text-xs font-bold uppercase tracking-wider">
                                                         {displayed.category}
                                                     </span>
                                                     <span className="flex items-center gap-1 text-xs font-medium text-amber-400">
@@ -116,7 +116,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                                                         {displayed.facilities.map((facility) => (
                                                             <span
                                                                 key={facility}
-                                                                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-50 px-3.5 py-2 text-xs font-semibold text-blue-700 border border-blue-100"
+                                                                className="inline-flex items-center gap-1.5 rounded-xl bg-amber-50 px-3.5 py-2 text-xs font-semibold text-amber-600 border border-amber-100"
                                                             >
                                                                 <i className="bx bx-check-circle text-base"></i>
                                                                 {facility}
@@ -140,7 +140,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
 
                                                 <Link
                                                     href={route('destinations.show', displayed.slug)}
-                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-8 py-3.5 text-xs font-bold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition"
+                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-8 py-3.5 text-xs font-bold text-white shadow-lg shadow-amber-500/20 hover:bg-amber-600 transition"
                                                 >
                                                     <span>Lihat Halaman Full Detail</span>
                                                     <i className="bx bx-right-arrow-alt text-lg"></i>

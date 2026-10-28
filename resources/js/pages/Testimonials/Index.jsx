@@ -85,7 +85,7 @@ export default function TestimonialsIndex({ testimonials = [] }) {
             {/* Hero Header */}
             <section className="relative pt-64 pb-20 overflow-hidden bg-slate-900 text-white">
                 <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
+                <div className="absolute -top-24 -left-24 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl"></div>
                 <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl"></div>
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
@@ -137,7 +137,7 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                                                 <i key={i} className="bx bxs-star text-lg"></i>
                                             ))}
                                         </div>
-                                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 bg-blue-50 rounded-full px-3 py-1 border border-blue-100">
+                                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-500 bg-amber-50 rounded-full px-3 py-1 border border-amber-100">
                                             <i className="bx bx-map-pin"></i>
                                             {item.visited}
                                         </span>
@@ -145,7 +145,7 @@ export default function TestimonialsIndex({ testimonials = [] }) {
 
                                     {/* Quote */}
                                     <div className="relative">
-                                        <i className="bx bxs-quote-alt-left text-4xl text-blue-100 absolute -top-3 -left-2 -z-0"></i>
+                                        <i className="bx bxs-quote-alt-left text-4xl text-amber-100 absolute -top-3 -left-2 -z-0"></i>
                                         <p className="relative z-10 text-sm leading-relaxed text-slate-600 italic">
                                             "{item.quote}"
                                         </p>
@@ -158,10 +158,10 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                                         <img
                                             src={item.avatar}
                                             alt={item.name}
-                                            className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-100"
+                                            className="w-12 h-12 rounded-full object-cover ring-2 ring-amber-100"
                                         />
                                         <div>
-                                            <h4 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                                            <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-500 transition-colors">
                                                 {item.name}
                                             </h4>
                                             <p className="text-xs text-slate-500">
@@ -175,7 +175,7 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                     </div>
 
                     {/* Share Experience CTA */}
-                    <div className="mt-16 rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-700 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="mt-16 rounded-3xl bg-gradient-to-r from-amber-500 to-indigo-700 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
                         <div>
                             <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider mb-3">
                                 Punya Pengalaman Seru?
@@ -183,13 +183,13 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                             <h3 className="text-2xl sm:text-3xl font-bold">
                                 Bagikan Cerita Perjalanan Anda di Lampung
                             </h3>
-                            <p className="mt-2 text-sm text-blue-100 max-w-xl">
+                            <p className="mt-2 text-sm text-amber-100 max-w-xl">
                                 Cerita dan testimoni Anda dapat menginspirasi ribuan wisatawan lainnya untuk mengeksplorasi keindahan Provinsi Lampung.
                             </p>
                         </div>
                         <Link
                             href="/destinations"
-                            className="shrink-0 inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-sm font-bold text-blue-700 shadow-lg hover:bg-blue-50 transition transform hover:scale-105"
+                            className="shrink-0 inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-sm font-bold text-amber-600 shadow-lg hover:bg-amber-50 transition transform hover:scale-105"
                         >
                             <i className="bx bx-edit text-xl"></i>
                             <span>Tulis Testimoni</span>

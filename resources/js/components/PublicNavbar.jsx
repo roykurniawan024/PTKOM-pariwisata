@@ -46,8 +46,8 @@ export default function PublicNavbar() {
                                     href={link.href}
                                     className={`text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
                                         active
-                                            ? 'text-blue-600 font-semibold'
-                                            : 'text-slate-600 hover:text-blue-600'
+                                            ? 'text-amber-500 font-semibold'
+                                            : 'text-slate-600 hover:text-amber-500'
                                     }`}
                                 >
                                     {link.label === 'Beranda' && <i className="bx bx-home-alt text-base"></i>}
@@ -64,7 +64,7 @@ export default function PublicNavbar() {
                         {auth?.user ? (
                             <Link
                                 href={route('dashboard')}
-                                className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-blue-600 shadow-sm hover:shadow-blue-500/25"
+                                className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-amber-500 shadow-sm hover:shadow-amber-500/25"
                             >
                                 <i className="bx bx-grid-alt text-base"></i>
                                 Dashboard
@@ -73,14 +73,14 @@ export default function PublicNavbar() {
                             <>
                                 <Link
                                     href={route('login')}
-                                    className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 transition hover:text-blue-600 hover:bg-slate-100"
+                                    className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 transition hover:text-amber-500 hover:bg-slate-100"
                                 >
                                     <i className="bx bx-log-in text-base"></i>
                                     Masuk
                                 </Link>
                                 <Link
                                     href={route('registrasi.select')}
-                                    className="inline-flex items-center gap-1.5 rounded-md bg-blue-600 px-5 py-2.5 text-xs font-bold tracking-wider uppercase text-white transition hover:bg-blue-700"
+                                    className="inline-flex items-center gap-1.5 rounded-md bg-amber-500 px-5 py-2.5 text-xs font-bold tracking-wider uppercase text-white transition hover:bg-amber-600"
                                 >
                                     <i className="bx bx-user-plus text-base"></i>
                                     Daftar
@@ -108,7 +108,7 @@ export default function PublicNavbar() {
                                 onClick={() => setIsMenuOpen(false)}
                                 className={`flex items-center gap-2.5 rounded-xl px-4 py-3 text-base font-medium transition ${
                                     isActive(link.href)
-                                        ? 'bg-blue-50 text-blue-600 font-semibold'
+                                        ? 'bg-amber-50 text-amber-500 font-semibold'
                                         : 'text-slate-700 hover:bg-slate-50'
                                 }`}
                             >
@@ -139,7 +139,7 @@ export default function PublicNavbar() {
                                     </Link>
                                     <Link
                                         href={route('registrasi.select')}
-                                        className="flex items-center justify-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-center text-sm font-semibold text-white"
+                                        className="flex items-center justify-center gap-2 rounded-md bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-white"
                                     >
                                         <i className="bx bx-user-plus text-lg"></i>
                                         Daftar
