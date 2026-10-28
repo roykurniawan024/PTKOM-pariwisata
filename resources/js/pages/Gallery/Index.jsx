@@ -136,7 +136,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight">
-                        Potret Keajaiban <span className="font-serif italic font-normal text-blue-400">Sang Bumi Ruwa Jurai</span>
+                        Potret Keajaiban <span className="font-serif italic font-normal text-amber-400">Sang Bumi Ruwa Jurai</span>
                     </h1>
 
 
@@ -190,7 +190,7 @@ export default function GalleryIndex({ galleryItems = [] }) {
                                     {/* Top badges */}
                                     <div className="absolute top-4 left-4 flex gap-2">
                                         <span className="inline-flex items-center gap-1 rounded-full bg-slate-900/80 backdrop-blur-md px-3 py-1 text-xs font-medium text-white border border-white/10">
-                                            <i className="bx bx-tag-alt text-blue-400"></i>
+                                            <i className="bx bx-tag-alt text-amber-400"></i>
                                             {item.categoryLabel}
                                         </span>
                                     </div>
@@ -203,11 +203,11 @@ export default function GalleryIndex({ galleryItems = [] }) {
 
                                     {/* Bottom Info */}
                                     <div className="absolute bottom-0 inset-x-0 p-5 text-white">
-                                        <div className="flex items-center gap-1 text-xs text-blue-300 font-medium mb-1">
+                                        <div className="flex items-center gap-1 text-xs text-amber-300 font-medium mb-1">
                                             <i className="bx bx-map-pin"></i>
                                             <span>{item.location}</span>
                                         </div>
-                                        <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors">
+                                        <h3 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">
                                             {item.title}
                                         </h3>
                                         <div className="mt-3 flex items-center justify-between text-xs text-slate-300 pt-3 border-t border-white/15">
@@ -255,12 +255,12 @@ export default function GalleryIndex({ galleryItems = [] }) {
 
                         <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900 text-white border-t border-slate-800">
                             <div>
-                                <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-blue-400 text-xs font-semibold mb-2">
+                                <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-semibold mb-2">
                                     {activeLightbox.categoryLabel}
                                 </span>
                                 <h3 className="text-xl font-bold">{activeLightbox.title}</h3>
                                 <p className="text-sm text-slate-400 flex items-center gap-2 mt-1">
-                                    <i className="bx bx-map-pin text-blue-400"></i>
+                                    <i className="bx bx-map-pin text-amber-400"></i>
                                     {activeLightbox.location} • Oleh {activeLightbox.photographer}
                                 </p>
                             </div>

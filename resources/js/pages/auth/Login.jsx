@@ -60,7 +60,7 @@ export default function Login({ status, canResetPassword }) {
 
                         {/* Quick Test Accounts Fill */}
                         <div className="mb-8 p-4 rounded-2xl bg-amber-50/50 border border-amber-100">
-                            <p className="text-xs font-bold text-blue-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                            <p className="text-xs font-bold text-amber-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                                 <i className="bx bx-info-circle text-amber-500 text-base"></i>
                                 Akun Uji Coba Cepat (Test Accounts):
                             </p>
@@ -178,7 +178,7 @@ export default function Login({ status, canResetPassword }) {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
                     <div className="absolute bottom-16 left-16 right-16 text-white">
-                        <span className="px-3 py-1 rounded-full bg-amber-500/30 border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-widest backdrop-blur-md">
+                        <span className="px-3 py-1 rounded-full bg-amber-500/30 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-widest backdrop-blur-md">
                             Wonderful Indonesia
                         </span>
                         <h2 className="mt-4 text-3xl font-extrabold tracking-tight">Jelajahi Pesona Sang Bumi Ruwa Jurai</h2>

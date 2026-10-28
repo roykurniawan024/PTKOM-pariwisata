@@ -28,7 +28,7 @@ export default function PublicFooter() {
                                 <i className="bx bxs-compass text-2xl"></i>
                             </div>
                             <span className="font-bold">
-                                Wonderly <span className="text-blue-400 font-sans text-xs uppercase font-extrabold tracking-widest ml-0.5 px-2 py-0.5 bg-blue-950 rounded-full border border-blue-800">Lampung</span>
+                                Wonderly <span className="text-amber-400 font-sans text-xs uppercase font-extrabold tracking-widest ml-0.5 px-2 py-0.5 bg-blue-950 rounded-full border border-amber-800">Lampung</span>
                             </span>
                         </Link>
                         <p className="text-sm leading-relaxed text-slate-400">
@@ -52,7 +52,7 @@ export default function PublicFooter() {
 
                     <div>
                         <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
-                            <i className="bx bx-map-pin text-blue-400 text-lg"></i>
+                            <i className="bx bx-map-pin text-amber-400 text-lg"></i>
                             Destinasi Populer
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm">
@@ -72,7 +72,7 @@ export default function PublicFooter() {
 
                     <div>
                         <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
-                            <i className="bx bx-navigation text-blue-400 text-lg"></i>
+                            <i className="bx bx-navigation text-amber-400 text-lg"></i>
                             Navigasi Cepat
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm">
@@ -92,24 +92,24 @@ export default function PublicFooter() {
 
                     <div>
                         <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
-                            <i className="bx bx-support text-blue-400 text-lg"></i>
+                            <i className="bx bx-support text-amber-400 text-lg"></i>
                             Kontak & Layanan
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm text-slate-400">
                             <li className="flex items-start gap-3">
-                                <i className="bx bx-buildings text-lg text-blue-400 shrink-0 mt-0.5"></i>
+                                <i className="bx bx-buildings text-lg text-amber-400 shrink-0 mt-0.5"></i>
                                 <span>Dinas Pariwisata Provinsi Lampung</span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <i className="bx bx-map text-lg text-blue-400 shrink-0 mt-0.5"></i>
+                                <i className="bx bx-map text-lg text-amber-400 shrink-0 mt-0.5"></i>
                                 <span>Jl. S. Parman No.8, Bandar Lampung</span>
                             </li>
                             <li className="flex items-center gap-3">
-                                <i className="bx bx-envelope text-lg text-blue-400 shrink-0"></i>
+                                <i className="bx bx-envelope text-lg text-amber-400 shrink-0"></i>
                                 <span>info@wonderlylampung.id</span>
                             </li>
                             <li className="flex items-center gap-3">
-                                <i className="bx bx-phone text-lg text-blue-400 shrink-0"></i>
+                                <i className="bx bx-phone text-lg text-amber-400 shrink-0"></i>
                                 <span>+62 721 123456</span>
                             </li>
                         </ul>

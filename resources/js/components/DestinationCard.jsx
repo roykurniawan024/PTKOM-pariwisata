@@ -22,7 +22,7 @@ export default function DestinationCard({
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-slate-900/80 backdrop-blur-md px-3 py-1 text-xs font-semibold text-white border border-white/10">
-                    <i className="bx bx-category-alt text-blue-400"></i>
+                    <i className="bx bx-category-alt text-amber-400"></i>
                     {category}
                 </span>
             </div>

@@ -208,7 +208,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                 <div className="space-y-4 mb-8">
                                     <div className="flex justify-between items-center py-3 border-b border-white/10">
                                         <span className="text-sm text-white/60">Harga Tiket</span>
-                                        <span className="font-bold text-blue-400">{formatRupiah(displayData.priceMin || displayData.price)}</span>
+                                        <span className="font-bold text-amber-400">{formatRupiah(displayData.priceMin || displayData.price)}</span>
                                     </div>
                                     <div className="flex justify-between items-center py-3 border-b border-white/10">
                                         <span className="text-sm text-white/60">Status</span>

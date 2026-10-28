@@ -91,7 +91,7 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                 <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
 
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight">
-                        Apa Kata Mereka Tentang <span className="font-serif italic font-normal text-blue-400">Lampung?</span>
+                        Apa Kata Mereka Tentang <span className="font-serif italic font-normal text-amber-400">Lampung?</span>
                     </h1>
 
                     <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
@@ -101,7 +101,7 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                     {/* Stats Highlights */}
                     <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto border border-slate-800 rounded-2xl bg-slate-900/80 backdrop-blur-md p-6">
                         <div>
-                            <div className="text-3xl font-extrabold text-blue-400">4.9/5</div>
+                            <div className="text-3xl font-extrabold text-amber-400">4.9/5</div>
                             <div className="text-xs text-slate-400 mt-1">Kepuasan Wisatawan</div>
                         </div>
                         <div>

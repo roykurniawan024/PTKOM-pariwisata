@@ -79,7 +79,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                                                     {displayed.name}
                                                 </DialogTitle>
                                                 <p className="text-xs sm:text-sm text-slate-300 flex items-center gap-1 mt-1">
-                                                    <i className="bx bx-map-pin text-blue-400"></i>
+                                                    <i className="bx bx-map-pin text-amber-400"></i>
                                                     {displayed.regency}
                                                 </p>
                                             </div>
