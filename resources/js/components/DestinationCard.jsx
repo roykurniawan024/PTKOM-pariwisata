@@ -22,7 +22,11 @@ export default function DestinationCard({
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-slate-900/80 backdrop-blur-md px-3 py-1 text-xs font-semibold text-white border border-white/10">
+<<<<<<< HEAD
                     <i className="bx bx-category-alt text-yellow-600"></i>
+=======
+                    <i className="bx bx-category-alt text-amber-400"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                     {category}
                 </span>
             </div>
@@ -31,7 +35,11 @@ export default function DestinationCard({
                 <div>
                     <div className="mt-3 flex items-center justify-between text-xs">
                         <span className="flex items-center gap-1 text-slate-500">
+<<<<<<< HEAD
                             <i className="bx bx-map-pin text-yellow-600 text-sm"></i>
+=======
+                            <i className="bx bx-map-pin text-amber-500 text-sm"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             {location}
                         </span>
                         <span className="flex items-center gap-1 font-semibold text-amber-500">
@@ -41,7 +49,11 @@ export default function DestinationCard({
                         </span>
                     </div>
 
+<<<<<<< HEAD
                     <h3 className="mt-2 text-lg font-bold tracking-tight text-slate-900 group-hover:text-yellow-600 transition-colors">
+=======
+                    <h3 className="mt-2 text-lg font-bold tracking-tight text-slate-900 group-hover:text-amber-500 transition-colors">
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                         <a href={destinationUrl} className="outline-none">
                             {title}
                         </a>
@@ -55,11 +67,19 @@ export default function DestinationCard({
                 <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
                     <div>
                         <span className="text-[10px] text-slate-400 block uppercase font-bold tracking-wider">Harga Tiket</span>
+<<<<<<< HEAD
                         <span className="text-sm font-bold text-yellow-600">{price}</span>
                     </div>
                     <a
                         href={destinationUrl}
                         className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-yellow-600 transition-colors"
+=======
+                        <span className="text-sm font-bold text-amber-500">{price}</span>
+                    </div>
+                    <a
+                        href={destinationUrl}
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-amber-500 transition-colors"
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                     >
                         <span>Detail</span>
                         <i className="bx bx-right-arrow-alt text-base group-hover:translate-x-1 transition-transform"></i>

@@ -24,14 +24,23 @@ export default function PublicFooter() {
                             href="/"
                             className="flex items-center gap-2.5 font-serif text-2xl tracking-tight text-white group"
                         >
+<<<<<<< HEAD
                             <span className="font-bold">
                                 Wanderly
+=======
+                            <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20">
+                                <i className="bx bxs-compass text-2xl"></i>
+                            </div>
+                            <span className="font-bold">
+                                Wonderly <span className="text-amber-400 font-sans text-xs uppercase font-extrabold tracking-widest ml-0.5 px-2 py-0.5 bg-blue-950 rounded-full border border-amber-800">Lampung</span>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             </span>
                         </Link>
                         <p className="text-sm leading-relaxed text-slate-400">
                             Portal pariwisata terpadu Provinsi Lampung. Temukan destinasi eksotis, kekayaan budaya, dan pengalaman petualangan terbaik Sang Bumi Ruwa Jurai.
                         </p>
                         <div className="flex items-center gap-3 pt-2">
+<<<<<<< HEAD
                             <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-yellow-600 hover:border-yellow-600 transition-all">
                                 <i className="bx bxl-facebook text-xl"></i>
                             </a>
@@ -42,6 +51,18 @@ export default function PublicFooter() {
                                 <i className="bx bxl-youtube text-xl"></i>
                             </a>
                             <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-yellow-600 hover:border-yellow-600 transition-all">
+=======
+                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-amber-500 hover:border-amber-500 transition-all">
+                                <i className="bx bxl-facebook text-xl"></i>
+                            </a>
+                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-amber-500 hover:border-amber-500 transition-all">
+                                <i className="bx bxl-instagram text-xl"></i>
+                            </a>
+                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-amber-500 hover:border-amber-500 transition-all">
+                                <i className="bx bxl-youtube text-xl"></i>
+                            </a>
+                            <a href="#" className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-amber-500 hover:border-amber-500 transition-all">
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                 <i className="bx bxl-tiktok text-xl"></i>
                             </a>
                         </div>
@@ -49,7 +70,11 @@ export default function PublicFooter() {
 
                     <div>
                         <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
+<<<<<<< HEAD
                             <i className="bx bx-map-pin text-yellow-600 text-lg"></i>
+=======
+                            <i className="bx bx-map-pin text-amber-400 text-lg"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             Destinasi Populer
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm">
@@ -59,7 +84,11 @@ export default function PublicFooter() {
                                         href={item.href}
                                         className="inline-flex items-center gap-2 text-slate-400 transition hover:text-white hover:translate-x-1 duration-200"
                                     >
+<<<<<<< HEAD
                                         <i className="bx bx-chevron-right text-yellow-600"></i>
+=======
+                                        <i className="bx bx-chevron-right text-amber-500"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         {item.name}
                                     </Link>
                                 </li>
@@ -69,7 +98,11 @@ export default function PublicFooter() {
 
                     <div>
                         <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
+<<<<<<< HEAD
                             <i className="bx bx-navigation text-yellow-600 text-lg"></i>
+=======
+                            <i className="bx bx-navigation text-amber-400 text-lg"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             Navigasi Cepat
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm">
@@ -79,7 +112,11 @@ export default function PublicFooter() {
                                         href={link.href}
                                         className="inline-flex items-center gap-2 text-slate-400 transition hover:text-white hover:translate-x-1 duration-200"
                                     >
+<<<<<<< HEAD
                                         <i className="bx bx-chevron-right text-yellow-600"></i>
+=======
+                                        <i className="bx bx-chevron-right text-amber-500"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         {link.label}
                                     </Link>
                                 </li>
@@ -89,11 +126,16 @@ export default function PublicFooter() {
 
                     <div>
                         <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
+<<<<<<< HEAD
                             <i className="bx bx-support text-yellow-600 text-lg"></i>
+=======
+                            <i className="bx bx-support text-amber-400 text-lg"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             Kontak & Layanan
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm text-slate-400">
                             <li className="flex items-start gap-3">
+<<<<<<< HEAD
                                 <i className="bx bx-buildings text-lg text-yellow-600 shrink-0 mt-0.5"></i>
                                 <span>Dinas Pariwisata Provinsi Lampung</span>
                             </li>
@@ -107,6 +149,21 @@ export default function PublicFooter() {
                             </li>
                             <li className="flex items-center gap-3">
                                 <i className="bx bx-phone text-lg text-yellow-600 shrink-0"></i>
+=======
+                                <i className="bx bx-buildings text-lg text-amber-400 shrink-0 mt-0.5"></i>
+                                <span>Dinas Pariwisata Provinsi Lampung</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <i className="bx bx-map text-lg text-amber-400 shrink-0 mt-0.5"></i>
+                                <span>Jl. S. Parman No.8, Bandar Lampung</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <i className="bx bx-envelope text-lg text-amber-400 shrink-0"></i>
+                                <span>info@wonderlylampung.id</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <i className="bx bx-phone text-lg text-amber-400 shrink-0"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                 <span>+62 721 123456</span>
                             </li>
                         </ul>

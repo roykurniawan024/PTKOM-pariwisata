@@ -1,12 +1,23 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 
 const fontFamily = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
+<<<<<<< HEAD
 const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-600';
 const inputClass =
     'w-full rounded-2xl border bg-slate-50/50 px-4 py-3.5 text-sm text-slate-900 transition placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:bg-white';
 
 const fieldClass = (hasError) =>
     `${inputClass} ${hasError ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/20' : 'border-slate-200 focus:border-yellow-600 focus:ring-yellow-600/20'}`;
+=======
+const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-500';
+
+const inputClass = (hasError) =>
+    `block w-full rounded-2xl border bg-slate-50/50 px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 transition focus:outline-none focus:ring-2 focus:bg-white ${
+        hasError
+            ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/20'
+            : 'border-slate-200 focus:border-amber-500 focus:ring-amber-500/20'
+    }`;
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
 
 const fields = [
     {
@@ -139,6 +150,7 @@ export default function RegisterUser({ token }) {
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 {/* {Right: Image / Visual Banner */}
                 <div className="hidden lg:block relative overflow-hidden bg-slate-900">
                     <img
@@ -157,6 +169,49 @@ export default function RegisterUser({ token }) {
                         </p>
                     </div>
                 </div>
+=======
+                <form onSubmit={submit} className="space-y-5">
+                    {fields.map((field, index) => (
+                        <div key={field.id} className="grid gap-2">
+                            <label htmlFor={field.id} className="block text-xs font-bold uppercase tracking-wider text-slate-600">
+                                {field.label}
+                            </label>
+                            <input
+                                id={field.id}
+                                name={field.id}
+                                type={field.type ?? 'text'}
+                                value={data[field.id]}
+                                placeholder={field.placeholder}
+                                autoComplete={field.autoComplete}
+                                autoFocus={index === 0}
+                                required={field.required}
+                                className={inputClass(!!errors[field.id])}
+                                onChange={(e) => setData(field.id, e.target.value)}
+                            />
+                            {errors[field.id] && (
+                                <p role="alert" className="text-xs text-rose-600 font-medium">
+                                    {errors[field.id]}
+                                </p>
+                            )}
+                        </div>
+                    ))}
+
+                    <button
+                        type="submit"
+                        disabled={processing}
+                        className="w-full mt-4 py-4 rounded-2xl bg-amber-500 text-white font-bold text-sm tracking-wide shadow-xl shadow-amber-500/20 hover:bg-amber-600 transition disabled:opacity-50"
+                    >
+                        {processing ? 'Memproses...' : 'Daftar Akun Sekarang'}
+                    </button>
+                </form>
+
+                <p className="mt-8 text-center text-xs text-slate-500">
+                    Sudah punya akun?{' '}
+                    <Link href={route('login')} className="font-bold text-amber-500 hover:underline">
+                        Masuk di sini
+                    </Link>
+                </p>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
             </div>
         </>
     );

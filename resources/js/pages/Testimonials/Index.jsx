@@ -84,14 +84,23 @@ export default function TestimonialsIndex({ testimonials = [] }) {
 
             {/* Hero Header */}
             <section className="relative pt-64 pb-20 overflow-hidden bg-slate-900 text-white">
+<<<<<<< HEAD
                 <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(#eab308_1px,transparent_1px)] [background-size:16px_16px]"></div>
                 <div className="absolute -top-24 -left-24 w-96 h-96 bg-yellow-600/20 rounded-full blur-3xl"></div>
+=======
+                <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div className="absolute -top-24 -left-24 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl"></div>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                 <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl"></div>
 
                 <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
 
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl mx-auto leading-tight">
+<<<<<<< HEAD
                         Apa Kata Mereka Tentang <span className="font-serif italic font-normal text-yellow-400">Lampung?</span>
+=======
+                        Apa Kata Mereka Tentang <span className="font-serif italic font-normal text-amber-400">Lampung?</span>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                     </h1>
 
                     <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
@@ -101,7 +110,11 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                     {/* Stats Highlights */}
                     <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto border border-slate-800 rounded-2xl bg-slate-900/80 backdrop-blur-md p-6">
                         <div>
+<<<<<<< HEAD
                             <div className="text-3xl font-extrabold text-yellow-400">4.9/5</div>
+=======
+                            <div className="text-3xl font-extrabold text-amber-400">4.9/5</div>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             <div className="text-xs text-slate-400 mt-1">Kepuasan Wisatawan</div>
                         </div>
                         <div>
@@ -137,7 +150,11 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                                                 <i key={i} className="bx bxs-star text-lg"></i>
                                             ))}
                                         </div>
+<<<<<<< HEAD
                                         <span className="inline-flex items-center gap-1 text-xs font-semibold text-yellow-600 bg-yellow-50 rounded-full px-3 py-1 border border-yellow-100">
+=======
+                                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-500 bg-amber-50 rounded-full px-3 py-1 border border-amber-100">
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                             <i className="bx bx-map-pin"></i>
                                             {item.visited}
                                         </span>
@@ -145,7 +162,11 @@ export default function TestimonialsIndex({ testimonials = [] }) {
 
                                     {/* Quote */}
                                     <div className="relative">
+<<<<<<< HEAD
                                         <i className="bx bxs-quote-alt-left text-4xl text-yellow-100 absolute -top-3 -left-2 -z-0"></i>
+=======
+                                        <i className="bx bxs-quote-alt-left text-4xl text-amber-100 absolute -top-3 -left-2 -z-0"></i>
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         <p className="relative z-10 text-sm leading-relaxed text-slate-600 italic">
                                             "{item.quote}"
                                         </p>
@@ -158,10 +179,17 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                                         <img
                                             src={item.avatar}
                                             alt={item.name}
+<<<<<<< HEAD
                                             className="w-12 h-12 rounded-full object-cover ring-2 ring-yellow-100"
                                         />
                                         <div>
                                             <h4 className="text-sm font-bold text-slate-900 group-hover:text-yellow-600 transition-colors">
+=======
+                                            className="w-12 h-12 rounded-full object-cover ring-2 ring-amber-100"
+                                        />
+                                        <div>
+                                            <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-500 transition-colors">
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                                 {item.name}
                                             </h4>
                                             <p className="text-xs text-slate-500">
@@ -175,7 +203,11 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                     </div>
 
                     {/* Share Experience CTA */}
+<<<<<<< HEAD
                     <div className="mt-16 rounded-3xl bg-gradient-to-r from-yellow-600 to-amber-700 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+=======
+                    <div className="mt-16 rounded-3xl bg-gradient-to-r from-amber-500 to-indigo-700 p-8 sm:p-12 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                         <div>
                             <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider mb-3">
                                 Punya Pengalaman Seru?
@@ -183,13 +215,21 @@ export default function TestimonialsIndex({ testimonials = [] }) {
                             <h3 className="text-2xl sm:text-3xl font-bold">
                                 Bagikan Cerita Perjalanan Anda di Lampung
                             </h3>
+<<<<<<< HEAD
                             <p className="mt-2 text-sm text-yellow-100 max-w-xl">
+=======
+                            <p className="mt-2 text-sm text-amber-100 max-w-xl">
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                 Cerita dan testimoni Anda dapat menginspirasi ribuan wisatawan lainnya untuk mengeksplorasi keindahan Provinsi Lampung.
                             </p>
                         </div>
                         <Link
                             href="/destinations"
+<<<<<<< HEAD
                             className="shrink-0 inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-sm font-bold text-yellow-700 shadow-lg hover:bg-yellow-50 transition transform hover:scale-105"
+=======
+                            className="shrink-0 inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-sm font-bold text-amber-600 shadow-lg hover:bg-amber-50 transition transform hover:scale-105"
+>>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                         >
                             <i className="bx bx-edit text-xl"></i>
                             <span>Tulis Testimoni</span>

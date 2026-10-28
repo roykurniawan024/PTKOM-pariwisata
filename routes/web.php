@@ -62,3 +62,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/contact', \App\Http\Controllers\ContactPageController::class)->name('contact.index');
