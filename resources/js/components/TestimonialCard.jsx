@@ -23,11 +23,7 @@ export default function TestimonialCard({
 
                 {/* Quote Text */}
                 <div className="relative">
-<<<<<<< HEAD
                     <i className="bx bxs-quote-alt-left text-3xl text-yellow-100 absolute -top-3 -left-2 -z-0"></i>
-=======
-                    <i className="bx bxs-quote-alt-left text-3xl text-amber-100 absolute -top-3 -left-2 -z-0"></i>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                     <p className="relative z-10 text-sm leading-relaxed text-slate-600 italic">
                         "{quote}"
                     </p>
@@ -39,11 +35,7 @@ export default function TestimonialCard({
                 <img
                     src={avatar}
                     alt={name}
-<<<<<<< HEAD
                     className="h-12 w-12 rounded-full object-cover ring-2 ring-yellow-200"
-=======
-                    className="h-12 w-12 rounded-full object-cover ring-2 ring-amber-100"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                     loading="lazy"
                 />
                 <div>

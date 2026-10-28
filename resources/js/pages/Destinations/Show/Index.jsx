@@ -11,11 +11,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
             <div className="min-h-screen flex items-center justify-center bg-white">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-slate-900 mb-4">Destinasi Tidak Ditemukan</h1>
-<<<<<<< HEAD
                     <Link href={route('home')} className="text-yellow-600 font-semibold hover:underline">
-=======
-                    <Link href={route('home')} className="text-amber-500 font-semibold hover:underline">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                         Kembali ke Beranda
                     </Link>
                 </div>
@@ -69,11 +65,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                     <div className="absolute bottom-0 left-0 w-full p-6 sm:p-12 lg:p-20">
                         <div className="max-w-7xl mx-auto">
                             <div className="flex flex-wrap items-center gap-3 mb-4">
-<<<<<<< HEAD
                                 <span className="px-3 py-1 rounded-full bg-yellow-600 text-white text-xs font-bold uppercase tracking-wider">
-=======
-                                <span className="px-3 py-1 rounded-full bg-amber-500 text-white text-xs font-bold uppercase tracking-wider">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                     {displayData.category}
                                 </span>
                                 <span className="flex items-center gap-1 text-white/90 text-sm font-medium">
@@ -103,43 +95,27 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                 <div className="space-y-1">
                                     <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Lokasi</span>
                                     <p className="text-sm font-bold text-slate-900 flex items-center gap-1">
-<<<<<<< HEAD
                                         <i className="bx bx-map-pin text-yellow-600"></i>
-=======
-                                        <i className="bx bx-map-pin text-amber-500"></i>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         {displayData.regency || displayData.location}
                                     </p>
                                 </div>
                                 <div className="space-y-1">
                                     <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Durasi</span>
                                     <p className="text-sm font-bold text-slate-900 flex items-center gap-1">
-<<<<<<< HEAD
                                         <i className="bx bx-time-five text-yellow-600"></i>
-=======
-                                        <i className="bx bx-time-five text-amber-500"></i>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         {displayData.duration || '1-2 Hari'}
                                     </p>
                                 </div>
                                 <div className="space-y-1">
                                     <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Jam Buka</span>
                                     <p className="text-sm font-bold text-slate-900 flex items-center gap-1">
-<<<<<<< HEAD
                                         <i className="bx bx-calendar-check text-yellow-600"></i>
-=======
-                                        <i className="bx bx-calendar-check text-amber-500"></i>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         {displayData.openingHours}
                                     </p>
                                 </div>
                                 <div className="space-y-1">
                                     <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Tiket Mulai</span>
-<<<<<<< HEAD
                                     <p className="text-sm font-bold text-yellow-600">
-=======
-                                    <p className="text-sm font-bold text-amber-500">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         {formatRupiah(displayData.priceMin || displayData.price)}
                                     </p>
                                 </div>
@@ -153,20 +129,12 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                             key={tab}
                                             onClick={() => setActiveTab(tab)}
                                             className={`pb-4 text-sm font-bold uppercase tracking-widest transition-all relative ${
-<<<<<<< HEAD
                                                 activeTab === tab ? 'text-yellow-600' : 'text-slate-400 hover:text-slate-600'
-=======
-                                                activeTab === tab ? 'text-amber-500' : 'text-slate-400 hover:text-slate-600'
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                             }`}
                                         >
                                             {tab}
                                             {activeTab === tab && (
-<<<<<<< HEAD
                                                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-600 rounded-full"></span>
-=======
-                                                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-amber-500 rounded-full"></span>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                             )}
                                         </button>
                                     ))}
@@ -200,13 +168,8 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                         <h3 className="text-2xl font-bold text-slate-900 mb-6">Fasilitas Tersedia</h3>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             {displayData.facilities.map((item, idx) => (
-<<<<<<< HEAD
                                                 <div key={idx} className="flex items-center gap-3 p-4 rounded-md bg-slate-50 border border-slate-100">
                                                     <div className="w-8 h-8 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center">
-=======
-                                                <div key={idx} className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                                                    <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-500 flex items-center justify-center">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                                         <i className="bx bx-check text-xl"></i>
                                                     </div>
                                                     <span className="font-medium text-slate-700">{item}</span>
@@ -247,11 +210,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                 <div className="space-y-4 mb-8">
                                     <div className="flex justify-between items-center py-3 border-b border-white/10">
                                         <span className="text-sm text-white/60">Harga Tiket</span>
-<<<<<<< HEAD
                                         <span className="font-bold text-yellow-600">{formatRupiah(displayData.priceMin || displayData.price)}</span>
-=======
-                                        <span className="font-bold text-amber-400">{formatRupiah(displayData.priceMin || displayData.price)}</span>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                     </div>
                                     <div className="flex justify-between items-center py-3 border-b border-white/10">
                                         <span className="text-sm text-white/60">Status</span>
@@ -259,11 +218,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                     </div>
                                 </div>
 
-<<<<<<< HEAD
                                 <button className="w-full py-4 rounded-sm bg-yellow-600 hover:bg-yellow-700 text-white font-bold transition-all shadow-lg shadow-yellow-600/20 mb-4">
-=======
-                                <button className="w-full py-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold transition-all shadow-lg shadow-amber-500/20 mb-4">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                     Pesan Tiket Sekarang
                                 </button>
                                 
@@ -277,21 +232,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
                                 </a>
                             </div>
 
-<<<<<<< HEAD
                         
-=======
-                            {/* Share Section */}
-                            <div className="p-8 rounded-3xl border border-slate-100 bg-white">
-                                <h4 className="font-bold text-slate-900 mb-4">Bagikan Destinasi</h4>
-                                <div className="flex gap-3">
-                                    {['facebook', 'instagram', 'twitter', 'whatsapp'].map((social) => (
-                                        <button key={social} className="w-10 h-10 rounded-xl bg-slate-50 text-slate-400 hover:bg-amber-500 hover:text-white transition-all flex items-center justify-center">
-                                            <i className={`bx bxl-${social} text-xl`}></i>
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                         </div>
 
                     </div>
@@ -346,11 +287,7 @@ function ReviewsTab({ destination, reviews, userReview }) {
                 {!auth?.user ? (
                     <p className="text-slate-600">
                         Silakan{' '}
-<<<<<<< HEAD
                         <Link href={route('login')} className="font-semibold text-yellow-600 hover:underline">
-=======
-                        <Link href={route('login')} className="font-semibold text-amber-500 hover:underline">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             masuk
                         </Link>{' '}
                         untuk menulis ulasan.
@@ -389,11 +326,7 @@ function ReviewsTab({ destination, reviews, userReview }) {
                                 rows={4}
                                 maxLength={1000}
                                 placeholder="Ceritakan pengalaman Anda..."
-<<<<<<< HEAD
                                 className="w-full rounded-xl border border-slate-200 p-3 text-sm focus:border-yellow-500 focus:ring-yellow-500"
-=======
-                                className="w-full rounded-xl border border-slate-200 p-3 text-sm focus:border-amber-500 focus:ring-amber-500"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             />
                             {errors.comment && <p className="mt-1 text-xs text-rose-600 font-medium">{errors.comment}</p>}
                         </div>
@@ -402,11 +335,7 @@ function ReviewsTab({ destination, reviews, userReview }) {
                             <button
                                 type="submit"
                                 disabled={processing || data.rating === 0}
-<<<<<<< HEAD
                                 className="px-6 py-3 rounded-xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold transition-all disabled:opacity-50"
-=======
-                                className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold transition-all disabled:opacity-50"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                             >
                                 {userReview ? 'Perbarui Ulasan' : 'Kirim Ulasan'}
                             </button>

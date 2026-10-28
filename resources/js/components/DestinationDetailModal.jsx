@@ -67,11 +67,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
 
                                             <div className="absolute bottom-6 left-6 right-6 text-white">
                                                 <div className="flex items-center gap-2 mb-2">
-<<<<<<< HEAD
                                                     <span className="px-3 py-1 rounded-full bg-yellow-600 text-xs font-bold uppercase tracking-wider">
-=======
-                                                    <span className="px-3 py-1 rounded-full bg-amber-500 text-xs font-bold uppercase tracking-wider">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                                         {displayed.category}
                                                     </span>
                                                     <span className="flex items-center gap-1 text-xs font-medium text-amber-400">
@@ -83,11 +79,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                                                     {displayed.name}
                                                 </DialogTitle>
                                                 <p className="text-xs sm:text-sm text-slate-300 flex items-center gap-1 mt-1">
-<<<<<<< HEAD
                                                     <i className="bx bx-map-pin text-yellow-600"></i>
-=======
-                                                    <i className="bx bx-map-pin text-amber-400"></i>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                                     {displayed.regency}
                                                 </p>
                                             </div>
@@ -124,11 +116,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
                                                         {displayed.facilities.map((facility) => (
                                                             <span
                                                                 key={facility}
-<<<<<<< HEAD
                                                                 className="inline-flex items-center gap-1.5 rounded-md bg-yellow-50 px-3.5 py-2 text-xs font-semibold text-yellow-700 border border-yellow-100"
-=======
-                                                                className="inline-flex items-center gap-1.5 rounded-xl bg-amber-50 px-3.5 py-2 text-xs font-semibold text-amber-600 border border-amber-100"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                                             >
                                                                 <i className="bx bx-check-circle text-base"></i>
                                                                 {facility}
@@ -152,11 +140,7 @@ export default function DestinationDetailModal({ destination, priceLabel, onClos
 
                                                 <Link
                                                     href={route('destinations.show', displayed.slug)}
-<<<<<<< HEAD
                                                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-yellow-600 px-8 py-3.5 text-xs font-bold text-white shadow-lg shadow-yellow-600/20 hover:bg-yellow-700 transition"
-=======
-                                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-8 py-3.5 text-xs font-bold text-white shadow-lg shadow-amber-500/20 hover:bg-amber-600 transition"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                                 >
                                                     <span>Lihat Halaman Full Detail</span>
                                                     <i className="bx bx-right-arrow-alt text-lg"></i>
