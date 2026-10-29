@@ -74,11 +74,7 @@ const testimonialsData = [
 
 const fontFamily = "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif";
 const container = 'mx-auto w-full max-w-7xl px-6 lg:px-8';
-<<<<<<< HEAD
 const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-600';
-=======
-const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-500';
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
 
 function SectionHeader({ title, description, centered = false }) {
     return (
@@ -167,11 +163,7 @@ export default function Index({
                             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 p-8 rounded-xl bg-white shadow-2xl shadow-slate-200 border border-slate-100">
                                 {statsList.map((statistic, idx) => (
                                     <div key={statistic.label} className={`flex flex-col items-center text-center ${idx !== statsList.length - 1 ? 'md:border-r border-slate-100' : ''}`}>
-<<<<<<< HEAD
                                         <dd className="text-3xl font-extrabold tracking-tight text-yellow-600 sm:text-4xl">{statistic.value}</dd>
-=======
-                                        <dd className="text-3xl font-extrabold tracking-tight text-amber-500 sm:text-4xl">{statistic.value}</dd>
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         <dt className="mt-1 text-xs font-bold uppercase tracking-widest text-slate-400">{statistic.label}</dt>
                                     </div>
                                 ))}
@@ -196,11 +188,7 @@ export default function Index({
                                             onClick={() => setActiveCategory(category)}
                                             className={`px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl transition-all ${
                                                 activeCategory === category
-<<<<<<< HEAD
                                                     ? 'bg-white text-yellow-600 shadow-sm border border-slate-100'
-=======
-                                                    ? 'bg-white text-amber-500 shadow-sm border border-slate-100'
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                                     : 'text-slate-500 hover:text-slate-900'
                                             }`}
                                         >
@@ -219,11 +207,7 @@ export default function Index({
                             <div className="mt-16 text-center">
                                 <Link
                                     href={route('destinations.index')}
-<<<<<<< HEAD
                                     className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-yellow-600 shadow-lg shadow-slate-900/10"
-=======
-                                    className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-8 py-4 text-sm font-bold text-white transition-all hover:bg-amber-500 shadow-lg shadow-slate-900/10"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                 >
                                     <span>Lihat Semua Destinasi</span>
                                     <i className="bx bx-grid-alt text-lg"></i>
@@ -244,13 +228,8 @@ export default function Index({
                                     
                                     <div className="grid gap-4 sm:grid-cols-2">
                                         {cultureFeatures.map((feature) => (
-<<<<<<< HEAD
                                             <div key={feature.title} className="p-6 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all">
                                                 <div className="w-12 h-12 rounded-2xl bg-yellow-50 text-yellow-600 flex items-center justify-center mb-4">
-=======
-                                            <div key={feature.title} className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                                                <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mb-4">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                                     <i className="bx bx-star text-2xl"></i>
                                                 </div>
                                                 <h3 className="font-bold text-slate-900 mb-2">{feature.title}</h3>
@@ -290,11 +269,7 @@ export default function Index({
                                 />
                                 <Link
                                     href={route('gallery.index')}
-<<<<<<< HEAD
                                     className="group inline-flex items-center gap-2 text-sm font-bold text-yellow-600 hover:text-yellow-700 transition"
-=======
-                                    className="group inline-flex items-center gap-2 text-sm font-bold text-amber-500 hover:text-amber-600 transition"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                 >
                                     <span>Lihat Semua Galeri</span>
                                     <i className="bx bx-right-arrow-alt text-xl group-hover:translate-x-1 transition-transform"></i>
@@ -325,11 +300,7 @@ export default function Index({
                     </section>
 
                     {/* Testimoni Preview */}
-<<<<<<< HEAD
                     <section id="testimoni" className="py-24 sm:py-32 bg-gray-100">
-=======
-                    <section id="testimoni" className="py-24 sm:py-32 bg-amber-50/50">
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                         <div className={container}>
                             <div className="text-center max-w-3xl mx-auto mb-16">
                                 <SectionHeader
@@ -348,11 +319,7 @@ export default function Index({
                             <div className="mt-16 text-center">
                                 <Link
                                     href={route('testimonials.index')}
-<<<<<<< HEAD
                                     className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-yellow-600 transition"
-=======
-                                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-amber-500 transition"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                 >
                                     <span>Baca Lebih Banyak Cerita</span>
                                     <i className="bx bx-plus-circle text-lg"></i>
@@ -372,11 +339,7 @@ export default function Index({
                                         alt="Background"
                                     />
                                 </div>
-<<<<<<< HEAD
                                 <div className="absolute inset-0 bg-gradient-to-b from-yellow-600/20 to-slate-950/90" />
-=======
-                                <div className="absolute inset-0 bg-gradient-to-b from-amber-500/20 to-slate-950/90" />
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                 
                                 <div className="relative z-10 max-w-3xl mx-auto">
                                     <h2 className="text-4xl leading-tight font-extrabold tracking-tight text-white sm:text-6xl">
@@ -388,11 +351,7 @@ export default function Index({
                                     <div className="mt-12 flex flex-wrap justify-center items-center gap-4">
                                         <Link
                                             href={route('registrasi.select')}
-<<<<<<< HEAD
                                             className="inline-flex items-center gap-2 rounded-2xl bg-yellow-600 px-10 py-5 text-sm font-bold text-white transition-all hover:bg-yellow-700 shadow-xl shadow-yellow-600/20"
-=======
-                                            className="inline-flex items-center gap-2 rounded-2xl bg-amber-500 px-10 py-5 text-sm font-bold text-white transition-all hover:bg-amber-600 shadow-xl shadow-amber-500/20"
->>>>>>> 68d7f453f425278cde84d736a18e0735a5cfa693
                                         >
                                             <span>Daftar Akun Sekarang</span>
                                             <i className="bx bx-user-plus text-xl"></i>
