@@ -26,7 +26,7 @@ import {
     ResponsiveContainer 
 } from 'recharts';
 
-export default function Dashboard({ auth, stats, visitorTrends, destinationsByCategory, reviewsDistribution, priceDistribution, recentReviews, recentPartners }) {
+export default function Dashboard({ auth, stats, visitorTrends, destinationsByCategory, reviewsDistribution, priceDistribution, recentReviews, recentPartners, destinations }) {
     const user = auth.user;
 
     // Admin Dashboard View
