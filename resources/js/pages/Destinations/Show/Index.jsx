@@ -25,6 +25,7 @@ export default function Show({ destination, reviews = [], userReview = null }) {
         name: destination.name || 'Destinasi Wisata',
         category: destination.category?.name || destination.category || 'Wisata',
         tagline: destination.tagline || 'Destinasi Wisata Unggulan Lampung',
+        description: destination.description || 'Deskripsi destinasi ini belum tersedia.',
         openingHours: destination.opening_hours || '08:00 - 17:00 WIB',
         facilities: destination.facilities || ['Area Parkir', 'Toilet Umum', 'Mushola', 'Spot Foto'],
         tips: destination.tips || [

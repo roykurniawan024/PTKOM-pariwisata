@@ -1,74 +1,42 @@
 import { Head, Link } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DestinationCard from '@/components/DestinationCard';
 import PublicFooter from '@/components/PublicFooter';
 import PublicNavbar from '@/components/PublicNavbar';
 import TestimonialCard from '@/components/TestimonialCard';
 
-const statistics = [
-    { value: '47+', label: 'Destinasi wisata' },
-    { value: '1,2 jt', label: 'Wisatawan per tahun' },
-    { value: '9', label: 'Kategori wisata' },
-    { value: '4,8', label: 'Rating rata-rata' },
+const categories = ['Semua', 'Bahari', 'Alam', 'Pantai', 'Budaya'];
+
+// Gambar hero statis (tidak dari database). Tambah item baru di sini untuk menambah slide.
+const heroImages = [
+    {
+        src: 'https://asdp.id/storage//uploads/siaranpers/d905b966b12f4610fce258007a737f4d.jpeg',
+        alt: 'Menara Siger Lampung',
+    },
+    {
+        src: 'https://www.batiqa.com/upload/news/z/lampung-pantai-gigi-hiu_3mnwt.jpg',
+        alt: 'Pesona wisata Lampung',
+    },
 ];
 
-const categories = ['Semua', 'Bahari', 'Alam', 'Pantai', 'Budaya'];
+const HERO_INTERVAL = 5000;
 
 const cultureFeatures = [
     {
-        title: 'Tari Siger',
-        desc: 'Tarian penyambutan tamu kehormatan dengan mahkota Siger emas.',
+        title: 'Adat Istiadat',
+        desc: 'Tradisi dan nilai luhur masyarakat Lampung yang diwariskan dari generasi ke generasi.',
+    },
+    {
+        title: 'Tarian Tradisional',
+        desc: 'Seni tari Lampung yang mencerminkan identitas, penghormatan, dan keramahan masyarakat.',
     },
     {
         title: 'Kain Tapis',
-        desc: 'Tenun tradisional bersulam benang emas dengan filosofi luhur leluhur.',
+        desc: 'Kain tradisional Lampung dengan sulaman khas yang memiliki nilai seni dan budaya.',
     },
     {
-        title: 'Gamolan Pekhing',
-        desc: 'Alat musik bilah bambu yang menghasilkan melodi syahdu.',
-    },
-    {
-        title: 'Pesta Sekura',
-        desc: 'Tradisi topeng khas masyarakat Lampung Barat pasca Idul Fitri.',
-    },
-];
-
-const galleryImages = [
-    'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1564760055775-d63b19a55371?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1608953154378-b19b808a974b?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80',
-];
-
-const testimonialsData = [
-    {
-        id: 1,
-        quote: 'Keindahan bawah laut Pulau Pahawang dan keramahan warga lokal membuat liburan kami sangat berkesan. Recommended banget!',
-        name: 'Rian Hidayat',
-        role: 'Travel Vlogger',
-        location: 'Jakarta',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-        rating: 5,
-    },
-    {
-        id: 2,
-        quote: 'Menyaksikan lumba-lumba langsung di Teluk Kiluan saat matahari terbit adalah pengalaman yang tidak akan pernah saya lupakan.',
-        name: 'Sarah Wijaya',
-        role: 'Fotografer',
-        location: 'Bandung',
-        avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
-        rating: 5,
-    },
-    {
-        id: 3,
-        quote: 'Kombinasi sempurna antara wisata alam liar Way Kambas dan kekayaan budaya Kain Tapis. Lampung luar biasa!',
-        name: 'Dimas Prasetyo',
-        role: 'Backpacker',
-        location: 'Yogyakarta',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
-        rating: 5,
+        title: 'Seni dan Kerajinan',
+        desc: 'Karya seni lokal yang mencerminkan kreativitas dan kekayaan budaya Lampung.',
     },
 ];
 
@@ -87,19 +55,58 @@ function SectionHeader({ title, description, centered = false }) {
     );
 }
 
+function GridBackground() {
+    const mask = 'radial-gradient(ellipse at center, black 40%, transparent 85%)';
+
+    return (
+        <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+                backgroundImage:
+                    'linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)',
+                backgroundSize: '48px 48px',
+                maskImage: mask,
+                WebkitMaskImage: mask,
+            }}
+        />
+    );
+}
+
 export default function Index({
     destinations: initialDestinations = [],
     categories: initialCategories = [],
     statistics: initialStatistics = [],
+    testimonials = [],
+    galleryImages = [],
 }) {
     const destinationsList = initialDestinations;
     const categoriesList = initialCategories && initialCategories.length > 0 ? ['Semua', ...initialCategories] : categories;
-    const statsList = initialStatistics && initialStatistics.length > 0 ? initialStatistics : statistics;
-
+    const statsList = initialStatistics ?? [];
     const [activeCategory, setActiveCategory] = useState('Semua');
+    const [heroIndex, setHeroIndex] = useState(0);
+
+    // Ganti gambar hero otomatis. Dilewati jika pengguna memilih mengurangi animasi.
+    useEffect(() => {
+        if (heroImages.length < 2) return undefined;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+        // heroIndex ada di dependency agar timer diulang setelah dot diklik manual.
+        const timer = setTimeout(() => {
+            setHeroIndex((current) => (current + 1) % heroImages.length);
+        }, HERO_INTERVAL);
+
+        return () => clearTimeout(timer);
+    }, [heroIndex]);
 
     const filteredDestinations =
-        activeCategory === 'Semua' ? destinationsList : destinationsList.filter((d) => d.category === activeCategory);
+        (activeCategory === 'Semua' ? destinationsList : destinationsList.filter((d) => d.category === activeCategory)).slice(0, 3);
+
+    const cultureImages = galleryImages.filter((image) =>
+        /budaya|tari|adat|tenun|kerajinan|seni/i.test(
+            `${image.category} ${image.title}`
+        )
+    );
 
     return (
         <>
@@ -113,11 +120,18 @@ export default function Index({
                 <main className="flex-1">
                     {/* Hero */}
                     <section className="relative flex h-[90vh] items-center overflow-hidden">
-                        <img
-                            src="https://asdp.id/storage//uploads/siaranpers/d905b966b12f4610fce258007a737f4d.jpeg"
-                            alt="Menara Siger Lampung"
-                            className="absolute inset-0 h-full w-full object-cover"
-                        />
+                        {heroImages.map((image, index) => (
+                            <img
+                                key={image.src}
+                                src={image.src}
+                                alt={image.alt}
+                                aria-hidden={index !== heroIndex}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${
+                                    index === heroIndex ? 'opacity-100' : 'opacity-0'
+                                }`}
+                            />
+                        ))}
                         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent" />
 
                         <div className={`${container} relative z-10`}>
@@ -150,6 +164,24 @@ export default function Index({
                             </div>
                         </div>
 
+                        {/* Indikator Slide */}
+                        {heroImages.length > 1 && (
+                            <div className="absolute bottom-24 right-6 z-10 flex items-center gap-2 lg:right-8">
+                                {heroImages.map((image, index) => (
+                                    <button
+                                        key={image.src}
+                                        type="button"
+                                        onClick={() => setHeroIndex(index)}
+                                        aria-label={`Tampilkan gambar ${index + 1}`}
+                                        aria-current={index === heroIndex}
+                                        className={`h-2 rounded-full transition-all duration-300 ${
+                                            index === heroIndex ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'
+                                        }`}
+                                    />
+                                ))}
+                            </div>
+                        )}
+
                         {/* Scroll Indicator */}
                         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 animate-bounce">
                             <span className="text-[10px] uppercase font-bold tracking-widest">Scroll</span>
@@ -158,7 +190,7 @@ export default function Index({
                     </section>
 
                     {/* Statistik Bar */}
-                    <section className="relative z-20 -mt-12">
+                    <section className="relative z-20 -mt-14 px-4 sm:-mt-16">
                         <div className={container}>
                             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 p-8 rounded-xl bg-white shadow-2xl shadow-slate-200 border border-slate-100">
                                 {statsList.map((statistic, idx) => (
@@ -172,15 +204,17 @@ export default function Index({
                     </section>
 
                     {/* Destinasi */}
-                    <section id="destinations" className="py-24 sm:py-32">
+                    <section id="destinations" className="relative isolate bg-white py-24 sm:py-32">
+                        <GridBackground />
+
                         <div className={container}>
                             <div className="flex flex-col items-center justify-center gap-8 mb-12">
                                 <SectionHeader
                                     title="Tempat yang Wajib Dikunjungi"
                                     description="Destinasi terbaik di Lampung, dari kepulauan tropis hingga taman nasional bersejarah."
                                 />
-                                
-                                <div className="flex flex-wrap gap-2 p-1.5 rounded-xl bg-slate-50 border border-slate-100">
+
+                                <div className="flex flex-wrap gap-2 p-1.5 rounded-xl shadow-sm bg-slate-50 border border-slate-100">
                                     {categoriesList.map((category) => (
                                         <button
                                             key={category}
@@ -216,8 +250,8 @@ export default function Index({
                         </div>
                     </section>
 
-                    {/* Budaya Section - Modern Split */}
-                    <section id="budaya" className="py-24 sm:py-32 bg-slate-50 overflow-hidden">
+                    {/* Budaya Section */}
+                    <section id="budaya" className="overflow-hidden bg-slate-50 py-24 sm:py-32">
                         <div className={container}>
                             <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
                                 <div className="space-y-10">
@@ -225,42 +259,61 @@ export default function Index({
                                         title="Budaya Lampung yang Abadi"
                                         description="Adat, tarian, tenun, dan seni turun-temurun yang menjaga jiwa Sang Bumi Ruwa Jurai."
                                     />
-                                    
+
                                     <div className="grid gap-4 sm:grid-cols-2">
                                         {cultureFeatures.map((feature) => (
                                             <div key={feature.title} className="p-6 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all">
                                                 <div className="w-12 h-12 rounded-2xl bg-yellow-50 text-yellow-600 flex items-center justify-center mb-4">
                                                     <i className="bx bx-star text-2xl"></i>
                                                 </div>
-                                                <h3 className="font-bold text-slate-900 mb-2">{feature.title}</h3>
-                                                <p className="text-sm leading-relaxed text-slate-500">{feature.desc}</p>
+                                                <h3 className="mb-2 font-bold text-slate-900">
+                                                    {feature.title}
+                                                </h3>
+                                                <p className="text-sm leading-relaxed text-slate-500">
+                                                    {feature.desc}
+                                                </p>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
 
                                 <div className="relative">
-                                    <div className="aspect-square rounded-[3rem] overflow-hidden shadow-2xl rotate-3">
-                                        <img 
-                                            src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1000&q=80" 
-                                            alt="Budaya Lampung" 
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <div className="absolute -bottom-8 -left-8 aspect-video w-64 rounded-3xl overflow-hidden shadow-2xl -rotate-6 border-4 border-white">
-                                        <img 
-                                            src="https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=600&q=80" 
-                                            alt="Budaya Lampung 2" 
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
+                                    {cultureImages.length > 0 ? (
+                                        <>
+                                            <div className="aspect-square rotate-3 overflow-hidden rounded-[3rem] bg-slate-200 shadow-2xl">
+                                                <img
+                                                    src={cultureImages[0].src}
+                                                    alt={cultureImages[0].title}
+                                                    loading="lazy"
+                                                    className="h-full w-full object-cover"
+                                                />
+                                            </div>
+
+                                            {cultureImages.length > 1 && (
+                                                <div className="absolute -bottom-8 -left-8 aspect-video w-64 -rotate-6 overflow-hidden rounded-3xl border-4 border-white bg-slate-200 shadow-2xl">
+                                                    <img
+                                                        src={cultureImages[1].src}
+                                                        alt={cultureImages[1].title}
+                                                        loading="lazy"
+                                                        className="h-full w-full object-cover"
+                                                    />
+                                                </div>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <div className="flex aspect-square items-center justify-center rounded-[3rem] bg-slate-200 p-8 text-center text-slate-500">
+                                            <p>Foto budaya belum tersedia.</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Galeri Preview */}
-                    <section id="galeri" className="py-24 sm:py-32 bg-white">
+                    <section id="galeri" className="relative isolate bg-white py-24 sm:py-32">
+                        <GridBackground />
+
                         <div className={container}>
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
                                 <SectionHeader
@@ -275,22 +328,29 @@ export default function Index({
                                     <i className="bx bx-right-arrow-alt text-xl group-hover:translate-x-1 transition-transform"></i>
                                 </Link>
                             </div>
-                            
+
                             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                                {galleryImages.slice(0, 4).map((src, index) => (
+                                {galleryImages.slice(0, 4).map((image, index) => (
                                     <div
-                                        key={index}
-                                        className={`group relative overflow-hidden rounded-[2rem] bg-slate-100 ${index === 0 ? 'sm:col-span-2 sm:row-span-2 aspect-square sm:aspect-auto' : 'aspect-square'}`}
+                                        key={image.id}
+                                        className={`group relative aspect-square overflow-hidden rounded-[2rem] bg-slate-100 ${
+                                            index === 0 ? 'sm:col-span-2 sm:row-span-2 sm:aspect-auto' : ''
+                                        }`}
                                     >
                                         <img
-                                            src={src}
-                                            alt={`Foto wisata Lampung ${index + 1}`}
+                                            src={image.src}
+                                            alt={`Foto ${image.title}`}
+                                            loading="lazy"
                                             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+
+                                        <div className="absolute inset-0 flex items-end bg-gradient-to-t from-slate-950/70 to-transparent p-6 opacity-0 transition-opacity group-hover:opacity-100">
                                             <div className="text-white">
-                                                <p className="text-xs font-bold uppercase tracking-widest mb-1">Destinasi</p>
-                                                <p className="text-lg font-bold">Pesona Lampung</p>
+                                                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-yellow-300">
+                                                    {image.category}
+                                                </p>
+                                                <p className="text-lg font-bold">{image.title}</p>
+                                                <p className="text-sm text-white/80">{image.location}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -302,16 +362,16 @@ export default function Index({
                     {/* Testimoni Preview */}
                     <section id="testimoni" className="py-24 sm:py-32 bg-gray-100">
                         <div className={container}>
-                            <div className="text-center max-w-3xl mx-auto mb-16">
+                            <div className="mx-auto mb-16 max-w-3xl text-center">
                                 <SectionHeader
                                     centered
                                     title="Apa Kata Mereka?"
                                     description="Dengarkan cerita dan kesan mendalam dari para pelancong yang telah menjelajahi Lampung."
                                 />
                             </div>
-                            
+
                             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                                {testimonialsData.map((item) => (
+                                {testimonials.slice(0, 3).map((item) => (
                                     <TestimonialCard key={item.id} {...item} />
                                 ))}
                             </div>
@@ -328,13 +388,15 @@ export default function Index({
                         </div>
                     </section>
 
-                    {/* CTA - Modern Dark */}
-                    <section id="rencanakan" className="py-24 sm:py-32">
+                    {/* CTA */}
+                    <section id="rencanakan" className="relative isolate bg-white py-24 sm:py-32">
+                        <GridBackground />
+
                         <div className={container}>
                             <div className="relative overflow-hidden rounded-xl bg-slate-900 px-8 py-20 sm:px-16 sm:py-28 text-center">
                                 <div className="absolute inset-0 opacity-20">
-                                    <img 
-                                        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80" 
+                                    <img
+                                        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80"
                                         className="w-full h-full object-cover"
                                         alt="Background"
                                     />

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { CheckCircle2, Clock, EyeOff, MessageSquare, Star, Trash2 } from 'lucide-react';
@@ -9,12 +10,38 @@ const FILTERS = [
 ];
 
 export default function Reviews({ auth, reviews, currentStatus, stats }) {
+    const [selectedReviews, setSelectedReviews] = useState([]);
+
     const handleFilterStatus = (status) => {
         router.get(route('admin.reviews.index'), { status }, { preserveState: true });
     };
 
     const handleModerate = (review, isApproved) => {
         router.patch(route('admin.reviews.moderate', review.id), { is_approved: isApproved }, { preserveScroll: true });
+    };
+
+    const handleBulkModerate = (isApproved) => {
+        if (selectedReviews.length === 0) return;
+        router.patch(route('admin.reviews.moderate'), { is_approved: isApproved, review_ids: selectedReviews }, { 
+            preserveScroll: true,
+            onSuccess: () => setSelectedReviews([])
+        });
+    };
+
+    const toggleSelectAll = () => {
+        if (selectedReviews.length === reviews.data.length) {
+            setSelectedReviews([]);
+        } else {
+            setSelectedReviews(reviews.data.map(r => r.id));
+        }
+    };
+
+    const toggleSelect = (id) => {
+        if (selectedReviews.includes(id)) {
+            setSelectedReviews(selectedReviews.filter(rId => rId !== id));
+        } else {
+            setSelectedReviews([...selectedReviews, id]);
+        }
     };
 
     const handleDelete = (review) => {
@@ -35,40 +62,51 @@ export default function Reviews({ auth, reviews, currentStatus, stats }) {
 
             <div className="py-12 bg-gray-50 min-h-screen">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-gray-500">Semua Ulasan</span>
-                                <MessageSquare className="w-5 h-5 text-gray-400" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        {[
+                            { label: 'Semua Ulasan', value: stats.total, color: 'text-gray-900', icon: MessageSquare },
+                            { label: 'Menunggu', value: stats.pending, color: 'text-amber-600', icon: Clock },
+                            { label: 'Ditampilkan', value: stats.approved, color: 'text-emerald-600', icon: CheckCircle2 },
+                        ].map((stat, index) => (
+                            <div key={index} className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm">
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="text-sm font-medium text-gray-500">{stat.label}</span>
+                                    <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                                </div>
+                                <div className={`text-3xl font-bold ${stat.color}`}>{stat.value}</div>
                             </div>
-                            <div className="text-2xl font-bold text-gray-900 mt-2">{stats.total}</div>
-                        </div>
-                        <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-amber-600">Menunggu Persetujuan</span>
-                                <Clock className="w-5 h-5 text-amber-500" />
-                            </div>
-                            <div className="text-2xl font-bold text-amber-600 mt-2">{stats.pending}</div>
-                        </div>
-                        <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-emerald-600">Ditampilkan</span>
-                                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                            </div>
-                            <div className="text-2xl font-bold text-emerald-600 mt-2">{stats.approved}</div>
-                        </div>
+                        ))}
                     </div>
 
-                    <div className="bg-white p-4 rounded-xl border border-gray-200 flex items-center gap-2">
-                        {FILTERS.map((filter) => (
-                            <button
-                                key={filter.key}
-                                onClick={() => handleFilterStatus(filter.key)}
-                                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${currentStatus === filter.key ? filter.active : filter.idle}`}
-                            >
-                                {filter.label}
-                            </button>
-                        ))}
+                    <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-xl border border-gray-200">
+                        <div className="flex items-center gap-2">
+                            {FILTERS.map((filter) => (
+                                <button
+                                    key={filter.key}
+                                    onClick={() => handleFilterStatus(filter.key)}
+                                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${currentStatus === filter.key ? filter.active : filter.idle}`}
+                                >
+                                    {filter.label}
+                                </button>
+                            ))}
+                        </div>
+                        {selectedReviews.length > 0 && (
+                            <div className="flex items-center gap-2">
+                                <span className="text-xs text-gray-500">{selectedReviews.length} ulasan terpilih</span>
+                                <button
+                                    onClick={() => handleBulkModerate(true)}
+                                    className="inline-flex items-center px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-medium hover:bg-emerald-700 transition-colors"
+                                >
+                                    <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Setujui Semua
+                                </button>
+                                <button
+                                    onClick={() => handleBulkModerate(false)}
+                                    className="inline-flex items-center px-3 py-1.5 bg-amber-600 text-white rounded-lg text-xs font-medium hover:bg-amber-700 transition-colors"
+                                >
+                                    <EyeOff className="w-3.5 h-3.5 mr-1" /> Sembunyikan Semua
+                                </button>
+                            </div>
+                        )}
                     </div>
 
                     <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
@@ -83,6 +121,15 @@ export default function Reviews({ auth, reviews, currentStatus, stats }) {
                                 <table className="w-full text-left border-collapse">
                                     <thead>
                                         <tr className="bg-gray-50/80 text-[11px] font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                                            <th className="py-4 px-4 w-10">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={reviews.data.length > 0 && selectedReviews.length === reviews.data.length}
+                                                    onChange={toggleSelectAll}
+                                                    className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                                                    title="Pilih semua"
+                                                />
+                                            </th>
                                             <th className="py-4 px-6">Pengulas</th>
                                             <th className="py-4 px-6">Destinasi</th>
                                             <th className="py-4 px-6">Rating</th>
@@ -94,6 +141,14 @@ export default function Reviews({ auth, reviews, currentStatus, stats }) {
                                     <tbody className="divide-y divide-gray-100 text-sm">
                                         {reviews.data.map((review) => (
                                             <tr key={review.id} className="hover:bg-gray-50/50 transition-colors align-top">
+                                                <td className="py-4 px-4">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={selectedReviews.includes(review.id)}
+                                                        onChange={() => toggleSelect(review.id)}
+                                                        className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                                                    />
+                                                </td>
                                                 <td className="py-4 px-6">
                                                     <div className="font-semibold text-gray-900">{review.user?.name || '-'}</div>
                                                     <div className="text-xs text-gray-500 mt-0.5">{formatDate(review.created_at)}</div>

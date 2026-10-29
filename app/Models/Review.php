@@ -20,6 +20,7 @@ class Review extends Model
         'rating',
         'comment',
         'is_approved',
+        'ip_address',
     ];
 
     protected static function booted(): void

@@ -95,15 +95,15 @@ export default function PublicFooter() {
                         <ul className="mt-4 space-y-3 text-sm text-slate-400">
                             <li className="flex items-start gap-3">
                                 <i className="bx bx-buildings text-lg text-yellow-600 shrink-0 mt-0.5"></i>
-                                <span>Dinas Pariwisata Provinsi Lampung</span>
+                                <span>Media Independen Pariwisata</span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <i className="bx bx-map text-lg text-yellow-600 shrink-0 mt-0.5"></i>
-                                <span>Jl. S. Parman No.8, Bandar Lampung</span>
+                                <span>Jl. Ryacudu, Way Huwi, Jati Agung, Lampung Selatan</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <i className="bx bx-envelope text-lg text-yellow-600 shrink-0"></i>
-                                <span>info@wanderly.id</span>
+                                <span>admin@wanderly.asia</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <i className="bx bx-phone text-lg text-yellow-600 shrink-0"></i>

@@ -23,10 +23,18 @@ class ReviewController extends Controller
             'comment' => 'required|string|max:1000',
         ]);
 
-        Review::updateOrCreate(
-            ['user_id' => $request->user()->id, 'destination_id' => $destination->id],
-            $validated + ['is_approved' => false],
-        );
+        $ipAddress = (string) $request->ip();
+        $ipUsedByAnotherUser = Review::where('destination_id', $destination->id)->whereNotNull('ip_address')->where('ip_address', $ipAddress)->where('user_id', '!=', $request->user()->id)->exists();
+        if ($ipUsedByAnotherUser) {
+            return back()->withErrors(['comment' => 'Satu alamat IP hanya dapat digunakan oleh satu akun untuk mengulas destinasi ini.']);
+        }
+        $rateKey = "review-ip:{$ipAddress}:{$destination->id}";
+        if (\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($rateKey, 3)) {
+            $sec = \Illuminate\Support\Facades\RateLimiter::availableIn($rateKey);
+            return back()->withErrors(['comment' => "Terlalu banyak pengiriman ulasan dari alamat IP ini. Silakan coba lagi dalam {$sec} detik."]);
+        }
+        \Illuminate\Support\Facades\RateLimiter::hit($rateKey, 60);
+        Review::updateOrCreate(['user_id' => $request->user()->id, 'destination_id' => $destination->id], $validated + ['is_approved' => false, 'ip_address' => $ipAddress]);
 
         return back()->with('success', 'Ulasan Anda berhasil dikirim dan menunggu persetujuan admin.');
     }
@@ -59,13 +67,25 @@ class ReviewController extends Controller
     }
 
     /**
-     * Approve or reject a review (admin only).
+     * Approve or hide one or many reviews at once (admin only).
      */
-    public function moderate(Request $request, Review $review): RedirectResponse
+    public function moderate(Request $request, ?Review $review = null): RedirectResponse
     {
         $validated = $request->validate([
             'is_approved' => 'required|boolean',
+            'review_ids' => 'sometimes|array|min:1',
+            'review_ids.*' => 'exists:reviews,id',
         ]);
+
+        if ($request->has('review_ids')) {
+            $reviews = Review::findMany($validated['review_ids']);
+
+            $reviews->each(fn (Review $item) => $item->update(['is_approved' => $validated['is_approved']]));
+
+            return back()->with('success', $reviews->count().' ulasan berhasil diperbarui.');
+        }
+
+        abort_if($review === null, 404);
 
         $review->update(['is_approved' => $validated['is_approved']]);
 

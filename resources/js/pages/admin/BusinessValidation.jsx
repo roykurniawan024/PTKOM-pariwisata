@@ -72,50 +72,25 @@ export default function BusinessValidation({ auth, businessOwners, currentStatus
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     
                     {/* Statistik Ringkasan */}
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div 
-                            onClick={() => handleFilterStatus('all')}
-                            className={`p-5 rounded-2xl bg-white border cursor-pointer transition-all shadow-sm ${currentStatus === 'all' ? 'border-emerald-600 ring-2 ring-emerald-500/20' : 'border-gray-200 hover:border-gray-300'}`}
-                        >
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-gray-500">Semua Mitra</span>
-                                <Store className="w-5 h-5 text-gray-400" />
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        {[
+                            { label: 'Semua Mitra', value: stats.total, color: 'text-gray-900', icon: Store, status: 'all' },
+                            { label: 'Menunggu', value: stats.pending, color: 'text-amber-600', icon: Clock, status: 'pending' },
+                            { label: 'Disetujui', value: stats.approved, color: 'text-emerald-600', icon: CheckCircle2, status: 'approved' },
+                            { label: 'Ditolak', value: stats.rejected, color: 'text-rose-600', icon: XCircle, status: 'rejected' },
+                        ].map((stat) => (
+                            <div 
+                                key={stat.status}
+                                onClick={() => handleFilterStatus(stat.status)}
+                                className={`p-6 rounded-3xl bg-white border cursor-pointer transition-all shadow-sm hover:shadow-md ${currentStatus === stat.status ? 'border-emerald-500 ring-2 ring-emerald-500/10' : 'border-gray-100'}`}
+                            >
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="text-sm font-medium text-gray-500">{stat.label}</span>
+                                    <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                                </div>
+                                <div className={`text-3xl font-bold ${stat.color}`}>{stat.value}</div>
                             </div>
-                            <div className="text-2xl font-bold text-gray-900 mt-2">{stats.total}</div>
-                        </div>
-
-                        <div 
-                            onClick={() => handleFilterStatus('pending')}
-                            className={`p-5 rounded-2xl bg-white border cursor-pointer transition-all shadow-sm ${currentStatus === 'pending' ? 'border-amber-500 ring-2 ring-amber-500/20' : 'border-gray-200 hover:border-gray-300'}`}
-                        >
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-amber-600">Menunggu Validasi</span>
-                                <Clock className="w-5 h-5 text-amber-500" />
-                            </div>
-                            <div className="text-2xl font-bold text-amber-600 mt-2">{stats.pending}</div>
-                        </div>
-
-                        <div 
-                            onClick={() => handleFilterStatus('approved')}
-                            className={`p-5 rounded-2xl bg-white border cursor-pointer transition-all shadow-sm ${currentStatus === 'approved' ? 'border-emerald-600 ring-2 ring-emerald-500/20' : 'border-gray-200 hover:border-gray-300'}`}
-                        >
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-emerald-600">Telah Disetujui</span>
-                                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                            </div>
-                            <div className="text-2xl font-bold text-emerald-600 mt-2">{stats.approved}</div>
-                        </div>
-
-                        <div 
-                            onClick={() => handleFilterStatus('rejected')}
-                            className={`p-5 rounded-2xl bg-white border cursor-pointer transition-all shadow-sm ${currentStatus === 'rejected' ? 'border-rose-600 ring-2 ring-rose-500/20' : 'border-gray-200 hover:border-gray-300'}`}
-                        >
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-rose-600">Ditolak</span>
-                                <XCircle className="w-5 h-5 text-rose-500" />
-                            </div>
-                            <div className="text-2xl font-bold text-rose-600 mt-2">{stats.rejected}</div>
-                        </div>
+                        ))}
                     </div>
 
                     {/* Toolbar & Filter */}

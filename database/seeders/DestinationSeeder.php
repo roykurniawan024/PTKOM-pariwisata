@@ -39,7 +39,7 @@ class DestinationSeeder extends Seeder
         ]);
 
         // 1. Way Kambas
-        $wayKambas = Destination::firstOrCreate(['slug' => 'way-kambas'], [
+        $wayKambas = $this->upsertDestination('way-kambas', [
             'category_id' => $catTaman->id,
             'name' => 'Taman Nasional Way Kambas',
             'tagline' => 'Suaka Gajah Sumatera Terbesar di Indonesia',
@@ -59,10 +59,10 @@ Agar kunjungan lebih bermakna, luangkan waktu untuk mengikuti penjelasan dari pe
             'facilities' => ['Pusat Informasi', 'Pemandu Wisata', 'Area Parkir', 'Toilet Umum', 'Kantin'],
             'tips' => ['Gunakan pakaian yang nyaman', 'Bawa lotion anti nyamuk', 'Jangan memberi makan satwa sembarangan'],
         ]);
-        DestinationImage::firstOrCreate(['destination_id' => $wayKambas->id, 'image_url' => 'https://images.unsplash.com/photo-1581852017103-68ac65514cf7?auto=format&fit=crop&w=1200&q=80'], ['is_primary' => true]);
+        $this->setPrimaryImage($wayKambas, 'https://images.unsplash.com/photo-1581852017103-68ac65514cf7?auto=format&fit=crop&w=1200&q=80');
 
         // 2. Pantai Tanjung Setia
-        $tanjungSetia = Destination::firstOrCreate(['slug' => 'pantai-tanjung-setia'], [
+        $tanjungSetia = $this->upsertDestination('pantai-tanjung-setia', [
             'category_id' => $catPantai->id,
             'name' => 'Pantai Tanjung Setia',
             'tagline' => 'Surga Ombak Kelas Dunia bagi Para Peselancar',
@@ -82,10 +82,10 @@ Karena lokasinya cukup jauh dari kota besar, sebaiknya rencanakan perjalanan den
             'facilities' => ['Sewa Papan Selancar', 'Instruktur Selancar', 'Penginapan Tepi Pantai', 'Restoran', 'Area Parkir'],
             'tips' => ['Bawa perlengkapan selancar sendiri jika profesional', 'Gunakan tabir surya', 'Waspadai arus laut yang kuat'],
         ]);
-        DestinationImage::firstOrCreate(['destination_id' => $tanjungSetia->id, 'image_url' => 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80'], ['is_primary' => true]);
+        $this->setPrimaryImage($tanjungSetia, 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80');
 
         // 3. Pulau Pahawang
-        $pahawang = Destination::firstOrCreate(['slug' => 'pulau-pahawang'], [
+        $pahawang = $this->upsertDestination('pulau-pahawang', [
             'category_id' => $catBahari->id,
             'name' => 'Pulau Pahawang',
             'tagline' => 'Pesona Taman Laut dan Pasir Timbul yang Eksotis',
@@ -105,10 +105,10 @@ Untuk pengalaman terbaik, pilih waktu kunjungan saat cuaca cerah dan laut tenang
             'facilities' => ['Sewa Alat Snorkeling', 'Sewa Kapal', 'Cottage Terapung', 'Kamar Bilas', 'Warung Makan'],
             'tips' => ['Bawa kamera waterproof', 'Gunakan pelampung saat snorkeling', 'Bawa pakaian ganti yang cukup'],
         ]);
-        DestinationImage::firstOrCreate(['destination_id' => $pahawang->id, 'image_url' => 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80'], ['is_primary' => true]);
+        $this->setPrimaryImage($pahawang, 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80');
 
         // 4. Teluk Kiluan
-        $kiluan = Destination::firstOrCreate(['slug' => 'teluk-kiluan'], [
+        $kiluan = $this->upsertDestination('teluk-kiluan', [
             'category_id' => $catBahari->id,
             'name' => 'Teluk Kiluan',
             'tagline' => 'Atraksi Lumba-Lumba Liar di Samudra Hindia',
@@ -128,10 +128,10 @@ Perlu diingat bahwa kemunculan lumba-lumba bergantung pada kondisi alam sehingga
             'facilities' => ['Sewa Jukung', 'Homestay', 'Pemandu Lokal', 'Warung Makan', 'Area Parkir'],
             'tips' => ['Berangkatlah sepagi mungkin', 'Siapkan fisik untuk perjalanan darat yang berliku', 'Bawa kantong plastik untuk sampah'],
         ]);
-        DestinationImage::firstOrCreate(['destination_id' => $kiluan->id, 'image_url' => 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80'], ['is_primary' => true]);
+        $this->setPrimaryImage($kiluan, 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80');
 
         // 5. Pantai Gigi Hiu
-        $gigiHiu = Destination::firstOrCreate(['slug' => 'pantai-gigi-hiu'], [
+        $gigiHiu = $this->upsertDestination('pantai-gigi-hiu', [
             'category_id' => $catPantai->id,
             'name' => 'Pantai Gigi Hiu',
             'tagline' => 'Simfoni Karang Tajam di Tepi Samudra',
@@ -151,10 +151,10 @@ Datanglah pada pagi atau sore hari untuk mendapatkan cahaya terbaik sekaligus me
             'facilities' => ['Spot Foto', 'Pemandu Lokal', 'Toilet Sederhana', 'Warung Kecil'],
             'tips' => ['Gunakan alas kaki yang kuat dan tidak licin', 'Waspadai ombak besar yang tiba-tiba', 'Gunakan jasa ojek lokal untuk akses lebih mudah'],
         ]);
-        DestinationImage::firstOrCreate(['destination_id' => $gigiHiu->id, 'image_url' => 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80'], ['is_primary' => true]);
+        $this->setPrimaryImage($gigiHiu, 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80');
 
         // 6. Menara Siger
-        $menaraSiger = Destination::firstOrCreate(['slug' => 'menara-siger'], [
+        $menaraSiger = $this->upsertDestination('menara-siger', [
             'category_id' => $catBudaya->id,
             'name' => 'Menara Siger',
             'tagline' => 'Ikon Kebanggaan dan Gerbang Budaya Lampung',
@@ -174,10 +174,10 @@ Karena letaknya tidak jauh dari Pelabuhan Bakauheni, tempat ini mudah dijadikan 
             'facilities' => ['Menara Pandang', 'Pusat Informasi Budaya', 'Kios Oleh-oleh', 'Area Parkir', 'Toilet'],
             'tips' => ['Datanglah saat cuaca cerah untuk pandangan maksimal', 'Siapkan kamera untuk foto ikonik', 'Jaga kebersihan area menara'],
         ]);
-        DestinationImage::firstOrCreate(['destination_id' => $menaraSiger->id, 'image_url' => 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80'], ['is_primary' => true]);
+        $this->setPrimaryImage($menaraSiger, 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80');
 
         // 7. Gunung Anak Krakatau
-        $krakatau = Destination::firstOrCreate(['slug' => 'gunung-anak-krakatau'], [
+        $krakatau = $this->upsertDestination('gunung-anak-krakatau', [
             'category_id' => $catAlam->id,
             'name' => 'Gunung Anak Krakatau',
             'tagline' => 'Legenda Vulkanik yang Terus Bertumbuh',
@@ -197,7 +197,7 @@ Karena aktivitas gunung api dapat berubah sewaktu-waktu, akses pendakian bisa di
             'facilities' => ['Kapal Ekspedisi', 'Pemandu Berlisensi', 'Alat Snorkeling', 'Makan Siang', 'Izin Masuk Cagar Alam'],
             'tips' => ['Gunakan sepatu trekking yang memadai', 'Bawa masker untuk debu vulkanik', 'Pastikan kondisi fisik dalam keadaan prima'],
         ]);
-        DestinationImage::firstOrCreate(['destination_id' => $krakatau->id, 'image_url' => 'https://images.unsplash.com/photo-1608953154378-b19b808a974b?auto=format&fit=crop&w=1200&q=80'], ['is_primary' => true]);
+        $this->setPrimaryImage($krakatau, 'https://images.unsplash.com/photo-1608953154378-b19b808a974b?auto=format&fit=crop&w=1200&q=80');
 
         // Site Metrics
         SiteMetric::firstOrCreate(
@@ -208,5 +208,37 @@ Karena aktivitas gunung api dapat berubah sewaktu-waktu, akses pendakian bisa di
                 'total_bookings' => 9,       // 9
             ]
         );
+    }
+
+    /**
+     * Create the destination, or refresh its content on re-seed. The rating is only
+     * set on creation because it is recalculated from approved reviews afterwards.
+     *
+     * @param  array<string, mixed>  $attributes
+     */
+    private function upsertDestination(string $slug, array $attributes): Destination
+    {
+        $destination = Destination::firstOrNew(['slug' => $slug]);
+
+        $destination->fill($destination->exists ? array_diff_key($attributes, ['rating' => true]) : $attributes)->save();
+
+        return $destination;
+    }
+
+    /**
+     * Keep exactly one seeded primary image per destination, without touching
+     * images uploaded through the admin or partner panels.
+     */
+    private function setPrimaryImage(Destination $destination, string $url): void
+    {
+        $primaryImages = $destination->images()->where('is_primary', true)->get();
+
+        if ($primaryImages->contains(fn (DestinationImage $image) => str_starts_with($image->image_url, '/storage/'))) {
+            return;
+        }
+
+        $primaryImages->where('image_url', '!=', $url)->each->delete();
+
+        $destination->images()->firstOrCreate(['image_url' => $url], ['is_primary' => true]);
     }
 }

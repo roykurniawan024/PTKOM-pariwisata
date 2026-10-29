@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Destination;
 use App\Models\Review;
-use App\Models\SiteMetric;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,27 +14,66 @@ class HomeController extends Controller
 {
     public function index(): Response
     {
-        $destinations = Destination::published()
+        $destinationQuery = Destination::published()
             ->with(['category', 'images'])
-            ->withCount(['reviews as approved_reviews_count' => fn ($query) => $query->approved()])
-            ->latest()
-            ->get()
-            ->map(function (Destination $dest) {
-                $primaryImg = $dest->images->firstWhere('is_primary', true) ?? $dest->images->first();
+            ->withCount([
+                'reviews as approved_reviews_count' => fn ($query) => $query->approved(),
+            ])
+            ->latest();
 
-                return [
-                    'id' => $dest->id,
+        $destinationModels = $destinationQuery->get();
+
+        $destinations = $destinationModels->map(function (Destination $dest) {
+            $primaryImg = $dest->images->firstWhere('is_primary', true)
+                ?? $dest->images->first();
+
+            return [
+                'id' => $dest->id,
+                'title' => $dest->name,
+                'slug' => $dest->slug,
+                'category' => $dest->category?->name ?? 'Wisata',
+                'location' => $dest->location ?? 'Lampung',
+                'rating' => (float) $dest->rating,
+                'reviewCount' => $dest->approved_reviews_count,
+                'description' => $dest->description,
+                'price' => 'Rp '.number_format(
+                    $dest->price,
+                    0,
+                    ',',
+                    '.'
+                ).' / orang',
+                'image' => $primaryImg?->image_url
+                    ?? 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
+            ];
+        })->values();
+
+        // Foto galeri diambil dari seluruh gambar destinasi terpublikasi.
+        $galleryImages = $destinationModels
+            ->flatMap(function (Destination $dest) {
+                return $dest->images->map(fn ($image) => [
+                    'id' => $image->id,
+                    'src' => $image->image_url,
                     'title' => $dest->name,
-                    'slug' => $dest->slug,
                     'category' => $dest->category?->name ?? 'Wisata',
                     'location' => $dest->location ?? 'Lampung',
-                    'rating' => (float) $dest->rating,
-                    'reviewCount' => $dest->approved_reviews_count,
-                    'description' => $dest->description,
-                    'price' => 'Rp '.number_format($dest->price, 0, ',', '.').' / orang',
-                    'image' => $primaryImg?->image_url ?? 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
-                ];
-            });
+                ]);
+            })
+            ->filter(fn ($image) => ! empty($image['src']))
+            ->unique('src')
+            ->take(12)
+            ->values();
+
+        // Enam ulasan terbaru yang telah disetujui.
+        $testimonials = Review::approved()
+            ->with([
+                'user:id,name,profession,city,avatar_url',
+                'destination:id,name',
+            ])
+            ->latest()
+            ->limit(6)
+            ->get()
+            ->map(fn (Review $review) => $this->formatTestimonial($review))
+            ->values();
 
         return Inertia::render('Index', [
             'canLogin' => Route::has('login'),
@@ -43,29 +81,33 @@ class HomeController extends Controller
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
             'destinations' => $destinations,
-            'categories' => Category::pluck('name'),
+            'heroSlides' => $destinations->take(5)->values(),
+
+            'categories' => Category::whereHas(
+                'destinations',
+                fn ($query) => $query->published()
+            )->pluck('name'),
+
             'statistics' => $this->heroStatistics(),
+
+            'testimonials' => $testimonials,
+
+            // Data untuk galeri foto di halaman utama.
+            'galleryImages' => $galleryImages,
         ]);
     }
 
     public function testimonials(): Response
     {
         $testimonials = Review::approved()
-            ->with(['user:id,name,profession,city,avatar_url', 'destination:id,name'])
+            ->with([
+                'user:id,name,profession,city,avatar_url',
+                'destination:id,name',
+            ])
             ->latest()
-            ->limit(50)
             ->get()
-            ->map(fn (Review $review) => [
-                'id' => $review->id,
-                'quote' => $review->comment,
-                'name' => $review->user?->name,
-                'role' => $review->user?->profession ?: 'Pengunjung',
-                'location' => $review->user?->city ?: 'Lampung',
-                'avatar' => $review->user?->avatar_url ?: 'https://ui-avatars.com/api/?background=0ea5e9&color=fff&name='.urlencode((string) $review->user?->name),
-                'rating' => $review->rating,
-                'date' => $review->created_at?->translatedFormat('d F Y'),
-                'visited' => $review->destination?->name,
-            ]);
+            ->map(fn (Review $review) => $this->formatTestimonial($review))
+            ->values();
 
         return Inertia::render('Testimonials/Index', [
             'testimonials' => $testimonials,
@@ -73,26 +115,68 @@ class HomeController extends Controller
     }
 
     /**
-     * @return list<array{value: string, label: string}>|null
+     * Memformat data ulasan untuk frontend.
      */
-    private function heroStatistics(): ?array
+    private function formatTestimonial(Review $review): array
     {
-        $metric = SiteMetric::latest('recorded_at')->first();
-
-        if (! $metric) {
-            return null;
-        }
-
-        $averageRating = Destination::published()->where('rating', '>', 0)->avg('rating');
-        $visitors = $metric->total_visitors >= 1000000
-            ? str_replace('.0', '', number_format($metric->total_visitors / 1000000, 1, '.', '')).'jt'
-            : number_format($metric->total_visitors, 0, ',', '.');
+        $name = $review->user?->name ?? 'Pengunjung';
 
         return [
-            ['value' => Destination::published()->count().'+', 'label' => 'DESTINASI WISATA'],
-            ['value' => $visitors, 'label' => 'WISATAWAN/TAHUN'],
-            ['value' => (string) Category::count(), 'label' => 'KATEGORI WISATA'],
-            ['value' => number_format((float) $averageRating, 1).'★', 'label' => 'RATING RATA-RATA'],
+            'id' => $review->id,
+            'quote' => $review->comment,
+            'name' => $name,
+            'role' => $review->user?->profession ?: 'Pengunjung',
+            'location' => $review->user?->city ?: 'Lampung',
+            'avatar' => $review->user?->avatar_url
+                ?: 'https://ui-avatars.com/api/?background=0ea5e9&color=fff&name='
+                    .urlencode($name),
+            'rating' => $review->rating,
+            'date' => $review->created_at?->translatedFormat('d F Y'),
+            'visited' => $review->destination?->name,
+        ];
+    }
+
+    /**
+     * Statistik berdasarkan data database.
+     *
+     * @return list<array{value: string, label: string}>
+     */
+    private function heroStatistics(): array
+    {
+        $publishedDestinations = Destination::published();
+
+        $destinationCount = (clone $publishedDestinations)->count();
+
+        $categoryCount = Category::whereHas(
+            'destinations',
+            fn ($query) => $query->published()
+        )->count();
+
+        $averageRating = (clone $publishedDestinations)
+            ->where('rating', '>', 0)
+            ->avg('rating');
+
+        $approvedReviewCount = Review::approved()->count();
+
+        return [
+            [
+                'value' => number_format($destinationCount, 0, ',', '.'),
+                'label' => 'DESTINASI WISATA',
+            ],
+            [
+                'value' => number_format($approvedReviewCount, 0, ',', '.'),
+                'label' => 'ULASAN PENGUNJUNG',
+            ],
+            [
+                'value' => number_format($categoryCount, 0, ',', '.'),
+                'label' => 'KATEGORI WISATA',
+            ],
+            [
+                'value' => $averageRating !== null
+                    ? number_format((float) $averageRating, 1, ',', '.').'★'
+                    : '—',
+                'label' => 'RATING RATA-RATA',
+            ],
         ];
     }
 }

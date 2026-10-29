@@ -31,3 +31,15 @@ it('shows tagline and facilities stored in the database', function () {
             ->where('destination.facilities', ['Parkir'])
             ->where('destination.tips', ['Bawa air']));
 });
+
+it('renders the detail page for a destination without a description', function () {
+    $this->seed(DestinationSeeder::class);
+    $dest = Destination::first();
+    $dest->update(['description' => null]);
+
+    $this->get("/destinations/{$dest->slug}")
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Destinations/Show/Index')
+            ->where('destination.description', null));
+});
