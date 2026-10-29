@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryManagementController;
 use App\Http\Controllers\BusinessValidationController;
+use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\DestinationManagementController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
@@ -63,4 +64,4 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/contact', \App\Http\Controllers\ContactPageController::class)->name('contact.index');
+Route::get('/contact', ContactPageController::class)->name('contact.index');

@@ -91,10 +91,12 @@ export default function Index({
     destinations: initialDestinations = [],
     categories: initialCategories = [],
     statistics: initialStatistics = [],
+    testimonials: initialTestimonials = [],
 }) {
     const destinationsList = initialDestinations;
     const categoriesList = initialCategories && initialCategories.length > 0 ? ['Semua', ...initialCategories] : categories;
     const statsList = initialStatistics && initialStatistics.length > 0 ? initialStatistics : statistics;
+    const testimonialsList = initialTestimonials.length > 0 ? initialTestimonials : testimonialsData;
 
     const [activeCategory, setActiveCategory] = useState('Semua');
 
@@ -311,7 +313,7 @@ export default function Index({
                             </div>
                             
                             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                                {testimonialsData.map((item) => (
+                                {testimonialsList.map((item) => (
                                     <TestimonialCard key={item.id} {...item} />
                                 ))}
                             </div>

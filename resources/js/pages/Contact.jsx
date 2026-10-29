@@ -51,7 +51,7 @@ export default function Contact() {
 
     return (
         <div className="min-h-screen bg-[#f7f8fa] text-[#172033]">
-            <Head title="Kontak - Wonderly Lampung" />
+            <Head title="Kontak - Wanderly" />
 
             {/* ================= NAVBAR ================= */}
             <header className="px-4 pt-6 md:px-8">
@@ -62,7 +62,7 @@ export default function Contact() {
                         href="/"
                         className="font-serif text-3xl font-bold tracking-tight text-[#172033]"
                     >
-                        Wonderly
+                        Wanderly
                     </Link>
 
                     {/* Navigation */}
@@ -166,7 +166,7 @@ export default function Contact() {
 
                         <div className="relative max-w-3xl">
                             <p className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-[#f59e0b]">
-                                WONDERLY LAMPUNG
+                                WANDERLY
                             </p>
 
                             <h1 className="font-serif text-4xl font-bold leading-tight text-white md:text-6xl">
@@ -251,7 +251,7 @@ export default function Contact() {
                                         </p>
 
                                         <p className="mt-1 text-sm text-slate-500">
-                                            info@wonderlylampung.com
+                                            info@wanderly.id
                                         </p>
                                     </div>
                                 </div>
@@ -311,7 +311,7 @@ export default function Contact() {
 
                                 <p className="mt-2 text-slate-500">
                                     Isi formulir berikut untuk menghubungi
-                                    tim Wonderly Lampung.
+                                    tim Wanderly.
                                 </p>
                             </div>
 
@@ -423,7 +423,7 @@ export default function Contact() {
                             {submitted && (
                                 <div className="mt-5 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-700">
                                     Pesan berhasil dikirim. Terima kasih telah
-                                    menghubungi Wonderly Lampung.
+                                    menghubungi Wanderly.
                                 </div>
                             )}
                         </div>
@@ -436,7 +436,7 @@ export default function Contact() {
                 <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-8 md:flex-row md:px-8">
                     <div>
                         <p className="font-serif text-2xl font-bold text-white">
-                            Wonderly
+                            Wanderly
                         </p>
 
                         <p className="mt-1 text-sm text-slate-400">
@@ -445,7 +445,7 @@ export default function Contact() {
                     </div>
 
                     <p className="text-sm text-slate-400">
-                        © 2026 Wonderly Lampung. Semua hak dilindungi.
+                        © 2026 Wanderly. Semua hak dilindungi.
                     </p>
                 </div>
             </footer>

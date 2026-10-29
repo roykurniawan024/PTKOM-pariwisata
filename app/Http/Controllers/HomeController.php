@@ -7,6 +7,7 @@ use App\Models\Destination;
 use App\Models\Review;
 use App\Models\SiteMetric;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -45,15 +46,28 @@ class HomeController extends Controller
             'destinations' => $destinations,
             'categories' => Category::pluck('name'),
             'statistics' => $this->heroStatistics(),
+            'testimonials' => $this->approvedTestimonials(6),
         ]);
     }
 
     public function testimonials(): Response
     {
-        $testimonials = Review::approved()
+        return Inertia::render('Testimonials/Index', [
+            'testimonials' => $this->approvedTestimonials(50),
+        ]);
+    }
+
+    /**
+     * The latest approved reviews shaped as testimonial cards.
+     *
+     * @return Collection<int, array<string, mixed>>
+     */
+    private function approvedTestimonials(int $limit)
+    {
+        return Review::approved()
             ->with(['user:id,name,profession,city,avatar_url', 'destination:id,name'])
             ->latest()
-            ->limit(50)
+            ->limit($limit)
             ->get()
             ->map(fn (Review $review) => [
                 'id' => $review->id,
@@ -66,10 +80,6 @@ class HomeController extends Controller
                 'date' => $review->created_at?->translatedFormat('d F Y'),
                 'visited' => $review->destination?->name,
             ]);
-
-        return Inertia::render('Testimonials/Index', [
-            'testimonials' => $testimonials,
-        ]);
     }
 
     /**
