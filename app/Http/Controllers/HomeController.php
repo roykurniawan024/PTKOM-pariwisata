@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Destination;
 use App\Models\Review;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -37,12 +36,12 @@ class HomeController extends Controller
                 'rating' => (float) $dest->rating,
                 'reviewCount' => $dest->approved_reviews_count,
                 'description' => $dest->description,
-                'price' => 'Rp ' . number_format(
+                'price' => 'Rp '.number_format(
                     $dest->price,
                     0,
                     ',',
                     '.'
-                ) . ' / orang',
+                ).' / orang',
                 'image' => $primaryImg?->image_url
                     ?? 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
             ];
@@ -64,14 +63,14 @@ class HomeController extends Controller
             ->take(12)
             ->values();
 
-        // Tiga ulasan terbaru yang telah disetujui.
+        // Enam ulasan terbaru yang telah disetujui.
         $testimonials = Review::approved()
             ->with([
                 'user:id,name,profession,city,avatar_url',
                 'destination:id,name',
             ])
             ->latest()
-            ->limit(3)
+            ->limit(6)
             ->get()
             ->map(fn (Review $review) => $this->formatTestimonial($review))
             ->values();
@@ -105,7 +104,6 @@ class HomeController extends Controller
                 'destination:id,name',
             ])
             ->latest()
-            ->limit($limit)
             ->get()
             ->map(fn (Review $review) => $this->formatTestimonial($review))
             ->values();
@@ -130,7 +128,7 @@ class HomeController extends Controller
             'location' => $review->user?->city ?: 'Lampung',
             'avatar' => $review->user?->avatar_url
                 ?: 'https://ui-avatars.com/api/?background=0ea5e9&color=fff&name='
-                    . urlencode($name),
+                    .urlencode($name),
             'rating' => $review->rating,
             'date' => $review->created_at?->translatedFormat('d F Y'),
             'visited' => $review->destination?->name,
@@ -174,11 +172,10 @@ class HomeController extends Controller
             ],
             [
                 'value' => $averageRating !== null
-                    ? number_format((float) $averageRating, 1, ',', '.') . '★'
+                    ? number_format((float) $averageRating, 1, ',', '.').'★'
                     : '—',
                 'label' => 'RATING RATA-RATA',
             ],
         ];
     }
 }
-
