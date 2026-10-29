@@ -14,16 +14,22 @@ test('review seeder creates visitor accounts for approved sample reviews', funct
 
     expect(Review::count())->toBe(42)
         ->and(Review::approved()->count())->toBe(42)
-        ->and(User::where('email', 'like', '%@example.com')
-            ->where('role', 'user')
-            ->count())->toBe(12);
+        ->and(
+            User::where('email', 'like', '%@example.com')
+                ->where('role', 'user')
+                ->count()
+        )->toBe(12);
 
     $this->get(route('testimonials.index'))
         ->assertInertia(fn ($page) => $page
             ->component('Testimonials/Index')
-            ->has('testimonials', 6)
+            ->has('testimonials', 42)
             ->where('testimonials.5.name', 'Nadia Putri')
-            ->where('testimonials.5.visited', 'Menara Siger'));
+            ->where(
+                'testimonials.5.visited',
+                'Taman Nasional Way Kambas'
+            )
+        );
 });
 
 test('review seeder is idempotent and sample visitors can log in', function () {
