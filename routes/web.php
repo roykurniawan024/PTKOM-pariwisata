@@ -21,9 +21,9 @@ Route::post('/destinations/{slug}/reviews', [ReviewController::class, 'store'])
     ->middleware(['auth', 'verified', 'throttle:10,1'])
     ->name('destinations.reviews.store');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

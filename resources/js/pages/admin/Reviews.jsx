@@ -35,28 +35,20 @@ export default function Reviews({ auth, reviews, currentStatus, stats }) {
 
             <div className="py-12 bg-gray-50 min-h-screen">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-gray-500">Semua Ulasan</span>
-                                <MessageSquare className="w-5 h-5 text-gray-400" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        {[
+                            { label: 'Semua Ulasan', value: stats.total, color: 'text-gray-900', icon: MessageSquare },
+                            { label: 'Menunggu', value: stats.pending, color: 'text-amber-600', icon: Clock },
+                            { label: 'Ditampilkan', value: stats.approved, color: 'text-emerald-600', icon: CheckCircle2 },
+                        ].map((stat, index) => (
+                            <div key={index} className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm">
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="text-sm font-medium text-gray-500">{stat.label}</span>
+                                    <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                                </div>
+                                <div className={`text-3xl font-bold ${stat.color}`}>{stat.value}</div>
                             </div>
-                            <div className="text-2xl font-bold text-gray-900 mt-2">{stats.total}</div>
-                        </div>
-                        <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-amber-600">Menunggu Persetujuan</span>
-                                <Clock className="w-5 h-5 text-amber-500" />
-                            </div>
-                            <div className="text-2xl font-bold text-amber-600 mt-2">{stats.pending}</div>
-                        </div>
-                        <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-emerald-600">Ditampilkan</span>
-                                <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                            </div>
-                            <div className="text-2xl font-bold text-emerald-600 mt-2">{stats.approved}</div>
-                        </div>
+                        ))}
                     </div>
 
                     <div className="bg-white p-4 rounded-xl border border-gray-200 flex items-center gap-2">
