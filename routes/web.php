@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryManagementController;
 use App\Http\Controllers\BusinessValidationController;
 use App\Http\Controllers\ContactPageController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DestinationManagementController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
@@ -10,7 +11,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicDestinationController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/destinations', [PublicDestinationController::class, 'index'])->name('destinations.index');
@@ -22,7 +22,7 @@ Route::post('/destinations/{slug}/reviews', [ReviewController::class, 'store'])
     ->middleware(['auth', 'verified', 'throttle:10,1'])
     ->name('destinations.reviews.store');
 
-Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
+Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/admin/validasi-mitra/{user}', [BusinessValidationController::class, 'updateStatus'])->name('admin.business-validation.update');
 
         Route::get('/admin/ulasan', [ReviewController::class, 'index'])->name('admin.reviews.index');
-        Route::patch('/admin/ulasan/{review}', [ReviewController::class, 'moderate'])->name('admin.reviews.moderate');
+        Route::patch('/admin/ulasan/{review?}', [ReviewController::class, 'moderate'])->name('admin.reviews.moderate');
         Route::delete('/admin/ulasan/{review}', [ReviewController::class, 'destroy'])->name('admin.reviews.destroy');
 
         Route::get('/admin/destinasi', [App\Http\Controllers\Admin\DestinationManagementController::class, 'index'])->name('admin.destinations.index');

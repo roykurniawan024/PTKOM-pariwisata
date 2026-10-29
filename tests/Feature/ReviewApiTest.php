@@ -63,6 +63,58 @@ test('non admin cannot moderate reviews', function () {
         ->assertForbidden();
 });
 
+test('admin can approve many reviews at once', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $reviews = Review::factory()->pending()->count(3)->create([
+        'destination_id' => $this->destination->id,
+        'rating' => 5,
+    ]);
+
+    $this->actingAs($admin)
+        ->patch(route('admin.reviews.moderate'), [
+            'is_approved' => true,
+            'review_ids' => $reviews->pluck('id')->all(),
+        ])
+        ->assertSessionHas('success');
+
+    expect(Review::whereIn('id', $reviews->pluck('id'))->where('is_approved', true)->count())->toBe(3)
+        ->and((float) $this->destination->fresh()->rating)->toBe(5.0);
+});
+
+test('admin can hide many reviews at once and rating is recalculated', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $reviews = Review::factory()->count(2)->create([
+        'destination_id' => $this->destination->id,
+        'rating' => 4,
+    ]);
+
+    $this->actingAs($admin)
+        ->patch(route('admin.reviews.moderate'), [
+            'is_approved' => false,
+            'review_ids' => $reviews->pluck('id')->all(),
+        ])
+        ->assertSessionHas('success');
+
+    expect(Review::whereIn('id', $reviews->pluck('id'))->where('is_approved', false)->count())->toBe(2)
+        ->and((float) $this->destination->fresh()->rating)->toBe(0.0);
+});
+
+test('bulk moderation requires valid review ids', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+
+    $this->actingAs($admin)
+        ->patch(route('admin.reviews.moderate'), ['is_approved' => true, 'review_ids' => ['id-tidak-ada']])
+        ->assertSessionHasErrors('review_ids.0');
+});
+
+test('non admin cannot bulk moderate reviews', function () {
+    $review = Review::factory()->pending()->create(['destination_id' => $this->destination->id]);
+
+    $this->actingAs(User::factory()->create())
+        ->patch(route('admin.reviews.moderate'), ['is_approved' => true, 'review_ids' => [$review->id]])
+        ->assertForbidden();
+});
+
 test('unverified user cannot submit a review', function () {
     $user = User::factory()->unverified()->create();
 

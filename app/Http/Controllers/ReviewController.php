@@ -59,13 +59,25 @@ class ReviewController extends Controller
     }
 
     /**
-     * Approve or reject a review (admin only).
+     * Approve or hide one or many reviews at once (admin only).
      */
-    public function moderate(Request $request, Review $review): RedirectResponse
+    public function moderate(Request $request, ?Review $review = null): RedirectResponse
     {
         $validated = $request->validate([
             'is_approved' => 'required|boolean',
+            'review_ids' => 'sometimes|array|min:1',
+            'review_ids.*' => 'exists:reviews,id',
         ]);
+
+        if ($request->has('review_ids')) {
+            $reviews = Review::findMany($validated['review_ids']);
+
+            $reviews->each(fn (Review $item) => $item->update(['is_approved' => $validated['is_approved']]));
+
+            return back()->with('success', $reviews->count().' ulasan berhasil diperbarui.');
+        }
+
+        abort_if($review === null, 404);
 
         $review->update(['is_approved' => $validated['is_approved']]);
 
