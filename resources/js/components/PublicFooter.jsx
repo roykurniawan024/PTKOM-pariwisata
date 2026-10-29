@@ -90,7 +90,7 @@ export default function PublicFooter() {
                     <div>
                         <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
                             <i className="bx bx-support text-yellow-600 text-lg"></i>
-                            Kontak & Layanan
+                            <a href="/contact" className="hover:text-amber-400 transition underline-offset-4 hover:underline cursor-pointer">Kontak & Layanan</a>
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm text-slate-400">
                             <li className="flex items-start gap-3">
