@@ -139,7 +139,7 @@ Dokumen ini merangkum analisis lengkap mengenai kekurangan, celah keamanan, bug 
 
 ### 8. [P2 - Redundansi Kode] Duplikasi Middleware di `bootstrap/app.php`
 - **Lokasi Berkas:** `bootstrap/app.php` (Baris 17–25)
-- **Permasalahan:** Middleware `HandleInertiaRequests` dan `AddLinkHeadersForPreloadedAssets` didaftarkan dua kali dalam method `$middleware->web(append: [...])`.
+- **Permasalahan:** Mi ddleware `HandleInertiaRequests` dan `AddLinkHeadersForPreloadedAssets` didaftarkan dua kali dalam method `$middleware->web(append: [...])`.
 - **Solusi Teknis:** Hapus blok duplikasi baris 22–25.
 
 ---
