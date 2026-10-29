@@ -34,3 +34,18 @@ test('review seeder is idempotent and sample visitors can log in', function () {
     $this->post(route('login'), ['email' => 'rian.hidayat@example.com', 'password' => 'password'])
         ->assertRedirect(route('dashboard', absolute: false));
 });
+
+test('home page shows at most six approved reviews as testimonials', function () {
+    $this->seed(ReviewSeeder::class);
+    Review::factory()->pending()->create(['comment' => 'Belum disetujui']);
+    Review::factory()->count(3)->create();
+
+    $this->get(route('home'))->assertInertia(fn ($page) => $page
+        ->component('Index')
+        ->has('testimonials', 6)
+        ->where('testimonials', fn ($items) => collect($items)->every(fn ($item) => $item['quote'] !== 'Belum disetujui')));
+});
+
+test('home page testimonials are empty when no review is approved', function () {
+    $this->get(route('home'))->assertInertia(fn ($page) => $page->has('testimonials', 0));
+});

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Destination;
 use App\Models\Review;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -104,7 +105,7 @@ class HomeController extends Controller
                 'destination:id,name',
             ])
             ->latest()
-            ->limit(50)
+            ->limit($limit)
             ->get()
             ->map(fn (Review $review) => $this->formatTestimonial($review))
             ->values();
