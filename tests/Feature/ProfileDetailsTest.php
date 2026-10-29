@@ -17,7 +17,7 @@ test('user can save profession, city and an avatar photo', function () {
         'email' => $user->email,
         'profession' => 'Fotografer',
         'city' => 'Bandar Lampung',
-        'avatar' => UploadedFile::fake()->image('foto.jpg'),
+        'avatar' => UploadedFile::fake()->createWithContent('foto.jpg', base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==')),
     ])->assertSessionHasNoErrors();
 
     $user->refresh();
@@ -31,7 +31,7 @@ test('user can save profession, city and an avatar photo', function () {
 test('replacing the avatar removes the previous stored file', function () {
     Storage::fake('public');
     $user = User::factory()->create();
-    $payload = fn () => ['name' => $user->name, 'email' => $user->email, 'avatar' => UploadedFile::fake()->image('a.png')];
+    $payload = fn () => ['name' => $user->name, 'email' => $user->email, 'avatar' => UploadedFile::fake()->createWithContent('a.png', base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=='))];
 
     $this->actingAs($user)->patch(route('profile.update'), $payload());
     $first = str_replace('/storage/', '', $user->fresh()->avatar_url);
